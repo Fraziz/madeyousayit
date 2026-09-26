@@ -1,0 +1,757 @@
+.rulebookSection {
+  padding: 100px 0;
+  background-color: var(--bg-primary);
+  position: relative;
+}
+
+.rulebookContainer {
+  position: relative;
+  z-index: 1;
+  max-width: 1060px;
+}
+
+/* Section Header */
+.sectionHeader {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 52px;
+}
+
+.sectionTag {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  color: var(--brand-blue);
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  display: inline-block;
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  line-height: 1.1;
+}
+
+.titleHighlight {
+  color: var(--brand-blue);
+}
+
+.sectionTagline {
+  font-family: var(--font-prompt);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--brand-blue);
+  letter-spacing: 0.04em;
+  margin-bottom: 20px;
+}
+
+.specsPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 22px;
+  background: #ffffff;
+  border: 1px solid var(--border-medium);
+  border-radius: 9999px;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+}
+
+.specDot {
+  color: var(--brand-blue);
+  opacity: 0.5;
+}
+
+/* Minimalist Document Canvas */
+.rulebookCanvas {
+  background: #ffffff;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-xl);
+  padding: 48px 52px;
+  box-shadow: var(--shadow-card);
+}
+
+.divider {
+  height: 1px;
+  background-color: var(--border-subtle);
+  margin: 40px 0;
+}
+
+/* Rule Row Core */
+.ruleRow {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.ruleRowHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.ruleIndex {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: rgba(81, 112, 255, 0.08);
+  color: var(--brand-blue);
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 800;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.ruleRowTitle {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  margin: 0 0 6px 0;
+}
+
+.ruleRowSubtitle {
+  font-size: 0.98rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* 1. SETUP */
+.setupList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px 28px;
+  padding-left: 52px;
+}
+
+.setupItem {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.setupBulletDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--brand-blue);
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+.setupItemLabel {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+}
+
+.setupItemText {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* 2. YOUR TURN - Fluid & Wrapping */
+.flowStrip {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 12px 18px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  margin-left: 52px;
+}
+
+.flowNode {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-radius: 9999px;
+  padding: 6px 14px;
+}
+
+.flowNum {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--brand-blue);
+  color: #ffffff;
+  font-size: 0.65rem;
+  font-weight: 800;
+}
+
+.flowLabel {
+  font-family: var(--font-display);
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.flowChevron {
+  color: var(--brand-blue);
+  font-weight: 800;
+  font-size: 0.95rem;
+  opacity: 0.8;
+  flex-shrink: 0;
+}
+
+.stepsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-left: 52px;
+}
+
+.stepItem {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.stepItem:hover {
+  background: #ffffff;
+  border-color: var(--brand-blue);
+  box-shadow: 0 8px 20px -4px rgba(81, 112, 255, 0.1);
+}
+
+.stepItemTop {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.stepNumTag {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--brand-blue);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.stepItemName {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.stepItemAction {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* 3. CARD TYPES */
+.cardTypesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-left: 52px;
+}
+
+.cardTypeRow {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: all 0.2s ease;
+}
+
+.cardTypeRow:hover {
+  background: #ffffff;
+  border-color: var(--brand-blue);
+  box-shadow: 0 6px 18px -4px rgba(81, 112, 255, 0.08);
+}
+
+.cardTypeMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cardTypeTag {
+  align-self: flex-start;
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--brand-blue);
+  background: rgba(81, 112, 255, 0.08);
+  border: 1px solid rgba(81, 112, 255, 0.15);
+  padding: 3px 8px;
+  border-radius: 5px;
+}
+
+.cardTypeNames {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+.cardTypeInstruction {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* 4 & 5. SPLIT ROW */
+.splitRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+}
+
+.splitCol {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.pointsList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 52px;
+}
+
+.pointRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+}
+
+.pointTierName {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+}
+
+.pointTierBadge {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 3px 12px;
+  border-radius: 9999px;
+  letter-spacing: 0.04em;
+  color: var(--brand-blue);
+  background: rgba(81, 112, 255, 0.08);
+  border: 1px solid rgba(81, 112, 255, 0.15);
+}
+
+.passNoteBadge {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--brand-blue);
+  background: rgba(81, 112, 255, 0.08);
+  border: 1px solid rgba(81, 112, 255, 0.15);
+  padding: 3px 8px;
+  border-radius: 5px;
+  margin-top: 4px;
+}
+
+.passFailList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 52px;
+}
+
+.passFailItem {
+  padding: 14px 16px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.passFailLabel {
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--brand-blue);
+}
+
+.passFailText {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* 6. THE PILES */
+.pilesGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-left: 52px;
+}
+
+.pileItem {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pileMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.pileName {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.pileRole {
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--brand-blue);
+  background: rgba(81, 112, 255, 0.08);
+  padding: 2px 7px;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+}
+
+.pileDetails {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* 7. END OF GAME */
+.endGameStrip {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  margin-left: 52px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.formulaLine {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.formulaItem {
+  background: #ffffff;
+  border: 1px solid var(--border-medium);
+  border-radius: 8px;
+  padding: 6px 16px;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.formulaSymbol {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--brand-blue);
+}
+
+.formulaOutcome {
+  background: var(--brand-blue);
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 6px 18px;
+  font-family: var(--font-display);
+  font-size: 0.98rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.winnerDeclaration {
+  font-family: var(--font-prompt);
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: var(--brand-blue);
+  margin: 0;
+}
+
+/* 8. GOLDEN RULE */
+.goldenRuleBlock {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-medium);
+  border-left: 4px solid var(--brand-blue);
+  border-radius: var(--radius-md);
+  padding: 32px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 36px;
+}
+
+.goldenContent {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 640px;
+}
+
+.goldenBadgeLine {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.goldenNumber {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  background: var(--brand-blue);
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.goldenTag {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--brand-blue);
+  text-transform: uppercase;
+}
+
+.goldenTitle {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.goldenText {
+  font-size: 0.98rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.goldenAction {
+  flex-shrink: 0;
+}
+
+.goldenButton {
+  background-color: var(--brand-blue);
+  color: #ffffff;
+  padding: 14px 24px;
+  border-radius: 9999px;
+  font-family: var(--font-prompt);
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 16px var(--brand-blue-glow);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.goldenButton:hover {
+  background-color: var(--brand-blue-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(81, 112, 255, 0.35);
+}
+
+/* Footer Stamp */
+.rulebookFooterStamp {
+  text-align: center;
+  margin-top: 48px;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-transform: uppercase;
+}
+
+.stampDot {
+  color: var(--brand-blue);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .setupList {
+    padding-left: 0;
+  }
+
+  .flowStrip {
+    margin-left: 0;
+  }
+
+  .stepsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    margin-left: 0;
+  }
+
+  .cardTypesGrid {
+    margin-left: 0;
+  }
+
+  .splitRow {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .pointsList {
+    padding-left: 0;
+  }
+
+  .passFailList {
+    padding-left: 0;
+  }
+
+  .pilesGrid {
+    grid-template-columns: repeat(2, 1fr);
+    margin-left: 0;
+  }
+
+  .endGameStrip {
+    margin-left: 0;
+  }
+
+  .goldenRuleBlock {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 28px;
+  }
+
+  .goldenAction {
+    width: 100%;
+  }
+
+  .goldenButton {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .rulebookSection {
+    padding: 60px 0;
+  }
+
+  .rulebookCanvas {
+    padding: 24px 16px;
+    border-radius: var(--radius-lg);
+  }
+
+  .divider {
+    margin: 28px 0;
+  }
+
+  .setupList {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .stepsGrid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .cardTypesGrid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .pilesGrid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .goldenRuleBlock {
+    padding: 20px 16px;
+  }
+
+  .goldenButton {
+    padding: 13px 18px;
+    font-size: 0.8rem;
+    white-space: normal;
+    text-align: center;
+  }
+}

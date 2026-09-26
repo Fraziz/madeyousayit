@@ -1,0 +1,271 @@
+/* ============================================================
+   MADE YOU SAY IT — PREMIUM DESIGN SYSTEM & SPATIAL FOUNDATION
+   Signature Color: #5170FF (Electric Ultramarine Blue)
+   Elevated Editorial & Tactile Game Design
+   ============================================================ */
+
+@font-face {
+  font-family: 'Bobby Jones';
+  src: local('Bobby Jones'), local('Bobby Jones Soft'), local('BobbyJones-Regular'), local('BobbyJonesRough');
+  font-display: swap;
+}
+
+:root {
+  /* Brand Signature Colors */
+  --brand-blue: #5170FF;
+  --color-blue: #5170FF;
+  --brand-blue-dark: #3753e6;
+  --color-blue-dark: #3753e6;
+  --brand-blue-light: #768eff;
+  --color-blue-light: #768eff;
+  --brand-blue-surface: rgba(81, 112, 255, 0.07);
+  --brand-blue-glow: rgba(81, 112, 255, 0.28);
+  --brand-blue-subtle: rgba(81, 112, 255, 0.12);
+
+  /* Card Type Colors (From Official Physical Game Cards) */
+  --card-create: #5CE1E6;
+  --card-guess: #006826;
+  --card-love: #FF66C4;
+  --card-together: #FF751F;
+  --card-battle: #FF3131;
+  --card-chaos: #5E17EB;
+  --card-connect: #004AAD;
+
+  /* Ambient Lighting & Canvas */
+  --bg-primary: #ffffff;
+  --color-bg: #ffffff;
+  --bg-secondary: #f8fafc;
+  --color-bg-alt: #f8fafc;
+  --bg-tertiary: #f1f5f9;
+  --bg-card: #ffffff;
+  --bg-card-hover: #ffffff;
+  --bg-glass: rgba(255, 255, 255, 0.85);
+  --bg-glass-card: rgba(255, 255, 255, 0.92);
+  --bg-paper: #ffffff;
+  --color-paper: #ffffff;
+
+  /* Crisp Typography Hierarchy */
+  --text-primary: #0f172a;
+  --color-text-primary: #0f172a;
+  --text-secondary: #475569;
+  --color-text-secondary: #475569;
+  --text-muted: #64748b;
+  --color-text-tertiary: #64748b;
+  --text-light-muted: #94a3b8;
+
+  /* Refined, Airy Borders */
+  --border-subtle: rgba(15, 23, 42, 0.06);
+  --color-border-subtle: rgba(15, 23, 42, 0.06);
+  --border-medium: rgba(15, 23, 42, 0.1);
+  --color-border: rgba(15, 23, 42, 0.1);
+  --border-card: rgba(15, 23, 42, 0.08);
+  --border-accent: rgba(81, 112, 255, 0.2);
+
+  /* Generous Spacing Scale (Airy & Non-Cramped) */
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 36px;
+  --space-xl: 56px;
+  --space-2xl: 88px;
+  --space-3xl: 130px;
+  
+  --section-padding: 120px 0;
+  --container-max: 1240px;
+  --max-width: 1240px;
+
+  /* Border Radii */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 36px;
+  --radius-full: 9999px;
+
+  /* Typography Fonts */
+  --font-logo: 'Notable', sans-serif;
+  --font-prompt: 'Bobby Jones', 'Fredoka', 'Lilita One', sans-serif;
+  --font-display: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Soft, Elevated Shadows */
+  --shadow-subtle: 0 4px 16px -2px rgba(15, 23, 42, 0.04);
+  --shadow-card: 0 12px 32px -4px rgba(15, 23, 42, 0.06), 0 4px 12px rgba(15, 23, 42, 0.03);
+  --shadow-card-hover: 0 24px 50px -10px rgba(81, 112, 255, 0.18), 0 10px 24px -5px rgba(15, 23, 42, 0.08);
+  --shadow-box: 0 30px 70px -15px rgba(81, 112, 255, 0.28), 0 15px 35px -10px rgba(15, 23, 42, 0.1);
+  --shadow-float: 0 20px 40px -10px rgba(15, 23, 42, 0.08);
+
+  /* Transitions */
+  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-snappy: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  -webkit-text-size-adjust: 100%;
+  max-width: 100vw;
+  overflow-x: clip;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.65;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: clip;
+  max-width: 100vw;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  touch-action: manipulation;
+}
+
+::selection {
+  background: var(--brand-blue);
+  color: #ffffff;
+}
+
+/* Typography Helpers */
+h1, h2, h3, h4, .brand-title {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.serif-italic {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.mono-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+button {
+  font-family: var(--font-sans);
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+input, textarea, select {
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Minimalist Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(15, 23, 42, 0.18);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(81, 112, 255, 0.5);
+}
+
+/* Generous Container with Room to Breathe */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+/* Keyframes */
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(1deg); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.08); }
+}
+
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+/* ============================================================
+   ANTI-SCREENSHOT, ASSET COPY & PRINT PROTECTION
+   ============================================================ */
+@media print {
+  html, body {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+  }
+}
+
+img, canvas, svg {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}

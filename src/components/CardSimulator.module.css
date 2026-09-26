@@ -1,0 +1,457 @@
+.simulatorSection {
+  padding: 100px 0;
+  background-color: #ffffff;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  position: relative;
+}
+
+.sectionHeader {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 40px;
+}
+
+.sectionTag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  color: var(--brand-blue);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.sectionTitle {
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 900;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+.titleHighlight {
+  color: var(--brand-blue);
+}
+
+.sectionSubtitle {
+  font-size: 0.98rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Category Filters Bar */
+.categoryFilters {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+
+.filterPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  background: #ffffff;
+  border: 1px solid var(--border-medium);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  letter-spacing: 0.06em;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.filterPill:hover {
+  border-color: var(--brand-blue);
+  color: var(--text-primary);
+}
+
+.filterPillActive {
+  background: var(--text-primary);
+  border-color: var(--text-primary);
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+.catDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+/* Workspace 3-Column Grid */
+.workspaceGrid {
+  display: grid;
+  grid-template-columns: 280px 1fr 280px;
+  gap: 32px;
+  align-items: center;
+}
+
+/* Left Piles Card */
+.pilesCard {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-medium);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.pilesHeading {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 10px;
+  margin: 0;
+}
+
+.pileItem {
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.pileItemActive {
+  background: rgba(81, 112, 255, 0.08);
+  border: 1px solid rgba(81, 112, 255, 0.35);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.pileMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.pileName {
+  font-family: var(--font-prompt);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.pileCount {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+}
+
+.scoreHighlight {
+  font-family: var(--font-prompt);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--brand-blue);
+}
+
+.pileDesc {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.ruleReminderBox {
+  background: #ffffff;
+  border: 1px dashed var(--border-medium);
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.ruleIcon {
+  font-size: 1.1rem;
+}
+
+/* Center Display Area */
+.cardDisplayArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardInteractiveStage {
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: center;
+}
+
+.flipInstruction {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  margin-bottom: 24px;
+}
+
+.controlsBar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 440px;
+}
+
+.passBtn {
+  flex: 1;
+  background: #ffffff;
+  border: 1px solid var(--border-medium);
+  color: var(--text-secondary);
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-family: var(--font-prompt);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.passBtn:hover {
+  background: #f1f2f5;
+  color: var(--text-primary);
+}
+
+.drawBtn {
+  flex: 1.4;
+  background: var(--text-primary);
+  border: 1px solid var(--text-primary);
+  color: #ffffff;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-family: var(--font-prompt);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+.drawBtn:hover {
+  background: #27272a;
+  transform: translateY(-1px);
+}
+
+.scoreBtn {
+  flex: 1.4;
+  background: var(--brand-blue);
+  color: #ffffff;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-family: var(--font-prompt);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  box-shadow: 0 4px 16px var(--brand-blue-glow);
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: none;
+  cursor: pointer;
+}
+
+.scoreBtn:hover {
+  background: var(--brand-blue-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(81, 112, 255, 0.45);
+}
+
+/* Right Column: Insight Card */
+.insightCard {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-medium);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.categoryBadge {
+  align-self: flex-start;
+  padding: 4px 12px;
+  border-radius: 6px;
+  color: #ffffff;
+  font-family: var(--font-prompt);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.categoryTitle {
+  font-family: var(--font-prompt);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.categoryTagline {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.specsList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 0;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.specRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.specKey {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+.specVal {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.shuffleBtn {
+  background: #ffffff;
+  border: 1px solid var(--border-medium);
+  color: var(--text-primary);
+  padding: 10px;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  transition: all 0.2s ease;
+  text-align: center;
+  cursor: pointer;
+}
+
+.shuffleBtn:hover {
+  background: var(--text-primary);
+  color: #ffffff;
+}
+
+/* Mobile-First Responsive Optimization */
+@media (max-width: 992px) {
+  .simulatorSection {
+    padding: 60px 0;
+  }
+
+  .categoryFilters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    padding: 4px 0;
+    margin: 0 0 28px 0;
+  }
+
+  .filterPill {
+    padding: 8px 14px;
+    font-size: 0.72rem;
+  }
+
+  .workspaceGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .cardDisplayArea {
+    order: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pilesCard {
+    order: 2;
+    max-width: 480px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .insightCard {
+    order: 3;
+    max-width: 480px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .simulatorSection {
+    padding: 40px 0;
+  }
+
+  .sectionHeader {
+    margin-bottom: 24px;
+  }
+
+  .sectionTitle {
+    font-size: clamp(1.8rem, 8vw, 2.4rem);
+    margin-bottom: 10px;
+  }
+
+  .sectionSubtitle {
+    font-size: 0.9rem;
+  }
+
+  .cardInteractiveStage {
+    min-height: 360px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .controlsBar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .drawBtn {
+    grid-column: span 2;
+    padding: 15px;
+    font-size: 1rem;
+    order: -1;
+  }
+
+  .passBtn, .scoreBtn {
+    padding: 12px 10px;
+    font-size: 0.85rem;
+  }
+
+  .flipInstruction {
+    font-size: 0.75rem;
+    margin: 12px 0 16px;
+  }
+}

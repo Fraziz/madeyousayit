@@ -1,0 +1,605 @@
+.heroSection {
+  position: relative;
+  min-height: calc(100vh - 110px);
+  display: flex;
+  align-items: center;
+  padding: 100px 0 120px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+}
+
+.backgroundAura {
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  width: 650px;
+  height: 650px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(81, 112, 255, 0.16) 0%, rgba(81, 112, 255, 0.03) 55%, transparent 70%);
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
+  animation: pulseGlow 10s ease-in-out infinite;
+}
+
+.backgroundGrid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+.heroContainer {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 80px;
+}
+
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.heroTitle {
+  font-family: var(--font-logo);
+  font-size: clamp(3rem, 6.5vw, 5.8rem);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: 0.01em;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+}
+
+.breakTitle {
+  display: block;
+}
+
+.titleHighlight {
+  color: var(--brand-blue);
+  text-shadow: 0 0 40px rgba(81, 112, 255, 0.25);
+}
+
+.heroTagline {
+  font-family: var(--font-prompt);
+  font-size: clamp(1.2rem, 2.5vw, 1.65rem);
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--brand-blue);
+  margin-bottom: 20px;
+}
+
+.heroDescription {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  max-width: 560px;
+  margin-bottom: 36px;
+}
+
+/* Specs Row Capsule */
+.specsRow {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px 20px;
+  padding: 14px 24px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  margin-bottom: 36px;
+  box-shadow: var(--shadow-card);
+  max-width: 100%;
+}
+
+.specBadge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.specIcon {
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.specMeta {
+  display: flex;
+  flex-direction: column;
+}
+
+.specLabel {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.specValue {
+  font-family: var(--font-prompt);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.specDivider {
+  width: 1px;
+  height: 28px;
+  background: var(--border-medium);
+}
+
+/* Action Buttons */
+.actionButtonsRow {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 28px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.primaryDemoBtn {
+  background-color: var(--brand-blue);
+  color: #ffffff;
+  padding: 18px 34px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-prompt);
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 10px 28px var(--brand-blue-glow);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: none;
+  cursor: pointer;
+}
+
+.primaryDemoBtn:hover {
+  background-color: var(--brand-blue-dark);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 16px 36px rgba(81, 112, 255, 0.45);
+}
+
+.btnArrow {
+  font-size: 1.25rem;
+  transition: transform 0.2s ease;
+}
+
+.primaryDemoBtn:hover .btnArrow {
+  transform: translateX(5px);
+}
+
+.secondaryExploreBtn {
+  background-color: #ffffff;
+  border: 1px solid var(--border-medium);
+  color: var(--text-primary);
+  padding: 18px 28px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-prompt);
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  box-shadow: var(--shadow-subtle);
+}
+
+.secondaryExploreBtn:hover {
+  border-color: var(--brand-blue);
+  color: var(--brand-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(81, 112, 255, 0.15);
+}
+
+/* Playtest Callout */
+.playtestCallout {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.calloutDot {
+  font-size: 1rem;
+}
+
+.calloutText {
+  line-height: 1.5;
+}
+
+.calloutLink {
+  color: var(--brand-blue);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+.calloutLink:hover {
+  color: var(--brand-blue-dark);
+}
+
+/* Right Column: Visual Stage */
+.heroVisualArea {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.cardStageWrapper {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.cardFanContainer {
+  position: relative;
+  width: 280px;
+  height: 400px;
+  margin: 0 auto 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: perspective(1200px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.fannedCardItem {
+  position: absolute;
+  width: 250px;
+  height: 350px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transform-origin: 50% 120%;
+  z-index: var(--card-z, 10);
+  transform: translateX(calc(var(--base-x, 0px) * var(--fan-mult, 1)))
+             translateY(calc(var(--base-y, 0px) * var(--fan-mult, 1)))
+             rotate(var(--base-angle, 0deg))
+             scale(1);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              z-index 0.05s ease;
+  will-change: transform, box-shadow;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Formal subtle hover state: dignified lift and soft shadow */
+.fannedCardItem:hover {
+  transform: translateX(calc(var(--base-x, 0px) * var(--fan-mult, 1)))
+             translateY(calc((var(--base-y, 0px) - 12px) * var(--fan-mult, 1)))
+             rotate(var(--base-angle, 0deg))
+             scale(1.02);
+  box-shadow: 0 14px 32px -6px rgba(15, 23, 42, 0.2);
+  z-index: 38 !important;
+}
+
+/* Formal selected card: clean, poised elevation */
+.fannedCardSelected {
+  transform: translateX(calc(var(--base-x, 0px) * var(--fan-mult, 1)))
+             translateY(calc((var(--base-y, 0px) - 18px) * var(--fan-mult, 1)))
+             rotate(calc(var(--base-angle, 0deg) * 0.4))
+             scale(1.035) !important;
+  box-shadow: 0 20px 42px -8px rgba(15, 23, 42, 0.24);
+  z-index: 40 !important;
+}
+
+/* Hovering the currently selected card */
+.fannedCardSelected:hover {
+  transform: translateX(calc(var(--base-x, 0px) * var(--fan-mult, 1)))
+             translateY(calc((var(--base-y, 0px) - 22px) * var(--fan-mult, 1)))
+             rotate(calc(var(--base-angle, 0deg) * 0.4))
+             scale(1.04) !important;
+  box-shadow: 0 24px 48px -8px rgba(15, 23, 42, 0.28);
+  z-index: 42 !important;
+}
+
+.cardInnerFlipper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-md);
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  transition: transform 0.48s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 12px 30px -6px rgba(15, 23, 42, 0.14), 0 0 0 1px rgba(15, 23, 42, 0.06);
+  will-change: transform;
+}
+
+.isFlipped {
+  transform: rotateY(180deg);
+}
+
+.cardFaceBackDesign,
+.cardFaceChallenge {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background: #5170FF;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+
+/* 0deg: Shows Card Back Design by default for all cards in fan */
+.cardFaceBackDesign {
+  transform: rotateY(0deg);
+  z-index: 2;
+}
+
+/* 180deg: Shows Crisp Clean Challenge Face upon click */
+.cardFaceChallenge {
+  transform: rotateY(180deg);
+  z-index: 1;
+  background: #ffffff;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  display: block;
+  border-radius: var(--radius-md);
+  image-rendering: -webkit-optimize-contrast;
+  pointer-events: none;
+}
+
+/* Card Controls */
+.cardControlsRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.flipBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 24px;
+  border-radius: 9999px;
+  background: #ffffff;
+  border: 1.5px solid var(--brand-blue);
+  font-family: var(--font-prompt);
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  touch-action: manipulation;
+}
+
+.flipBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(81, 112, 255, 0.16);
+  background: rgba(81, 112, 255, 0.03);
+}
+
+.flipBtn:active {
+  transform: translateY(0);
+}
+
+.flipIcon {
+  font-size: 1.05rem;
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.categoryIndicators {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 2px;
+}
+
+.catIndicatorDot {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 13px;
+  border-radius: 9999px;
+  background: #ffffff;
+  border: 1px solid var(--border-medium);
+  font-family: var(--font-prompt);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  touch-action: manipulation;
+}
+
+.catDotMarker {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.catIndicatorDot:hover {
+  color: var(--text-primary);
+  border-color: var(--cat-color, var(--brand-blue));
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.06);
+}
+
+.catIndicatorActive {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transform: translateY(-1px);
+}
+
+.catIndicatorActive:hover {
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .heroContainer {
+    grid-template-columns: 1fr;
+    gap: 60px;
+    text-align: center;
+  }
+
+  .heroContent {
+    align-items: center;
+  }
+
+  .heroDescription {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .actionButtonsRow {
+    justify-content: center;
+  }
+
+  .specsRow {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .heroSection {
+    padding: 40px 0 60px;
+  }
+
+  .heroTitle {
+    font-size: clamp(2.4rem, 11vw, 3.6rem);
+    margin-bottom: 14px;
+  }
+
+  .heroTagline {
+    font-size: 1.05rem;
+    margin-bottom: 12px;
+  }
+
+  .heroDescription {
+    font-size: 0.95rem;
+    line-height: 1.55;
+    margin-bottom: 24px;
+  }
+
+  .specsRow {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    width: 100%;
+    padding: 12px 14px;
+  }
+
+  .specDivider {
+    display: none;
+  }
+
+  .specValue {
+    font-size: 1.05rem;
+  }
+
+  .specLabel {
+    font-size: 0.65rem;
+  }
+
+  .actionButtonsRow {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .primaryDemoBtn,
+  .secondaryExploreBtn {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 20px;
+  }
+
+  .playtestCallout {
+    font-size: 0.88rem;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .cardFanContainer {
+    --fan-mult: 0.62;
+    width: 220px;
+    height: 310px;
+  }
+
+  .fannedCardItem {
+    width: 195px;
+    height: 273px;
+  }
+
+  .cardControlsRow {
+    width: 100%;
+    gap: 12px;
+  }
+
+  .flipBtn {
+    padding: 10px 20px;
+    font-size: 0.82rem;
+  }
+
+  .categoryIndicators {
+    gap: 5px;
+  }
+
+  .catIndicatorDot {
+    padding: 5px 10px;
+    font-size: 0.68rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .heroTitle {
+    font-size: 2.2rem;
+  }
+
+  .cardFanContainer {
+    --fan-mult: 0.48;
+    width: 185px;
+    height: 260px;
+  }
+
+  .fannedCardItem {
+    width: 170px;
+    height: 238px;
+  }
+
+  .catIndicatorDot {
+    padding: 4px 8px;
+    font-size: 0.64rem;
+  }
+}
