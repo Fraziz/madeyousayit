@@ -31,19 +31,17 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
 
   return (
     <>
-      {/* Top Announcement Bar */}
-      <div className={styles.topAnnouncementBar}>
-        <div className={styles.announcementTicker}>
-          <span>MADE YOU SAY IT</span>
-          <span>FREE CARD DECKS AVAILABLE TO TRY</span>
-          <span>75 CARDS · 7 FUN CATEGORIES</span>
-          <span>2-8 PLAYERS · 15-45 MINS · AGES 13+</span>
-          <span>PLAY A CARD. MAKE A MEMORY.</span>
-          <span>MADE YOU SAY IT</span>
-          <span>FREE CARD DECKS AVAILABLE TO TRY</span>
-          <span>75 CARDS · 7 FUN CATEGORIES</span>
-          <span>2-8 PLAYERS · 15-45 MINS · AGES 13+</span>
-          <span>PLAY A CARD. MAKE A MEMORY.</span>
+      {/* Moving Clean Top Announcement Bar */}
+      <div className={styles.topAnnouncementBar} aria-label="Announcement">
+        <div className={styles.tickerTrack}>
+          {[1, 2, 3, 4].map((i) => (
+            <div key={i} className={styles.tickerItem} aria-hidden={i > 1 ? 'true' : undefined}>
+              <span>LIMITED FREE PROTOTYPE DECKS AVAILABLE</span>
+              <span className={styles.tickerDot} />
+              <span>80 CARDS · 6 CARD TYPES · 3–8 PLAYERS · 20–30 MIN · AGES 13+</span>
+              <span className={styles.tickerDot} />
+            </div>
+          ))}
         </div>
       </div>
 
@@ -60,7 +58,7 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
             aria-label="MADE YOU SAY IT Home"
           >
             <img
-              src="/brand/logo.png"
+              src="/brand/logo.svg"
               alt="MADE YOU SAY IT logo"
               className={styles.brandLogoImg}
             />
@@ -103,13 +101,6 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
 
           {/* Right Action Utilities */}
           <div className={styles.rightActions}>
-            <button
-              onClick={() => handleLinkClick('feedback')}
-              className={styles.buyButton}
-            >
-              <span>GET FREE DECK</span>
-            </button>
-
             {/* Mobile Hamburger Toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -127,19 +118,19 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
         <div className={`${styles.mobileDrawer} ${mobileMenuOpen ? styles.mobileDrawerOpen : ''}`}>
           <div className={styles.mobileDrawerInner}>
             <button onClick={() => handleLinkClick('gallery')} className={styles.mobileNavLink}>
-              SAMPLE CARDS (7 TYPES)
+              SAMPLE CARDS (7 CARD TYPES)
             </button>
             <button onClick={() => handleLinkClick('packaging')} className={styles.mobileNavLink}>
               WHAT'S IN THE BOX
             </button>
             <button onClick={() => handleLinkClick('rules')} className={styles.mobileNavLink}>
-              HOW IT WORKS (6 RULES)
+              HOW IT WORKS
             </button>
             <button onClick={() => handleLinkClick('story')} className={styles.mobileNavLink}>
               WHY I CREATED THIS GAME
             </button>
             <button onClick={() => handleLinkClick('feedback')} className={styles.mobileNavLink}>
-              GIVE FEEDBACK &amp; GET FREE DECK
+              GIVE FEEDBACK
             </button>
 
             <div className={styles.mobileDrawerFooter}>
@@ -150,7 +141,7 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
                 }}
                 className={styles.mobileBuyBtn}
               >
-                ASK FOR A FREE DECK
+                GET A DECK →
               </button>
             </div>
           </div>

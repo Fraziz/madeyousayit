@@ -1,36 +1,67 @@
 import React, { useState } from 'react';
-import { OFFICIAL_DECK, CARD_CATEGORIES_INFO } from '../data/cards';
+import {
+  CURATED_SAMPLE_CARDS,
+  CARD_TYPES_INFO,
+  TOTAL_DECK_CARDS,
+  TOTAL_DECK_POINTS,
+} from '../data/cards';
 import { CardView } from './CardView';
 import { playSound } from '../utils/audio';
-import type { CardCategory } from '../types';
+import type { CardType, GameCard } from '../types';
 import styles from './CardGallery.module.css';
 
 interface CardGalleryProps {
   soundEnabled?: boolean;
 }
 
-type FilterCategory = 'ALL' | CardCategory;
-
 export const CardGallery: React.FC<CardGalleryProps> = ({ soundEnabled = true }) => {
-  const [activeCategory, setActiveCategory] = useState<FilterCategory>('CONNECT');
-  const [difficultyFilter, setDifficultyFilter] = useState<'ALL' | 'EASY' | 'FUN' | 'WILD'>('ALL');
+  const [activeCardType, setActiveCardType] = useState<CardType>('GUESS');
+  const [pointFilter, setPointFilter] = useState<'ALL' | 1 | 2 | 3>('ALL');
+  const [flippedCards, setFlippedCards] = useState<Record<string, boolean>>({});
+  const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
+  const [zoomModalCard, setZoomModalCard] = useState<GameCard | null>(null);
 
-  const filteredCards = OFFICIAL_DECK.filter((c) => {
-    const matchesCat = activeCategory === 'ALL' || c.category === activeCategory;
-    const matchesDiff = difficultyFilter === 'ALL' || c.difficulty === difficultyFilter;
-    return matchesCat && matchesDiff;
-  });
-
-  const currentCategoryInfo = activeCategory !== 'ALL' ? CARD_CATEGORIES_INFO[activeCategory] : null;
-
-  const handleTabChange = (cat: FilterCategory) => {
-    if (soundEnabled) playSound('draw');
-    setActiveCategory(cat);
+  const handleCardFlip = (cardId: string) => {
+    if (soundEnabled) playSound('flip');
+    setFlippedCards((prev) => ({
+      ...prev,
+      [cardId]: !prev[cardId],
+    }));
   };
 
-  const handleDifficultyChange = (diff: 'ALL' | 'EASY' | 'FUN' | 'WILD') => {
+  const filteredCards = CURATED_SAMPLE_CARDS.filter((c) => {
+    const matchesCat = c.cardType === activeCardType;
+    const matchesPoint = pointFilter === 'ALL' || c.points === pointFilter;
+    return matchesCat && matchesPoint;
+  });
+
+  const activeCard: GameCard | null =
+    filteredCards.find((c) => c.id === selectedCardId) || filteredCards[0] || null;
+
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setZoomModalCard(null);
+      }
+    };
+    if (zoomModalCard) {
+      window.addEventListener('keydown', handleKeyDown);
+      return () => window.removeEventListener('keydown', handleKeyDown);
+    }
+  }, [zoomModalCard]);
+
+  const currentCardTypeInfo = CARD_TYPES_INFO[activeCardType];
+
+  const handleTabChange = (cat: CardType) => {
+    if (soundEnabled) playSound('draw');
+    setActiveCardType(cat);
+    setSelectedCardId(null);
+  };
+
+  const handlePointChange = (p: 'ALL' | 1 | 2 | 3) => {
     if (soundEnabled) playSound('click');
-    setDifficultyFilter(diff);
+    setPointFilter(p);
+    setSelectedCardId(null);
   };
 
   return (
@@ -38,121 +69,167 @@ export const CardGallery: React.FC<CardGalleryProps> = ({ soundEnabled = true })
       <div className={`container ${styles.galleryContainer}`}>
         {/* Section Header */}
         <div className={styles.sectionHeader}>
-          <div className={styles.sectionTag}>SEE THE 7 CARD TYPES</div>
+          <div className={styles.sectionTag}>3 SAMPLE CARDS PER CARD TYPE</div>
           <h2 className={styles.sectionTitle}>
             SAMPLE <span className={styles.titleHighlight}>CARDS</span>
           </h2>
           <p className={styles.sectionSubtitle}>
-            Here are sample cards from all 7 types: GUESS, CREATE, BATTLE, CHAOS, TOGETHER, CONNECT, and LOVE. Click any card to see both sides!
+            Previewing 3 SAMPLE CARDS PER CARD TYPE. The complete {TOTAL_DECK_CARDS}-card prototype deck contains {TOTAL_DECK_POINTS} points, funny challenges, and plenty of opportunities for laughs. Click any card to flip it!
           </p>
         </div>
 
-        {/* Category Tabs: Includes ALL (14) + 7 Individual Types */}
-        <div className={styles.tabNav}>
-          <button
-            onClick={() => handleTabChange('ALL')}
-            className={`${styles.tabBtn} ${activeCategory === 'ALL' ? styles.tabBtnActive : ''}`}
-            style={activeCategory === 'ALL' ? { borderBottomColor: 'var(--brand-blue)' } : undefined}
+        {/* Creator Improvement Notice Banner */}
+        <div className={styles.improvingCallout}>
+          <div className={styles.improvingLeft}>
+            <span className={styles.improvingBadge}>HELP US IMPROVE THE CARDS</span>
+            <p className={styles.improvingText}>
+              <strong>I’m actively improving the challenges!</strong> If a card feels boring, awkward, confusing, or just isn't fun, tell me. Your feedback helps me improve the next version.
+            </p>
+          </div>
+          <a
+            href="#feedback"
+            className={styles.improvingBtn}
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById('feedback')?.scrollIntoView({ behavior: 'smooth' });
+            }}
           >
-            <span className={styles.tabDot} style={{ backgroundColor: 'var(--brand-blue)' }} />
-            <span>ALL CARDS ({OFFICIAL_DECK.length})</span>
-          </button>
+            <span>GIVE A SUGGESTION</span>
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
 
-          {(Object.keys(CARD_CATEGORIES_INFO) as CardCategory[]).map((catKey) => {
-            const info = CARD_CATEGORIES_INFO[catKey];
-            const isActive = activeCategory === catKey;
+        {/* Card Type Tabs: Exactly 3 cards per card type */}
+        <div className={styles.tabNav}>
+          {(Object.keys(CARD_TYPES_INFO) as CardType[]).map((catKey) => {
+            const info = CARD_TYPES_INFO[catKey];
+            const isActive = activeCardType === catKey;
 
             return (
               <button
                 key={catKey}
                 onClick={() => handleTabChange(catKey)}
                 className={`${styles.tabBtn} ${isActive ? styles.tabBtnActive : ''}`}
-                style={isActive ? { borderBottomColor: info.color } : undefined}
+                style={
+                  isActive
+                    ? {
+                        backgroundColor: info.color,
+                        borderColor: info.color,
+                        color: '#ffffff',
+                        boxShadow: `0 4px 14px ${info.color}55`,
+                      }
+                    : undefined
+                }
               >
-                <span className={styles.tabDot} style={{ backgroundColor: info.color }} />
-                <span>{catKey} ({info.count})</span>
+                <span>{catKey} ({info.sampleCount})</span>
               </button>
             );
           })}
         </div>
 
-        {/* Active Category Manifesto Banner */}
+        {/* Active Card Type Banner */}
         <div
           className={styles.manifestoBanner}
           style={{
-            borderColor: currentCategoryInfo ? currentCategoryInfo.color : 'var(--brand-blue)',
-            background: currentCategoryInfo
-              ? `linear-gradient(135deg, ${currentCategoryInfo.color}15 0%, #ffffff 100%)`
-              : 'linear-gradient(135deg, rgba(81, 112, 255, 0.08) 0%, #ffffff 100%)',
+            borderColor: currentCardTypeInfo.color,
+            background: `linear-gradient(135deg, ${currentCardTypeInfo.color}10 0%, #ffffff 100%)`,
           }}
         >
           <div className={styles.bannerLeft}>
             <span
-              className={styles.bannerCategoryTag}
+              className={styles.bannerCardTypeTag}
               style={{
-                backgroundColor: currentCategoryInfo ? currentCategoryInfo.color : 'var(--brand-blue)',
+                backgroundColor: currentCardTypeInfo.color,
               }}
             >
-              {activeCategory === 'ALL' ? 'ALL CARDS' : activeCategory} | {activeCategory === 'ALL' ? OFFICIAL_DECK.length : currentCategoryInfo?.count} CARDS
+              {activeCardType} · 3 SAMPLES ({currentCardTypeInfo.count} IN FULL DECK)
             </span>
             <h3 className={styles.bannerTagline}>
-              {currentCategoryInfo ? currentCategoryInfo.tagline : 'DIFFERENT CARDS FOR DIFFERENT KINDS OF FUN.'}
+              {currentCardTypeInfo.tagline}
             </h3>
             <p className={styles.bannerRule}>
-              {currentCategoryInfo
-                ? currentCategoryInfo.rule
-                : 'Includes GUESS, CREATE, BATTLE, CHAOS, TOGETHER, CONNECT, and LOVE cards. Take turns and see what each type feels like!'}
+              {currentCardTypeInfo.rule} (Showing 3 preview cards. Full deck has {currentCardTypeInfo.count} cards worth {currentCardTypeInfo.totalPoints} points.)
             </p>
           </div>
 
           <div className={styles.bannerRight}>
             <span className={styles.countBadge}>
-              SHOWING {filteredCards.length} OF {activeCategory === 'ALL' ? OFFICIAL_DECK.length : currentCategoryInfo?.count} CARDS
+              {filteredCards.length} SAMPLES · {currentCardTypeInfo.count} CARDS ({currentCardTypeInfo.totalPoints} PTS) IN FULL DECK
             </span>
-            {/* Difficulty Filter Chips */}
+            {/* Points Filter Chips: ALL, 1 POINT, 2 POINTS, 3 POINTS */}
             <div className={styles.filterPills}>
-              {(['ALL', 'EASY', 'FUN', 'WILD'] as const).map((d) => (
-                <button
-                  key={d}
-                  onClick={() => handleDifficultyChange(d)}
-                  className={`${styles.filterPill} ${difficultyFilter === d ? styles.filterPillActive : ''}`}
-                >
-                  {d}
-                </button>
-              ))}
+              {(['ALL', 1, 2, 3] as const).map((p) => {
+                const label = p === 'ALL' ? 'ALL' : p === 1 ? '1 POINT' : `${p} POINTS`;
+                return (
+                  <button
+                    key={p}
+                    onClick={() => handlePointChange(p)}
+                    className={`${styles.filterPill} ${pointFilter === p ? styles.filterPillActive : ''}`}
+                  >
+                    {label}
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>
 
-        {/* Cards Grid: Displays Curated Sample Cards Only */}
-        <div className={styles.cardsGrid}>
-          {filteredCards.map((card) => (
-            <div key={card.id} className={styles.cardWrapper}>
-              <CardView
-                card={card}
-                interactive={true}
-                onFlip={() => {
-                  if (soundEnabled) playSound('flip');
-                }}
-              />
+        {/* Cards Grid: Clean Pure Card Images (Click image to flip, no badges or colored glow) */}
+        {filteredCards.length > 0 ? (
+          <>
+            <div className={styles.cardsGrid}>
+              {filteredCards.map((card) => (
+                <div
+                  key={card.id}
+                  className={`${styles.cardWrapper} ${activeCard?.id === card.id ? styles.cardWrapperActive : ''}`}
+                  onClick={() => {
+                    setSelectedCardId(card.id);
+                  }}
+                >
+                  <CardView
+                    card={card}
+                    isFlipped={!!flippedCards[card.id]}
+                    interactive={true}
+                    onFlip={() => {
+                      setSelectedCardId(card.id);
+                      handleCardFlip(card.id);
+                    }}
+                  />
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </>
+        ) : (
+          <div className={styles.emptyFilterState}>
+            <h4 className={styles.emptyFilterTitle}>
+              NO {pointFilter === 1 ? '1 POINT' : `${pointFilter} POINTS`} CARDS IN {activeCardType}
+            </h4>
+            <p className={styles.emptyFilterText}>
+              In the 80-card deck, {activeCardType} cards have specific point values. Try selecting another point level or view all {activeCardType} cards!
+            </p>
+            <button
+              onClick={() => handlePointChange('ALL')}
+              className={styles.resetFilterBtn}
+            >
+              Show All {activeCardType} Cards
+            </button>
+          </div>
+        )}
 
-        {/* Coming Soon Teaser Banner */}
+        {/* Physical 80-Card Playtest Banner */}
         <div className={styles.playtestBanner}>
           <div className={styles.playtestText}>
-            <span className={styles.playtestTag}>FULL DECK COMING SOON</span>
-            <h4 className={styles.playtestTitle}>THE FULL 75-CARD DECK IS STILL BEING MADE.</h4>
+            <span className={styles.playtestTag}>UNLOCK ALL {TOTAL_DECK_CARDS} CARDS & {TOTAL_DECK_POINTS} POINTS</span>
+            <h4 className={styles.playtestTitle}>WANT TO PLAY THE FULL PHYSICAL GAME?</h4>
             <p className={styles.playtestDesc}>
-              Right now I am testing with a small set of sample cards. Try these with your friends and let me know what you think - your feedback helps make the final game better!
+              You are viewing 3 sample cards per card type. The 80-card prototype deck features all {TOTAL_DECK_CARDS} cards with {TOTAL_DECK_POINTS} points, custom prototype card box, and complete rulebook. Get your free prototype copy or share your playtest thoughts!
             </p>
             <div className={styles.playtestNoticeFoot}>
               <span className={styles.playtestNoticeTag}>
-                PROTOTYPE — FOR PLAYTESTING ONLY
+                PROTOTYPE EDITION
               </span>
               <span className={styles.playtestNoticeLegal}>
-                Please do not reproduce, distribute, or publish the cards without permission.
+                {TOTAL_DECK_CARDS} Cards · {TOTAL_DECK_POINTS} Points · 6 Card Types · 3–8 Players · 20–30 Min
               </span>
             </div>
           </div>
@@ -177,6 +254,96 @@ export const CardGallery: React.FC<CardGalleryProps> = ({ soundEnabled = true })
           </div>
         </div>
       </div>
+
+      {/* High-Definition Lightbox Zoom Modal for Mobile and Desktop inspection */}
+      {zoomModalCard && (
+        <div
+          className={styles.lightboxBackdrop}
+          onClick={() => setZoomModalCard(null)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <div
+            className={styles.lightboxModal}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className={styles.lightboxHeader}>
+              <div className={styles.lightboxMeta}>
+                <span
+                  className={styles.lightboxCatBadge}
+                  style={{ backgroundColor: zoomModalCard.themeColor }}
+                >
+                  {zoomModalCard.cardType}
+                </span>
+                <span className={styles.lightboxPointsBadge}>
+                  ★ {zoomModalCard.points} {zoomModalCard.points === 1 ? 'POINT' : 'POINTS'}
+                </span>
+              </div>
+              <button
+                onClick={() => setZoomModalCard(null)}
+                className={styles.lightboxCloseBtn}
+                aria-label="Close zoomed view"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className={styles.lightboxCardStage}>
+              <CardView
+                card={zoomModalCard}
+                isFlipped={!!flippedCards[zoomModalCard.id]}
+                interactive={true}
+                onFlip={() => handleCardFlip(zoomModalCard.id)}
+              />
+            </div>
+
+            <p className={styles.lightboxTapHint}>
+              Tap card to flip between front and back
+            </p>
+
+            <div className={styles.lightboxChallengeBox}>
+              <span className={styles.lightboxChallengeLabel}>CHALLENGE</span>
+              <p className={styles.lightboxChallengeText}>
+                {zoomModalCard.challenge}
+              </p>
+            </div>
+
+            <div className={styles.lightboxNavRow}>
+              <button
+                onClick={() => {
+                  const idx = filteredCards.findIndex((c) => c.id === zoomModalCard.id);
+                  if (idx > 0) {
+                    setZoomModalCard(filteredCards[idx - 1]);
+                    setSelectedCardId(filteredCards[idx - 1].id);
+                    if (soundEnabled) playSound('draw');
+                  }
+                }}
+                disabled={filteredCards.findIndex((c) => c.id === zoomModalCard.id) <= 0}
+                className={styles.lightboxNavBtn}
+              >
+                ‹ Prev Card
+              </button>
+              <button
+                onClick={() => {
+                  const idx = filteredCards.findIndex((c) => c.id === zoomModalCard.id);
+                  if (idx < filteredCards.length - 1) {
+                    setZoomModalCard(filteredCards[idx + 1]);
+                    setSelectedCardId(filteredCards[idx + 1].id);
+                    if (soundEnabled) playSound('draw');
+                  }
+                }}
+                disabled={
+                  filteredCards.findIndex((c) => c.id === zoomModalCard.id) >=
+                  filteredCards.length - 1
+                }
+                className={styles.lightboxNavBtn}
+              >
+                Next Card ›
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

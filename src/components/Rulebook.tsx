@@ -1,55 +1,127 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { RULEBOOK_DATA } from '../data/rules';
+import { sound } from '../utils/audio';
 import styles from './Rulebook.module.css';
 
 interface RulebookProps {
   soundEnabled?: boolean;
 }
 
-export const Rulebook: React.FC<RulebookProps> = () => {
-  const { setup, yourTurn, cardTypes, points, passOrFail, thePiles, endOfGame, goldenRule, specs } = RULEBOOK_DATA;
+export const Rulebook: React.FC<RulebookProps> = ({ soundEnabled = true }) => {
+  const [activeSoloCardIndex, setActiveSoloCardIndex] = useState<number>(0);
+  const [sampleIndices, setSampleIndices] = useState<Record<string, number>>({
+    guess: 0,
+    battle: 0,
+  });
+
+  const handleNextSample = (typeId: string, maxSamples: number) => {
+    if (soundEnabled) sound.playClick();
+    setSampleIndices((prev) => ({
+      ...prev,
+      [typeId]: ((prev[typeId] || 0) + 1) % maxSamples,
+    }));
+  };
+
+  const { setup, yourTurn, points, cardTypes, passOrFail, thePiles, endOfGame, goldenRule, specs } = RULEBOOK_DATA;
 
   return (
     <section className={styles.rulebookSection} id="rules">
-      <div className={`container ${styles.rulebookContainer}`}>
-        
+      <div className={styles.rulebookContainer}>
         {/* Section Header */}
         <div className={styles.sectionHeader}>
-          <span className={styles.sectionTag}>OFFICIAL RULEBOOK</span>
-          <h2 className={styles.sectionTitle}>
-            HOW TO <span className={styles.titleHighlight}>PLAY</span>
-          </h2>
-          <p className={styles.sectionTagline}>{specs.tagline}</p>
-
-          <div className={styles.specsPill}>
+          {/* Exact Specs Capsule */}
+          <div className={styles.specsCapsule}>
+            <span>RULEBOOK</span>
+            <span className={styles.specDot}>•</span>
             <span>{specs.players}</span>
             <span className={styles.specDot}>•</span>
             <span>{specs.ages}</span>
             <span className={styles.specDot}>•</span>
             <span>{specs.duration}</span>
           </div>
+
+          <h2 className={styles.sectionTitle}>
+            HOW TO <span className={styles.titleHighlight}>PLAY</span>
+          </h2>
+          <p className={styles.sectionSubtitle}>
+            Everything you need to know to start playing in 2 minutes.
+          </p>
         </div>
 
-        {/* Minimalist Unified Document Canvas */}
+        {/* Minimalist Wide Document Canvas */}
         <div className={styles.rulebookCanvas}>
+          {/* Quick Note Banner */}
+          <p className={styles.quickNote}>
+            <strong>Quick note:</strong> For now, I use AI anime images to help explain the rules. This is a test version, so some prints and cuts may be uneven.
+          </p>
 
-          {/* 1. SETUP */}
-          <div className={styles.ruleRow}>
-            <div className={styles.ruleRowHeader}>
-              <span className={styles.ruleIndex}>01</span>
-              <div>
-                <h3 className={styles.ruleRowTitle}>{setup.title}</h3>
-                <p className={styles.ruleRowSubtitle}>{setup.fullText}</p>
-              </div>
+          {/* 1. SETUP — Visual Step-by-Step Illustrated Guide */}
+          <div className={styles.sectionBlock}>
+            <div className={styles.sectionHeadingRow}>
+              <h3 className={styles.sectionHeading}>{setup.title}</h3>
             </div>
 
-            <div className={styles.setupList}>
-              {setup.bullets.map((b, idx) => (
-                <div key={idx} className={styles.setupItem}>
-                  <span className={styles.setupBulletDot} />
-                  <div>
-                    <span className={styles.setupItemLabel}>{b.label}: </span>
-                    <span className={styles.setupItemText}>{b.text}</span>
+            <div className={styles.setupGrid}>
+              {setup.steps?.map((st) => (
+                <div key={st.number} className={styles.setupStepCard}>
+                  <div className={styles.setupImageWrapper}>
+                    <img
+                      src={st.image}
+                      alt={st.alt}
+                      className={styles.setupImage}
+                      loading="lazy"
+                    />
+                    <div className={styles.setupStepBadge}>
+                      <span className={styles.stepNum}>{st.number}</span>
+                    </div>
+                  </div>
+                  <div className={styles.setupStepContent}>
+                    <h4 className={styles.setupStepTitle}>{st.title}</h4>
+                    <p className={styles.setupStepAction}>{st.action}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+
+          </div>
+
+          <div className={styles.divider} />
+
+          {/* 2. YOUR TURN — Visual Illustrated Turn Stepper */}
+          <div className={styles.sectionBlock}>
+            <div className={styles.sectionHeadingRow}>
+              <h3 className={styles.sectionHeading}>{yourTurn.title}</h3>
+            </div>
+
+            <div className={styles.turnStepperGrid}>
+              {yourTurn.steps.map((st, idx) => (
+                <div key={st.name} className={styles.turnStepCard}>
+                  <div className={styles.turnImageWrapper}>
+                    {st.image ? (
+                      <img
+                        src={st.image}
+                        alt={st.alt || st.name}
+                        className={styles.turnImage}
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className={styles.turnImagePlaceholder}>
+                        <div className={styles.placeholderCardShape}>
+                          <span className={styles.placeholderCardBack}>MADE YOU SAY IT</span>
+                        </div>
+                      </div>
+                    )}
+                    <div className={styles.turnStepBadge}>
+                      <span className={styles.turnStepNum}>{idx + 1}</span>
+                    </div>
+                  </div>
+
+                  <div className={styles.turnCardBody}>
+                    <span className={styles.turnTagName}>{st.name}</span>
+                    {st.reminder && (
+                      <p className={styles.turnReminderText}>{st.reminder}</p>
+                    )}
                   </div>
                 </div>
               ))}
@@ -58,201 +130,182 @@ export const Rulebook: React.FC<RulebookProps> = () => {
 
           <div className={styles.divider} />
 
-          {/* 2. YOUR TURN */}
-          <div className={styles.ruleRow}>
-            <div className={styles.ruleRowHeader}>
-              <span className={styles.ruleIndex}>02</span>
-              <div>
-                <h3 className={styles.ruleRowTitle}>{yourTurn.title}</h3>
-                <p className={styles.ruleRowSubtitle}>Take turns in clockwise order following these simple steps.</p>
-              </div>
+          {/* 3. POINTS — Clean Minimalist Section */}
+          <div className={styles.sectionBlock}>
+            <div className={styles.sectionHeadingRow}>
+              <h3 className={styles.sectionHeading}>{points.title}</h3>
             </div>
-
-            {/* Clean Turn Flow Sequence */}
-            <div className={styles.flowStrip}>
-              {yourTurn.flow.map((step, idx) => (
-                <React.Fragment key={step}>
-                  <div className={styles.flowNode}>
-                    <span className={styles.flowNum}>{idx + 1}</span>
-                    <span className={styles.flowLabel}>{step}</span>
-                  </div>
-                  {idx < yourTurn.flow.length - 1 && (
-                    <span className={styles.flowChevron}>→</span>
-                  )}
-                </React.Fragment>
-              ))}
-            </div>
-
-            {/* 6 Clean Step Cards */}
-            <div className={styles.stepsGrid}>
-              {yourTurn.steps.map((st) => (
-                <div key={st.step} className={styles.stepItem}>
-                  <div className={styles.stepItemTop}>
-                    <span className={styles.stepNumTag}>STEP {st.step}</span>
-                    <h4 className={styles.stepItemName}>{st.name}</h4>
-                  </div>
-                  <p className={styles.stepItemAction}>{st.action}</p>
-                </div>
-              ))}
-            </div>
+            <p className={styles.pointsText}>{points.text}</p>
           </div>
 
           <div className={styles.divider} />
 
-          {/* 3. CARD TYPES */}
-          <div className={styles.ruleRow}>
-            <div className={styles.ruleRowHeader}>
-              <span className={styles.ruleIndex}>03</span>
-              <div>
-                <h3 className={styles.ruleRowTitle}>{cardTypes.title}</h3>
-                <p className={styles.ruleRowSubtitle}>How each card category works when played on your turn.</p>
-              </div>
-            </div>
+          {/* 4. CARD TYPES — Formal, Compact & Clickable */}
+          <div className={styles.sectionBlock}>
+            <h3 className={styles.sectionHeading}>{cardTypes.title}</h3>
 
             <div className={styles.cardTypesGrid}>
-              {cardTypes.types.map((type, idx) => (
-                <div key={idx} className={styles.cardTypeRow}>
-                  <div className={styles.cardTypeMeta}>
-                    <span className={styles.cardTypeTag}>{type.tag}</span>
-                    <h4 className={styles.cardTypeNames}>{type.categories}</h4>
+              {cardTypes.types.map((type, idx) => {
+                const isSolo = type.id === 'solo';
+                const currentCardImg = isSolo
+                  ? type.subTypes?.[activeSoloCardIndex]?.image || '/cards/chaos 2 point hero.png'
+                  : type.samples?.[sampleIndices[type.id] || 0] || '/cards/guess  1point hero.png';
+
+                const cardAlt = isSolo
+                  ? `${type.subTypes?.[activeSoloCardIndex]?.name || 'Card'} official card`
+                  : `${type.name || 'Card'} sample card`;
+
+                return (
+                  <div key={idx} className={styles.cardTypeCard}>
+                    {/* Compact Formal Card Image on Top — Clickable to flip/cycle */}
+                    <div className={styles.cardDisplayArea}>
+                      <div
+                        className={styles.cardPreviewWrapper}
+                        onClick={() => {
+                          if (isSolo) {
+                            if (soundEnabled) sound.playClick();
+                            setActiveSoloCardIndex((prev) => (prev + 1) % (type.subTypes?.length || 4));
+                          } else if (type.samples) {
+                            handleNextSample(type.id, type.samples.length);
+                          }
+                        }}
+                        title={
+                          isSolo
+                            ? 'Click card to view next solo card type'
+                            : `Click card to view next ${type.name} card (${(sampleIndices[type.id] || 0) + 1}/${type.samples?.length || 3})`
+                        }
+                      >
+                        <img
+                          src={currentCardImg}
+                          alt={cardAlt}
+                          className={styles.compactCardImg}
+                          loading="lazy"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Pill Buttons directly under card — Clean, Same & Clickable */}
+                    <div className={styles.cardTypePillsBar}>
+                      {isSolo && type.subTypes ? (
+                        type.subTypes.map((c, cIdx) => {
+                          const isSelected = activeSoloCardIndex === cIdx;
+                          return (
+                            <button
+                              key={c.name}
+                              type="button"
+                              onClick={() => {
+                                if (soundEnabled) sound.playClick();
+                                setActiveSoloCardIndex(cIdx);
+                              }}
+                              className={`${styles.cardTypePill} ${isSelected ? styles.cardTypePillActive : ''}`}
+                              style={
+                                isSelected
+                                  ? {
+                                      backgroundColor: c.color,
+                                      color: c.textColor || '#ffffff',
+                                      borderColor: c.color,
+                                      boxShadow: `0 3px 12px ${c.color}66`,
+                                    }
+                                  : undefined
+                              }
+                              title={`Show ${c.name} card`}
+                            >
+                              {c.name}
+                            </button>
+                          );
+                        })
+                      ) : type.name && type.samples ? (
+                        <button
+                          type="button"
+                          onClick={() => handleNextSample(type.id, type.samples!.length)}
+                          className={`${styles.cardTypePill} ${styles.cardTypePillActive}`}
+                          style={{
+                            backgroundColor: type.color,
+                            color: type.textColor || '#ffffff',
+                            borderColor: type.color,
+                            boxShadow: `0 3px 12px ${type.color}66`,
+                          }}
+                          title={`Click to view next ${type.name} card (${(sampleIndices[type.id] || 0) + 1}/${type.samples.length})`}
+                        >
+                          {type.name}
+                        </button>
+                      ) : null}
+                    </div>
+
+                    {/* Rule Text Under Pills — NO duplicate heading! */}
+                    <p className={styles.cardTypeRuleUnder}>{type.rule}</p>
                   </div>
-                  <p className={styles.cardTypeInstruction}>{type.rule}</p>
-                </div>
-              ))}
+                );
+              })}
             </div>
+
           </div>
 
           <div className={styles.divider} />
 
-          {/* 4. POINTS & 5. PASS OR FAIL */}
-          <div className={styles.splitRow}>
-            {/* 4. POINTS */}
-            <div className={styles.splitCol}>
-              <div className={styles.ruleRowHeader}>
-                <span className={styles.ruleIndex}>04</span>
-                <div>
-                  <h3 className={styles.ruleRowTitle}>{points.title}</h3>
-                  <p className={styles.ruleRowSubtitle}>{points.note}</p>
+          {/* 5. PASS OR FAIL */}
+          <div className={styles.sectionBlock}>
+            <h3 className={styles.sectionHeading}>{passOrFail.title}</h3>
+            <div className={styles.passFailList}>
+              {passOrFail.items.map((it) => (
+                <div key={it.label} className={styles.passFailRow}>
+                  <span className={styles.passFailBadge}>{it.label}</span>
+                  <p className={styles.passFailText}>{it.desc}</p>
                 </div>
-              </div>
-
-              <div className={styles.pointsList}>
-                {points.tiers.map((t) => (
-                  <div key={t.name} className={styles.pointRow}>
-                    <span className={styles.pointTierName}>{t.name}</span>
-                    <span className={styles.pointTierBadge}>
-                      {t.points} {t.points === 1 ? 'POINT' : 'POINTS'}
-                    </span>
-                  </div>
-                ))}
-              </div>
+              ))}
             </div>
-
-            {/* 5. PASS OR FAIL */}
-            <div className={styles.splitCol}>
-              <div className={styles.ruleRowHeader}>
-                <span className={styles.ruleIndex}>05</span>
-                <div>
-                  <h3 className={styles.ruleRowTitle}>{passOrFail.title}</h3>
-                  <span className={styles.passNoteBadge}>{passOrFail.goldenCallout}</span>
-                </div>
-              </div>
-
-              <div className={styles.passFailList}>
-                {passOrFail.rules.map((r) => (
-                  <div key={r.type} className={styles.passFailItem}>
-                    <span className={styles.passFailLabel}>{r.type}</span>
-                    <p className={styles.passFailText}>{r.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <span className={styles.passAlwaysCallout}>{passOrFail.callout}</span>
           </div>
 
           <div className={styles.divider} />
 
           {/* 6. THE PILES */}
-          <div className={styles.ruleRow}>
-            <div className={styles.ruleRowHeader}>
-              <span className={styles.ruleIndex}>06</span>
-              <div>
-                <h3 className={styles.ruleRowTitle}>{thePiles.title}</h3>
-                <p className={styles.ruleRowSubtitle}>Four distinct areas for cards during and after play.</p>
-              </div>
-            </div>
+          <div className={styles.sectionBlock}>
+            <h3 className={styles.sectionHeading}>{thePiles.title}</h3>
 
-            <div className={styles.pilesGrid}>
-              {thePiles.piles.map((pile) => (
-                <div key={pile.name} className={styles.pileItem}>
-                  <div className={styles.pileMeta}>
-                    <span className={styles.pileName}>{pile.name}</span>
-                    <span className={styles.pileRole}>{pile.badge}</span>
-                  </div>
-                  <p className={styles.pileDetails}>{pile.desc}</p>
+            {/* Table layout image & piles explanation */}
+            {thePiles.image && (
+              <div className={styles.pilesHeroWrapper}>
+                <img
+                  src={thePiles.image}
+                  alt={thePiles.alt}
+                  className={styles.pilesHeroImage}
+                  loading="lazy"
+                />
+                <div className={styles.compactPilesGrid}>
+                  {thePiles.piles.map((p) => (
+                    <div key={p.name} className={styles.compactPileItem}>
+                      <span className={styles.compactPileName}>{p.name}</span>
+                      <p className={styles.compactPileDesc}>{p.desc}</p>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            )}
           </div>
 
           <div className={styles.divider} />
 
           {/* 7. END OF GAME */}
-          <div className={styles.ruleRow}>
-            <div className={styles.ruleRowHeader}>
-              <span className={styles.ruleIndex}>07</span>
-              <div>
-                <h3 className={styles.ruleRowTitle}>{endOfGame.title}</h3>
-                <p className={styles.ruleRowSubtitle}>{endOfGame.condition}</p>
-              </div>
+          <div className={styles.sectionBlock}>
+            <h3 className={styles.sectionHeading}>{endOfGame.title}</h3>
+            <p className={styles.endGameCondition}>{endOfGame.condition}</p>
+            <div className={styles.formulaBarCompact}>
+              <span className={styles.formulaItem}>Score Pile Points</span>
+              <span className={styles.formulaOp}>=</span>
+              <span className={styles.formulaOutcome}>Final Score</span>
             </div>
-
-            <div className={styles.endGameStrip}>
-              <div className={styles.formulaLine}>
-                <span className={styles.formulaItem}>Score Pile</span>
-                <span className={styles.formulaSymbol}>+</span>
-                <span className={styles.formulaItem}>Team Pile</span>
-                <span className={styles.formulaSymbol}>=</span>
-                <span className={styles.formulaOutcome}>Final Score</span>
-              </div>
-              <p className={styles.winnerDeclaration}>{endOfGame.winner}</p>
-            </div>
+            <p className={styles.winnerLine}>{endOfGame.winner}</p>
           </div>
 
           <div className={styles.divider} />
 
-          {/* 8. GOLDEN RULE */}
-          <div className={styles.goldenRuleBlock}>
-            <div className={styles.goldenContent}>
-              <div className={styles.goldenBadgeLine}>
-                <span className={styles.goldenNumber}>08</span>
-                <span className={styles.goldenTag}>SAFETY & COMFORT FIRST</span>
-              </div>
-              <h3 className={styles.goldenTitle}>{goldenRule.title}</h3>
-              <p className={styles.goldenText}>{goldenRule.text}</p>
-            </div>
-
-            <div className={styles.goldenAction}>
-              <a
-                href="https://www.facebook.com/aaronpaulcabagnan12"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.goldenButton}
-              >
-                <span>MESSAGE ON FACEBOOK TO GET DECK</span>
-                <span>→</span>
-              </a>
-            </div>
+          {/* 8. GOLDEN RULE — Compact Note */}
+          <div className={styles.goldenCard}>
+            <h4 className={styles.goldenTitle}>{goldenRule.title}</h4>
+            <p className={styles.goldenText}>{goldenRule.text}</p>
           </div>
-
         </div>
-
-        {/* Footer Brand Sign-off */}
-        <div className={styles.rulebookFooterStamp}>
-          <span>MADE YOU SAY IT</span>
-          <span className={styles.stampDot}>•</span>
-          <span>PLAY A CARD. MAKE A MEMORY.</span>
-        </div>
-
       </div>
     </section>
   );

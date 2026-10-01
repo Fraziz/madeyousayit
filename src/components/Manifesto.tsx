@@ -18,16 +18,13 @@ const Manifesto: React.FC = () => {
             "Sometimes the best memories happen when we simply spend time together, have fun, and enjoy the moment."
           </blockquote>
           <p className={styles.bodyText}>
-            I created <strong>MADE YOU SAY IT</strong> because I wanted to make a game that helps friends spend more time together, laugh, and have fun without being on their phones all the time.
+            I created <strong>MADE YOU SAY IT</strong> after seeing my friend enjoy creating and playing card games filled with challenges and funny moments. It inspired me to create my own game.
           </p>
           <p className={styles.bodyText}>
-            I noticed that some games can be too complicated, too competitive, or focused too much on winning. I wanted to create something simple and easy to play—something where everyone can join, try different challenges, answer questions, be creative, and make funny moments together.
+            I’m also a shy person, and sometimes I don’t know how to start conversations or interact with others. I wanted to create something that could make it easier for friends to <strong>talk, laugh, play, and enjoy the moment together.</strong>
           </p>
           <p className={styles.bodyText}>
-            <strong>MADE YOU SAY IT</strong> is still a prototype, so I’m still testing and improving it. I’m giving out free physical decks to people who are willing to play it with their friends.
-          </p>
-          <p className={styles.bodyText}>
-            Play it, enjoy it, and give me your honest feedback. Your feedback will help me improve the game and make it better.
+            <strong>MADE YOU SAY IT</strong> is still a prototype, and I’m continuously testing and improving it. That’s why I’m sharing it with people who are willing to play, have fun, and give honest feedback.
           </p>
         </div>
 
@@ -39,7 +36,7 @@ const Manifesto: React.FC = () => {
               <h3 className={styles.pillarTitle}>REAL LAUGHS</h3>
             </div>
             <p className={styles.pillarDesc}>
-              No boring questions. The cards give you funny challenges, playful battles, and jokes your friends will talk about for a long time.
+              Cards made to get people talking, trying funny challenges, and sharing genuine laughs together.
             </p>
           </div>
 
@@ -56,10 +53,10 @@ const Manifesto: React.FC = () => {
           <div className={styles.pillarCard}>
             <div className={styles.pillarHeader}>
               <span className={styles.pillarIndex}>03</span>
-              <h3 className={styles.pillarTitle}>WIN TOGETHER</h3>
+              <h3 className={styles.pillarTitle}>MAKE A MEMORY</h3>
             </div>
             <p className={styles.pillarDesc}>
-              You can play against each other, or work together to earn points for the whole group in team challenges.
+              Compete to stack points in your Score Pile or just play casually for laughs. Win or lose, everyone walks away with great memories.
             </p>
           </div>
         </div>
@@ -73,7 +70,7 @@ const Manifesto: React.FC = () => {
               rel="noopener noreferrer"
               className={styles.joinBtn}
             >
-              MESSAGE ME ON FACEBOOK FOR A FREE DECK →
+              MESSAGE ME ON FACEBOOK TO PLAYTEST →
             </a>
           </div>
         </div>

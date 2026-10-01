@@ -12,29 +12,55 @@ export interface CommunityReview {
   date: string;
   name: string;
   rating: number;
-  category: string;
+  cardType: string;
   thoughts: string;
 }
 
-const FEEDBACK_STORAGE_KEY = 'mysi_feedback_last_submitted';
-const ONE_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
+const FEEDBACK_STORAGE_KEY = 'mysi_feedback_history_v2';
+const MAX_MONTHLY_FEEDBACK = 5;
+const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000;
 const GOOGLE_SHEETS_API_URL =
   'https://script.google.com/macros/s/AKfycbyo5cRws4wo7wZCg3CabmprCk-MB567wPl-spjnZqW8qHnP6ylLCMq9tYkrdl-t4Sjo/exec';
 
-const CATEGORIES = [
+const CARD_TYPES = [
   'GUESS',
   'CREATE',
   'BATTLE',
   'CHAOS',
-  'TOGETHER',
   'CONNECT',
   'LOVE',
 ];
 
+const CARD_TYPE_OPTIONS: Record<string, string[]> = {
+  CONNECT:  ['Good as it is', 'Deeper conversations', 'Lighter, easier questions', "Haven't tried it"],
+  LOVE:     ['Good as it is', 'More questions about love & romance', 'More playful, flirty questions', 'Less personal questions', "Haven't tried it"],
+  CHAOS:    ['Good as it is', 'Funnier challenges', 'Easier challenges', 'More interaction with other players', "Haven't tried it"],
+  CREATE:   ['Good as it is', 'Funnier prompts', 'Easier things to come up with', 'More chances to be creative', "Haven't tried it"],
+  GUESS:    ['Good as it is', 'Funnier questions', 'More surprising questions', 'Less personal questions', "Haven't tried it"],
+  BATTLE:   ['Good as it is', 'More exciting challenges', 'Clearer instructions', 'Fairer challenges', "Haven't tried it"],
+};
+
+export type FeedbackType = 'GENERAL' | 'REPORT_BAD' | 'SUGGEST_NEW';
+
+const getRecentSubmissions = (): number[] => {
+  try {
+    const raw = localStorage.getItem(FEEDBACK_STORAGE_KEY);
+    if (!raw) return [];
+    const list: number[] = JSON.parse(raw);
+    const now = Date.now();
+    return list.filter((t) => typeof t === 'number' && now - t < THIRTY_DAYS_MS);
+  } catch {
+    return [];
+  }
+};
+
 export const PlaytestFeedback: React.FC<PlaytestFeedbackProps> = ({ soundEnabled = true }) => {
-  const [rating, setRating] = useState<number>(5);
+  const [feedbackType, setFeedbackType] = useState<FeedbackType>('GENERAL');
+  const [rating, setRating] = useState<number | null>(null);
+  const [ratingError, setRatingError] = useState<boolean>(false);
   const [hoverRating, setHoverRating] = useState<number | null>(null);
-  const [favoriteCategory, setFavoriteCategory] = useState<string>('BATTLE');
+  const [favoriteCardType, setfavoriteCardType] = useState<string>('BATTLE');
+  const [cardTypeFeedback, setCardTypeFeedback] = useState<Record<string, string[]>>({});
   const [notes, setNotes] = useState<string>('');
   const [contactInfo, setContactInfo] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -46,21 +72,26 @@ export const PlaytestFeedback: React.FC<PlaytestFeedbackProps> = ({ soundEnabled
   const [reviews, setReviews] = useState<CommunityReview[]>([]);
   const [isLoadingReviews, setIsLoadingReviews] = useState<boolean>(true);
 
-  // 1. Silent 1-week per-device check
+  // Listen for direct suggestion clicks from Card Simulator
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem(FEEDBACK_STORAGE_KEY);
-      if (saved) {
-        const timestamp = parseInt(saved, 10);
-        const elapsed = Date.now() - timestamp;
-        if (elapsed < ONE_WEEK_MS) {
-          setAlreadySubmitted(true);
-        } else {
-          localStorage.removeItem(FEEDBACK_STORAGE_KEY);
-        }
+    const handleSuggestEvent = (e: Event) => {
+      const customEvent = e as CustomEvent<{ cardType?: string }>;
+      setFeedbackType('REPORT_BAD');
+      if (customEvent.detail?.cardType && CARD_TYPES.includes(customEvent.detail.cardType.toUpperCase())) {
+        setfavoriteCardType(customEvent.detail.cardType.toUpperCase());
       }
-    } catch {
-      // local storage unavailable fallback
+    };
+    window.addEventListener('mysi_suggest_challenge', handleSuggestEvent);
+    return () => {
+      window.removeEventListener('mysi_suggest_challenge', handleSuggestEvent);
+    };
+  }, []);
+
+  // Check 5 submissions per device per month
+  useEffect(() => {
+    const recent = getRecentSubmissions();
+    if (recent.length >= MAX_MONTHLY_FEEDBACK) {
+      setAlreadySubmitted(true);
     }
   }, []);
 
@@ -98,10 +129,24 @@ export const PlaytestFeedback: React.FC<PlaytestFeedbackProps> = ({ soundEnabled
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (rating === null) {
+      setRatingError(true);
+      return;
+    }
+
     setIsSubmitting(true);
 
     const playerName = contactInfo.trim() || 'Anonymous Player';
     const playerReviewText = notes.trim();
+
+    const prefix =
+      feedbackType === 'REPORT_BAD'
+        ? '[BAD CHALLENGE REPORT] '
+        : feedbackType === 'SUGGEST_NEW'
+        ? '[CHALLENGE SUGGESTION] '
+        : '';
+    const formattedThoughts = `${prefix}${playerReviewText}`;
 
     // Optimistically add review to live feed immediately
     const optimisticReview: CommunityReview = {
@@ -109,14 +154,15 @@ export const PlaytestFeedback: React.FC<PlaytestFeedbackProps> = ({ soundEnabled
       date: 'Just now',
       name: playerName,
       rating,
-      category: favoriteCategory,
-      thoughts: playerReviewText,
+      cardType: favoriteCardType,
+      thoughts: formattedThoughts,
     };
     setReviews((prev) => [optimisticReview, ...prev]);
 
     try {
-      // Record 1-week cooldown timestamp on device
-      localStorage.setItem(FEEDBACK_STORAGE_KEY, Date.now().toString());
+      // Record submission timestamp on device (keep array for 5-per-month tracking)
+      const existing = getRecentSubmissions();
+      localStorage.setItem(FEEDBACK_STORAGE_KEY, JSON.stringify([...existing, Date.now()]));
 
       // Save directly to Aaron's Google Sheet
       await fetch(GOOGLE_SHEETS_API_URL, {
@@ -128,8 +174,13 @@ export const PlaytestFeedback: React.FC<PlaytestFeedbackProps> = ({ soundEnabled
         body: JSON.stringify({
           name: playerName,
           rating,
-          category: favoriteCategory,
-          thoughts: playerReviewText,
+          cardType: favoriteCardType,
+          category: favoriteCardType,
+          thoughts: formattedThoughts,
+          cardTypeFeedback: Object.entries(cardTypeFeedback)
+            .filter(([, opts]) => opts.length > 0)
+            .map(([type, opts]) => `${type}: ${opts.join(', ')}`)
+            .join(' | '),
         }),
       });
     } catch (err) {
@@ -180,6 +231,16 @@ export const PlaytestFeedback: React.FC<PlaytestFeedbackProps> = ({ soundEnabled
           </p>
         </div>
 
+        {/* Creator Note Banner */}
+        <div className={styles.creatorBanner}>
+          <div className={styles.creatorBannerLeft}>
+            <span className={styles.creatorBadge}>HELP US IMPROVE THE CARDS</span>
+            <p className={styles.creatorText}>
+              <strong>I’m actively improving the challenges!</strong> If a card feels boring, awkward, confusing, or just isn't fun, tell me. Your feedback helps me improve the next version.
+            </p>
+          </div>
+        </div>
+
         <div className={styles.grid}>
           {/* Minimalist Feedback Form */}
           <div className={styles.formCard}>
@@ -202,6 +263,43 @@ export const PlaytestFeedback: React.FC<PlaytestFeedbackProps> = ({ soundEnabled
               </div>
             ) : (
               <form onSubmit={handleSubmit} className={styles.feedbackForm}>
+                {/* Feedback Type Selector */}
+                <div className={styles.fieldGroup}>
+                  <label className={styles.fieldLabel}>FEEDBACK TYPE</label>
+                  <div className={styles.typeSelectorRow}>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setFeedbackType('GENERAL');
+                        if (soundEnabled) playSound('click');
+                      }}
+                      className={`${styles.typeBtn} ${feedbackType === 'GENERAL' ? styles.typeBtnActive : ''}`}
+                    >
+                      General Review
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setFeedbackType('REPORT_BAD');
+                        if (soundEnabled) playSound('click');
+                      }}
+                      className={`${styles.typeBtn} ${feedbackType === 'REPORT_BAD' ? styles.typeBtnActive : ''}`}
+                    >
+                      Report a Bad Challenge
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setFeedbackType('SUGGEST_NEW');
+                        if (soundEnabled) playSound('click');
+                      }}
+                      className={`${styles.typeBtn} ${feedbackType === 'SUGGEST_NEW' ? styles.typeBtnActive : ''}`}
+                    >
+                      Suggest a Challenge
+                    </button>
+                  </div>
+                </div>
+
                 {/* Rating 1-5 */}
                 <div className={styles.fieldGroup}>
                   <label className={styles.fieldLabel}>OVERALL RATING</label>
@@ -211,7 +309,7 @@ export const PlaytestFeedback: React.FC<PlaytestFeedbackProps> = ({ soundEnabled
                   >
                     <div className={styles.starsGroup}>
                       {[1, 2, 3, 4, 5].map((val) => {
-                        const currentVal = hoverRating !== null ? hoverRating : rating;
+                        const currentVal = hoverRating !== null ? hoverRating : (rating ?? 0);
                         const isFilled = val <= currentVal;
                         return (
                           <button
@@ -219,6 +317,7 @@ export const PlaytestFeedback: React.FC<PlaytestFeedbackProps> = ({ soundEnabled
                             type="button"
                             onClick={() => {
                               setRating(val);
+                              setRatingError(false);
                               if (soundEnabled) playSound('click');
                             }}
                             onMouseEnter={() => setHoverRating(val)}
@@ -245,41 +344,103 @@ export const PlaytestFeedback: React.FC<PlaytestFeedbackProps> = ({ soundEnabled
                       })}
                     </div>
                     <span className={styles.ratingLabel}>
-                      {RATING_LABELS[hoverRating !== null ? hoverRating : rating]}
+                      {hoverRating !== null
+                        ? RATING_LABELS[hoverRating]
+                        : rating !== null
+                        ? RATING_LABELS[rating]
+                        : 'Select a rating (1/5 · 2/5 · 3/5 · 4/5 · 5/5)'}
                     </span>
                   </div>
+                  {ratingError && (
+                    <p style={{ color: '#ef4444', fontSize: '0.8rem', marginTop: '6px', fontWeight: 600 }}>
+                      Please select an overall rating (1–5 stars) before submitting.
+                    </p>
+                  )}
                 </div>
 
-                {/* Favorite Category */}
+                {/* Favorite Card Type */}
                 <div className={styles.fieldGroup}>
-                  <label className={styles.fieldLabel}>FAVORITE CARD TYPE</label>
-                  <div className={styles.categoryPills}>
-                    {CATEGORIES.map((cat) => (
-                      <button
-                        key={cat}
-                        type="button"
-                        onClick={() => {
-                          setFavoriteCategory(cat);
-                          if (soundEnabled) playSound('click');
-                        }}
-                        className={`${styles.categoryPill} ${
-                          favoriteCategory === cat ? styles.categoryPillActive : ''
-                        }`}
-                      >
-                        {cat}
-                      </button>
+                  <label className={styles.fieldLabel} htmlFor="card-type-select">
+                    {feedbackType === 'REPORT_BAD'
+                      ? 'WHICH CARD TYPE HAD THE BAD CHALLENGE?'
+                      : feedbackType === 'SUGGEST_NEW'
+                      ? 'WHICH CARD TYPE IS YOUR CHALLENGE FOR?'
+                      : 'FAVORITE CARD TYPE'}
+                  </label>
+                  <select
+                    id="card-type-select"
+                    value={favoriteCardType}
+                    onChange={(e) => {
+                      setfavoriteCardType(e.target.value);
+                      if (soundEnabled) playSound('click');
+                    }}
+                    className={styles.cardTypeSelect}
+                  >
+                    {CARD_TYPES.map((cat) => (
+                      <option key={cat} value={cat}>{cat}</option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Card Type Feedback */}
+                <div className={styles.fieldGroup}>
+                  <label className={styles.fieldLabel}>CARD TYPE FEEDBACK</label>
+                  <p className={styles.cardTypeFeedbackHint}>What would you change? Choose all that apply.</p>
+                  <div className={styles.cardTypeFeedbackGrid}>
+                    {Object.entries(CARD_TYPE_OPTIONS).map(([type, opts]) => (
+                      <div key={type} className={styles.ctfBlock}>
+                        <span className={styles.ctfType}>{type}</span>
+                        <div className={styles.ctfOptions}>
+                          {opts.map((opt) => {
+                            const checked = (cardTypeFeedback[type] ?? []).includes(opt);
+                            return (
+                              <label key={opt} className={styles.ctfLabel}>
+                                <input
+                                  type="checkbox"
+                                  className={styles.ctfCheckbox}
+                                  checked={checked}
+                                  onChange={() => {
+                                    setCardTypeFeedback((prev) => {
+                                      const current = prev[type] ?? [];
+                                      return {
+                                        ...prev,
+                                        [type]: checked
+                                          ? current.filter((o) => o !== opt)
+                                          : [...current, opt],
+                                      };
+                                    });
+                                  }}
+                                />
+                                <span>{opt}</span>
+                              </label>
+                            );
+                          })}
+                        </div>
+                      </div>
                     ))}
                   </div>
                 </div>
 
-                {/* Thoughts and Observations */}
+                {/* Specific Card Textarea */}
                 <div className={styles.fieldGroup}>
-                  <label className={styles.fieldLabel}>YOUR THOUGHTS</label>
+                  <label className={styles.fieldLabel}>
+                    {feedbackType === 'REPORT_BAD'
+                      ? 'WHICH CHALLENGE WAS BAD & HOW CAN IT BE BETTER?'
+                      : feedbackType === 'SUGGEST_NEW'
+                      ? 'YOUR CHALLENGE IDEA'
+                      : 'ANY SPECIFIC CARD YOU WOULD CHANGE? (OPTIONAL)'}
+                  </label>
                   <textarea
                     rows={4}
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
-                    placeholder="What was the funniest part? Was anything hard to understand? Tell us what you liked or what to change..."
+                    placeholder={
+                      feedbackType === 'REPORT_BAD'
+                        ? 'Tell us which challenge felt bad, boring, or awkward, and what you suggest changing to make it better...'
+                        : feedbackType === 'SUGGEST_NEW'
+                        ? 'Describe your challenge idea, rules, and how players should complete it...'
+                        : 'What was the funniest part? Was anything hard to understand? Tell us what you liked or what to change...'
+                    }
                     className={styles.textarea}
                     required
                   />
@@ -310,22 +471,30 @@ export const PlaytestFeedback: React.FC<PlaytestFeedbackProps> = ({ soundEnabled
             )}
           </div>
 
-          {/* Right Column: Request Free Physical Deck & Share */}
+          {/* Right Column: Request Free 80-Card Prototype Deck & Share */}
           <div className={styles.sideCol}>
             <div className={styles.sideCard}>
-              <span className={styles.sideTag}>FREE CARDS</span>
-              <h3 className={styles.sideTitle}>WANT A FREE CARD DECK?</h3>
+              <span className={styles.sideTag}>LIMITED FREE PROTOTYPE DECKS</span>
+              <h3 className={styles.sideTitle}>WANT A FREE 80-CARD PROTOTYPE DECK?</h3>
               <p className={styles.sideText}>
-                MADE YOU SAY IT is made for laughing together and having fun without phones.
+                I'm giving out <strong>free prototype decks</strong> to people who want to play it with their friends.
               </p>
-              <p className={styles.sideText}>
-                We are giving out free card decks to people who want to play with their friends.
+
+              <div className={styles.keepOrReturnBox}>
+                <span className={styles.keepOrReturnEmoji}>😄</span>
+                <p className={styles.keepOrReturnText}>
+                  If you enjoyed the game, you're welcome to keep it. If it wasn't for you, you can return it to me.
+                </p>
+              </div>
+
+              <p className={styles.sideTextSmall}>
+                Copies are limited. Message me on Facebook to claim yours!
               </p>
 
               <div className={styles.requestCtaBox}>
                 <span className={styles.requestHeading}>MESSAGE ON FACEBOOK</span>
                 <p className={styles.requestSubtext}>
-                  Send Aaron Paul a message on Facebook to ask for a free card deck for your next game night!
+                  Hit me up on Facebook — I'll sort you out with a free deck to try with your friends!
                 </p>
                 <a
                   href="https://www.facebook.com/aaronpaulcabagnan12"
@@ -391,8 +560,8 @@ export const PlaytestFeedback: React.FC<PlaytestFeedbackProps> = ({ soundEnabled
                       <span className={styles.reviewDate}>{rev.date}</span>
                     </div>
                     <div className={styles.reviewCardBadges}>
-                      <span className={styles.reviewCategoryPill}>
-                        {rev.category}
+                      <span className={styles.reviewCardTypePill}>
+                        {rev.cardType}
                       </span>
                     </div>
                   </div>

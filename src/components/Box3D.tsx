@@ -72,7 +72,7 @@ export const Box3D: React.FC = () => {
           </div>
           <div className={styles.barcodeArea}>
             <div className={styles.barcodeLines} />
-            <span className={styles.barcodeNum}>MADE-IN-PH • 75 CARDS • 7 CATEGORIES</span>
+            <span className={styles.barcodeNum}>MADE-IN-PH • 80 CARDS • 6 CARD TYPES</span>
           </div>
         </div>
 

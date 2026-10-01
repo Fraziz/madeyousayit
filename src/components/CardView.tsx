@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import type { GameCard } from '../types';
+import { CARD_TYPES_INFO } from '../data/cards';
 import styles from './CardView.module.css';
 
 interface CardViewProps {
@@ -17,6 +18,14 @@ export const CardView: React.FC<CardViewProps> = ({
   scale = 1,
   interactive = true,
 }) => {
+  const cardTypeFallback = CARD_TYPES_INFO[card.cardType]?.officialCardImage || '/cards/guess  1point hero.png';
+  const initialImage = card.imageUrl || cardTypeFallback;
+  const [currentImg, setCurrentImg] = useState<string>(initialImage);
+
+  useEffect(() => {
+    setCurrentImg(card.imageUrl || cardTypeFallback);
+  }, [card.imageUrl, cardTypeFallback]);
+
   return (
     <div
       className={`${styles.cardContainer} ${isFlipped ? styles.flipped : ''} ${
@@ -32,83 +41,29 @@ export const CardView: React.FC<CardViewProps> = ({
           onFlip?.();
         }
       }}
-      aria-label={`Card: ${card.category} - ${card.challenge || 'Classified'}`}
+      aria-label={`Card: ${card.cardType} - ${card.challenge || 'Sample Card'}`}
     >
       <div className={styles.cardInner}>
-        {/* CARD FRONT — Pure High Quality Authentic Card Image or Classified Mystery State */}
-        {card.imageUrl ? (
-          <div className={styles.cardFrontImageWrapper}>
-            <img
-              src={card.imageUrl}
-              alt={card.challenge || `Card ${card.category}`}
-              className={styles.cardFrontImage}
-              loading="lazy"
-            />
-          </div>
-        ) : (
-          <div
-            className={styles.cardFrontLocked}
-            style={{
-              borderColor: card.themeColor,
+        {/* CARD FRONT — Pure High Quality Authentic Card Image */}
+        <div className={styles.cardFrontImageWrapper}>
+          <img
+            src={currentImg}
+            alt={card.challenge || `Card ${card.cardType}`}
+            className={styles.cardFrontImage}
+            loading="lazy"
+            onError={() => {
+              if (currentImg !== cardTypeFallback) {
+                setCurrentImg(cardTypeFallback);
+              }
             }}
-          >
-            <div className={styles.lockedInner}>
-              <div
-                className={styles.lockedCategoryTag}
-                style={{ backgroundColor: card.themeColor }}
-              >
-                <span>{card.category}</span>
-              </div>
+          />
+        </div>
 
-              <div className={styles.lockedIconCircle}>
-                <svg
-                  width="28"
-                  height="28"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                  <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                </svg>
-              </div>
-
-              <span className={styles.lockedBadge}>CARD CLASSIFIED</span>
-
-              <div className={styles.redactedBars}>
-                <span
-                  className={styles.redactedBar}
-                  style={{ backgroundColor: card.themeColor, width: '85%' }}
-                />
-                <span
-                  className={styles.redactedBar}
-                  style={{ backgroundColor: card.themeColor, width: '65%' }}
-                />
-                <span
-                  className={styles.redactedBar}
-                  style={{ backgroundColor: card.themeColor, width: '78%' }}
-                />
-              </div>
-
-              <p className={styles.lockedSubtext}>
-                DRAW TO REVEAL CARD
-              </p>
-
-              <div className={styles.lockedFooter}>
-                <span className={styles.lockedTag}>75 AUTHENTIC CARDS</span>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* CARD BACK — Authentic Official Signature Back Design from User */}
+        {/* CARD BACK — Authentic Official Signature Back Design */}
         <div className={styles.cardBack}>
           <img
-            src="/cards/card-back.png"
-            alt="MADE YOU SAY IT official card back design"
+            src="/cards/back design.png"
+            alt="MADE YOU SAY IT official card back"
             className={styles.cardBackImage}
             loading="lazy"
           />
@@ -119,3 +74,4 @@ export const CardView: React.FC<CardViewProps> = ({
 };
 
 export default CardView;
+

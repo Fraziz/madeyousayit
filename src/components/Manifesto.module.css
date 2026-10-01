@@ -1,9 +1,10 @@
 .section {
-  padding: 130px 0;
+  padding: clamp(56px, 8vh, 100px) 0;
   background-color: #ffffff;
   color: var(--text-primary);
   border-top: 1px solid var(--border-subtle);
   border-bottom: 1px solid var(--border-subtle);
+  overflow-x: clip;
 }
 
 .container {
@@ -60,9 +61,7 @@
   line-height: 1.45;
   color: var(--brand-blue);
   font-weight: 400;
-  padding-left: 24px;
-  border-left: 3px solid var(--brand-blue);
-  margin: 8px 0;
+  margin: 14px 0 20px;
 }
 
 .bodyText {

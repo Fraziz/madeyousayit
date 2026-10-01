@@ -4,17 +4,15 @@ import Hero from './components/Hero';
 import CardGallery from './components/CardGallery';
 import PackagingSection from './components/PackagingSection';
 import Rulebook from './components/Rulebook';
+import WhoItsFor from './components/WhoItsFor';
 import Manifesto from './components/Manifesto';
 import PlaytestFeedback from './components/PlaytestFeedback';
 import Footer from './components/Footer';
-import { useContentProtection } from './hooks/useContentProtection';
 import './App.css';
 
 const App: React.FC = () => {
-  const { isProtectedBlur } = useContentProtection();
-
   return (
-    <div className={`app-layout ${isProtectedBlur ? 'content-shield-blur' : ''}`}>
+    <div className="app-layout">
       {/* Sticky Navigation Header */}
       <Header />
 
@@ -23,14 +21,17 @@ const App: React.FC = () => {
         {/* Visual Hero with 7-Card Fan Showcase & Floating Specs Capsule */}
         <Hero />
 
-        {/* Visual Card Gallery by 7 Categories & Flip Cards */}
+        {/* How to Play Rulebook & Golden Rule Notice */}
+        <Rulebook />
+
+        {/* Visual Card Gallery by 7 Card Types & Flip Cards */}
         <CardGallery />
 
         {/* Complete Package & Unboxing Showcase: What's In The Box */}
         <PackagingSection />
 
-        {/* Simple 6-Step Rulebook & Golden Rule Notice */}
-        <Rulebook />
+        {/* Who This Game Is (and Isn't) For */}
+        <WhoItsFor />
 
         {/* Creator's Story & Mission */}
         <Manifesto />

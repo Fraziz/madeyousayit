@@ -1,8 +1,9 @@
 .feedbackSection {
-  padding: 120px 0;
+  padding: clamp(56px, 8vh, 100px) 0;
   background-color: var(--bg-secondary);
   border-top: 1px solid var(--border-subtle);
   border-bottom: 1px solid var(--border-subtle);
+  overflow-x: clip;
 }
 
 .container {
@@ -44,11 +45,89 @@
   line-height: 1.7;
 }
 
+/* Creator Improvement Banner */
+.creatorBanner {
+  background: #ffffff;
+  border: 1px solid rgba(81, 112, 255, 0.25);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  margin-bottom: 32px;
+  box-shadow: 0 4px 16px -4px rgba(81, 112, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.creatorBannerLeft {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.creatorBadge {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  background: var(--brand-blue);
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.creatorText {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.creatorText strong {
+  color: var(--text-primary);
+}
+
+/* Feedback Type Selector */
+.typeSelectorRow {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.typeBtn {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border-medium);
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.typeBtn:hover {
+  border-color: var(--brand-blue);
+  color: var(--text-primary);
+  background: #ffffff;
+}
+
+.typeBtnActive {
+  background: var(--brand-blue) !important;
+  color: #ffffff !important;
+  border-color: var(--brand-blue) !important;
+  box-shadow: 0 4px 12px rgba(81, 112, 255, 0.25);
+}
+
 .grid {
   display: grid;
-  grid-template-columns: 1.25fr 0.75fr;
-  gap: 48px;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+  gap: clamp(24px, 3.5vw, 48px);
   align-items: start;
+  width: 100%;
 }
 
 /* Form Card */
@@ -56,7 +135,7 @@
   background: #ffffff;
   border: 1px solid var(--border-medium);
   border-radius: var(--radius-md);
-  padding: 44px;
+  padding: clamp(20px, 3vw, 44px);
   box-shadow: var(--shadow-card);
 }
 
@@ -169,37 +248,33 @@
   letter-spacing: 0.01em;
 }
 
-/* Category Pills */
-.categoryPills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.categoryPill {
-  padding: 8px 16px;
-  border-radius: 9999px;
-  background: var(--bg-secondary);
+/* Card Type Select Dropdown */
+.cardTypeSelect {
+  width: 100%;
+  height: 50px;
+  padding: 0 18px;
+  border-radius: var(--radius-sm);
   border: 1px solid var(--border-medium);
+  background: var(--bg-secondary);
   font-family: var(--font-prompt);
-  font-size: 0.8rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  color: var(--text-secondary);
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: var(--text-primary);
   cursor: pointer;
   transition: all 0.2s ease;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%2364748b' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 42px;
 }
 
-.categoryPill:hover {
-  color: var(--text-primary);
-  border-color: var(--text-secondary);
-}
-
-.categoryPillActive {
-  background: var(--brand-blue);
+.cardTypeSelect:focus {
+  outline: none;
   border-color: var(--brand-blue);
-  color: #ffffff !important;
-  box-shadow: 0 4px 12px rgba(81, 112, 255, 0.25);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(81, 112, 255, 0.12);
 }
 
 /* Inputs */
@@ -584,7 +659,7 @@
   gap: 8px;
 }
 
-.reviewCategoryPill {
+.reviewCardTypePill {
   font-family: var(--font-prompt);
   font-size: 0.72rem;
   font-weight: 800;
@@ -652,4 +727,110 @@
   .reviewsGrid {
     grid-template-columns: 1fr;
   }
+}
+
+/* ─── Card Type Feedback ─────────────────────────────────────── */
+.cardTypeFeedbackHint {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin: 0 0 14px;
+  letter-spacing: 0.01em;
+}
+
+.cardTypeFeedbackGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 600px) {
+  .cardTypeFeedbackGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ctfBlock {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+
+.ctfType {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--brand-blue);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.ctfOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ctfLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  transition: color 0.15s;
+}
+
+.ctfLabel:hover {
+  color: var(--text-primary);
+}
+
+.ctfCheckbox {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  accent-color: var(--brand-blue);
+  cursor: pointer;
+}
+
+/* ─── Keep or Return Box ─────────────────────────────────────── */
+.keepOrReturnBox {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: rgba(81, 112, 255, 0.06);
+  border: 1px solid rgba(81, 112, 255, 0.18);
+  border-radius: 10px;
+  padding: 13px 15px;
+  margin: 14px 0;
+}
+
+.keepOrReturnEmoji {
+  font-size: 1.4rem;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.keepOrReturnText {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.keepOrReturnText strong {
+  color: var(--text-primary);
+  display: block;
+  margin-bottom: 3px;
+}
+
+.sideTextSmall {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin: 0 0 16px;
+  letter-spacing: 0.01em;
 }

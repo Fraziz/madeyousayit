@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
-import { OFFICIAL_DECK, CARD_CATEGORIES_INFO } from '../data/cards';
+import {
+  CURATED_SAMPLE_CARDS,
+  CARD_TYPES_INFO,
+  TOTAL_SAMPLE_CARDS,
+  TOTAL_DECK_CARDS,
+  TOTAL_DECK_POINTS,
+} from '../data/cards';
 import { CardView } from './CardView';
 import { playSound } from '../utils/audio';
-import type { CardCategory, GameCard } from '../types';
+import type { CardType, GameCard } from '../types';
 import styles from './CardSimulator.module.css';
 
 interface CardSimulatorProps {
@@ -11,20 +17,20 @@ interface CardSimulatorProps {
 }
 
 export const CardSimulator: React.FC<CardSimulatorProps> = ({ soundEnabled = true }) => {
-  const [deck, setDeck] = useState<GameCard[]>(OFFICIAL_DECK);
+  const [deck, setDeck] = useState<GameCard[]>(CURATED_SAMPLE_CARDS);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [isFlipped, setIsFlipped] = useState<boolean>(false);
-  const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
+  const [selectedCardType, setselectedCardType] = useState<string>('ALL');
   const [scorePilePoints, setScorePilePoints] = useState<number>(0);
   const [scorePileCount, setScorePileCount] = useState<number>(0);
   const [discardCount, setDiscardCount] = useState<number>(0);
 
   const activeCards =
-    selectedCategory === 'ALL'
+    selectedCardType === 'ALL'
       ? deck
-      : deck.filter((c) => c.category === selectedCategory);
+      : deck.filter((c) => c.cardType === selectedCardType);
 
-  const currentCard = activeCards[currentIndex % (activeCards.length || 1)] || OFFICIAL_DECK[0];
+  const currentCard = activeCards[currentIndex % (activeCards.length || 1)] || CURATED_SAMPLE_CARDS[0];
 
   const handleDrawNext = () => {
     if (soundEnabled) playSound('draw');
@@ -48,7 +54,7 @@ export const CardSimulator: React.FC<CardSimulatorProps> = ({ soundEnabled = tru
       particleCount: 45,
       spread: 60,
       origin: { y: 0.65 },
-      colors: ['#5170FF', '#fde047', '#006826', '#ff751f', '#ff3131'],
+      colors: ['#5170FF', '#768eff', '#fde047', '#ffffff'],
     });
 
     handleDrawNext();
@@ -62,58 +68,76 @@ export const CardSimulator: React.FC<CardSimulatorProps> = ({ soundEnabled = tru
 
   const handleShuffle = () => {
     if (soundEnabled) playSound('draw');
-    const shuffled = [...OFFICIAL_DECK].sort(() => Math.random() - 0.5);
+    const shuffled = [...CURATED_SAMPLE_CARDS].sort(() => Math.random() - 0.5);
     setDeck(shuffled);
     setCurrentIndex(0);
     setIsFlipped(false);
   };
 
-  const handleCategoryFilter = (catKey: string) => {
+  const handleCardTypeFilter = (catKey: string) => {
     if (soundEnabled) playSound('click');
-    setSelectedCategory(catKey);
+    setselectedCardType(catKey);
     setCurrentIndex(0);
     setIsFlipped(false);
   };
 
-  const currentCatInfo =
-    CARD_CATEGORIES_INFO[currentCard.category as CardCategory] || CARD_CATEGORIES_INFO.CONNECT;
+  const currentTypeInfo =
+    CARD_TYPES_INFO[currentCard.cardType as CardType] || CARD_TYPES_INFO.CONNECT;
 
   return (
     <section className={styles.simulatorSection} id="simulator">
       <div className={`container ${styles.simContainer}`}>
         {/* Section Header */}
         <div className={styles.sectionHeader}>
-          <div className={styles.sectionTag}>TRY SAMPLE CARDS ONLINE</div>
+          <div className={styles.sectionTag}>3 SAMPLE CARDS PER CARD TYPE · {TOTAL_SAMPLE_CARDS} ONLINE</div>
           <h2 className={styles.sectionTitle}>
             TEST SAMPLE CARDS. <span className={styles.titleHighlight}>HAVE FUN.</span>
           </h2>
           <p className={styles.sectionSubtitle}>
-            Want to see how the game feels? Draw cards right here on your phone or computer! Try 14 sample cards across all 7 categories with your friends.
+            Experience how the game feels! Draw from 18 sample cards across all 6 card types. The complete 80-card prototype deck contains {TOTAL_DECK_CARDS} cards and {TOTAL_DECK_POINTS} points.
           </p>
         </div>
 
-        {/* Category Pills Bar */}
-        <div className={styles.categoryFilters}>
-          <button
-            onClick={() => handleCategoryFilter('ALL')}
-            className={`${styles.filterPill} ${selectedCategory === 'ALL' ? styles.filterPillActive : ''}`}
+        {/* Creator Improvement Notice Banner */}
+        <div className={styles.improvingCallout}>
+          <div className={styles.improvingLeft}>
+            <span className={styles.improvingBadge}>HELP US IMPROVE THE CARDS</span>
+            <p className={styles.improvingText}>
+              <strong>I’m actively improving the challenges!</strong> If a card feels boring, awkward, confusing, or just isn't fun, tell me. Your feedback helps me improve the next version.
+            </p>
+          </div>
+          <a
+            href="#feedback"
+            className={styles.improvingBtn}
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById('feedback')?.scrollIntoView({ behavior: 'smooth' });
+            }}
           >
-            ALL SAMPLES ({OFFICIAL_DECK.length})
+            <span>GIVE A SUGGESTION</span>
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+
+        {/* Card Type Filter Bar */}
+        <div className={styles.cardTypeFilters}>
+          <button
+            onClick={() => handleCardTypeFilter('ALL')}
+            className={`${styles.filterPill} ${selectedCardType === 'ALL' ? styles.filterPillActive : ''}`}
+          >
+            ALL SAMPLES ({TOTAL_SAMPLE_CARDS})
           </button>
-          {(Object.keys(CARD_CATEGORIES_INFO) as CardCategory[]).map((catKey) => {
-            const info = CARD_CATEGORIES_INFO[catKey];
-            const isSelected = selectedCategory === catKey;
+          {(Object.keys(CARD_TYPES_INFO) as CardType[]).map((catKey) => {
+            const info = CARD_TYPES_INFO[catKey];
+            const isSelected = selectedCardType === catKey;
             return (
               <button
                 key={catKey}
-                onClick={() => handleCategoryFilter(catKey)}
+                onClick={() => handleCardTypeFilter(catKey)}
                 className={`${styles.filterPill} ${isSelected ? styles.filterPillActive : ''}`}
                 style={isSelected ? { backgroundColor: info.color, borderColor: info.color, color: '#ffffff' } : undefined}
               >
-                <span className={styles.pillDot} style={{ backgroundColor: info.color }} />
-                <span>
-                  {catKey} ({info.count})
-                </span>
+                <span>{catKey} ({info.sampleCount})</span>
               </button>
             );
           })}
@@ -150,9 +174,9 @@ export const CardSimulator: React.FC<CardSimulatorProps> = ({ soundEnabled = tru
             </div>
 
             <div className={styles.ruleReminderBox}>
-              <span className={styles.ruleLabel}>CATEGORY RULE</span>
+              <span className={styles.ruleLabel}>CARD TYPE RULE</span>
               <div>
-                <p>{currentCatInfo.rule}</p>
+                <p>{currentTypeInfo.rule}</p>
               </div>
             </div>
           </div>
@@ -186,25 +210,41 @@ export const CardSimulator: React.FC<CardSimulatorProps> = ({ soundEnabled = tru
                 <span>COMPLETE (+{currentCard.points} PT)</span>
               </button>
             </div>
+
+            {/* Quick Challenge Feedback Prompt */}
+            <div className={styles.challengeFeedbackPrompt}>
+              <span className={styles.promptHint}>Think this challenge is bad, awkward, or too easy?</span>
+              <a
+                href="#feedback"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('feedback')?.scrollIntoView({ behavior: 'smooth' });
+                  window.dispatchEvent(
+                    new CustomEvent('mysi_suggest_challenge', {
+                      detail: { CardType: currentCard.cardType },
+                    })
+                  );
+                }}
+                className={styles.promptLink}
+              >
+                Give a suggestion →
+              </a>
+            </div>
           </div>
 
-          {/* Right Column: Card Insight & Category Info */}
+          {/* Right Column: Card Insight & Card Type Info */}
           <div className={styles.insightCard}>
-            <div className={styles.categoryBadge} style={{ backgroundColor: currentCatInfo.color }}>
-              {currentCard.category}
+            <div className={styles.cardTypeBadge} style={{ backgroundColor: currentTypeInfo.color }}>
+              {currentCard.cardType}
             </div>
 
-            <h4 className={styles.categoryTitle}>{currentCatInfo.name}</h4>
-            <p className={styles.categoryTagline}>{currentCatInfo.tagline}</p>
+            <h4 className={styles.cardTypeTitle}>{currentTypeInfo.name}</h4>
+            <p className={styles.cardTypeTagline}>{currentTypeInfo.tagline}</p>
 
             <div className={styles.specsList}>
               <div className={styles.specRow}>
-                <span className={styles.specKey}>DIFFICULTY</span>
-                <span className={styles.specVal}>{currentCard.difficulty}</span>
-              </div>
-              <div className={styles.specRow}>
-                <span className={styles.specKey}>POINTS REWARD</span>
-                <span className={styles.specVal}>+{currentCard.points} Points</span>
+                <span className={styles.specKey}>CARD VALUE</span>
+                <span className={styles.specVal}>★ {currentCard.points} {currentCard.points === 1 ? 'Point' : 'Points'}</span>
               </div>
               <div className={styles.specRow}>
                 <span className={styles.specKey}>CARD NUMBER</span>
@@ -226,10 +266,10 @@ export const CardSimulator: React.FC<CardSimulatorProps> = ({ soundEnabled = tru
 
             <div style={{ marginTop: '16px', padding: '10px 12px', background: 'rgba(0,0,0,0.02)', borderRadius: '8px', border: '1px solid var(--border-subtle)', textAlign: 'center' }}>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', fontWeight: 700, color: 'var(--brand-blue)', letterSpacing: '0.04em', marginBottom: '2px' }}>
-                PROTOTYPE - FOR PLAYTESTING ONLY
+                ONLINE SAMPLER (21 CARDS)
               </div>
               <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', lineHeight: 1.35 }}>
-                Please do not reproduce, distribute, or publish the cards without permission.
+                Testing 3 sample cards PER CARD TYPE. The 80-card prototype deck contains all {TOTAL_DECK_CARDS} cards & {TOTAL_DECK_POINTS} points!
               </div>
             </div>
           </div>

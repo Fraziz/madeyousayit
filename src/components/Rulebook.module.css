@@ -1,757 +1,924 @@
 .rulebookSection {
-  padding: 100px 0;
+  padding: clamp(64px, 8vh, 120px) 0;
   background-color: var(--bg-primary);
   position: relative;
+  overflow-x: clip;
+  width: 100%;
 }
 
+.quickNote {
+  font-size: 0.8rem;
+  color: var(--text-secondary, #999);
+  font-style: italic;
+  margin: 0 0 24px 0;
+  line-height: 1.5;
+}
+
+.quickNote strong {
+  font-style: normal;
+  font-weight: 600;
+  color: var(--text-secondary, #999);
+}
+
+/* Wide expansive container */
 .rulebookContainer {
   position: relative;
   z-index: 1;
-  max-width: 1060px;
+  width: 100%;
+  max-width: min(1380px, 94vw);
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 /* Section Header */
+/* Section Header */
 .sectionHeader {
   text-align: center;
-  max-width: 760px;
-  margin: 0 auto 52px;
-}
-
-.sectionTag {
-  font-family: var(--font-display);
-  font-size: 0.78rem;
-  letter-spacing: 0.1em;
-  color: var(--brand-blue);
-  font-weight: 800;
-  text-transform: uppercase;
-  margin-bottom: 12px;
-  display: inline-block;
+  max-width: 900px;
+  margin: 0 auto clamp(24px, 3.5vw, 40px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .sectionTitle {
   font-family: var(--font-display);
-  font-size: clamp(2.4rem, 5vw, 3.6rem);
-  font-weight: 800;
+  font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+  font-weight: 900;
   letter-spacing: -0.02em;
   color: var(--text-primary);
-  margin-bottom: 12px;
-  line-height: 1.1;
+  margin: 14px 0 8px;
+  text-transform: uppercase;
 }
 
 .titleHighlight {
   color: var(--brand-blue);
 }
 
-.sectionTagline {
-  font-family: var(--font-prompt);
-  font-size: 1.1rem;
-  font-weight: 800;
-  color: var(--brand-blue);
-  letter-spacing: 0.04em;
-  margin-bottom: 20px;
+.sectionSubtitle {
+  font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+  color: var(--text-secondary);
+  margin: 0;
+  max-width: 600px;
+  line-height: 1.5;
 }
 
-.specsPill {
+/* Header Specs Capsule */
+.specsCapsule {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 12px;
-  padding: 8px 22px;
+  padding: 10px 24px;
   background: #ffffff;
   border: 1px solid var(--border-medium);
   border-radius: 9999px;
-  font-family: var(--font-sans);
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
   color: var(--text-secondary);
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
 }
 
 .specDot {
   color: var(--brand-blue);
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
-/* Minimalist Document Canvas */
+/* Unified Document Canvas — Compact, Clean & Modern */
 .rulebookCanvas {
   background: #ffffff;
   border: 1px solid var(--border-medium);
-  border-radius: var(--radius-xl);
-  padding: 48px 52px;
+  border-radius: var(--radius-lg);
+  padding: clamp(20px, 3vw, 36px) clamp(16px, 2.5vw, 32px);
   box-shadow: var(--shadow-card);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .divider {
   height: 1px;
   background-color: var(--border-subtle);
-  margin: 40px 0;
+  margin: clamp(18px, 2.5vw, 26px) 0;
 }
 
-/* Rule Row Core */
-.ruleRow {
+/* Section Common */
+.sectionBlock {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 12px;
 }
 
-.ruleRowHeader {
-  display: flex;
-  align-items: flex-start;
-  gap: 18px;
-}
-
-.ruleIndex {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 8px;
-  background: rgba(81, 112, 255, 0.08);
-  color: var(--brand-blue);
+.sectionHeading {
   font-family: var(--font-display);
-  font-size: 0.95rem;
-  font-weight: 800;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-.ruleRowTitle {
-  font-family: var(--font-display);
-  font-size: 1.35rem;
-  font-weight: 800;
+  font-size: clamp(1.15rem, 1.8vw, 1.35rem);
+  font-weight: 850;
   letter-spacing: -0.01em;
   color: var(--text-primary);
-  margin: 0 0 6px 0;
-}
-
-.ruleRowSubtitle {
-  font-size: 0.98rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
   margin: 0;
 }
 
-/* 1. SETUP */
-.setupList {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 14px 28px;
-  padding-left: 52px;
-}
-
-.setupItem {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-}
-
-.setupBulletDot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: var(--brand-blue);
-  flex-shrink: 0;
-  margin-top: 6px;
-}
-
-.setupItemLabel {
-  font-family: var(--font-display);
-  font-size: 0.8rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  color: var(--text-primary);
-}
-
-.setupItemText {
-  font-size: 0.92rem;
-  color: var(--text-secondary);
-  line-height: 1.5;
-}
-
-/* 2. YOUR TURN - Fluid & Wrapping */
-.flowStrip {
+.sectionHeadingRow {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   flex-wrap: wrap;
-  gap: 10px;
-  padding: 12px 18px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  margin-left: 52px;
 }
 
-.flowNode {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #ffffff;
-  border: 1px solid var(--border-subtle);
+.sectionSubtag {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  color: var(--brand-blue);
+  background: rgba(81, 112, 255, 0.08);
+  border: 1px solid rgba(81, 112, 255, 0.18);
+  padding: 4px 12px;
   border-radius: 9999px;
-  padding: 6px 14px;
+  white-space: nowrap;
 }
 
-.flowNum {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 18px;
-  height: 18px;
+.setupIntroText {
+  font-size: 0.94rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* 1. SETUP — 5-Step Visual Illustrated Grid */
+.setupGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  width: 100%;
+}
+
+.setupStepCard {
+  background: #ffffff;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.2s ease;
+}
+
+.setupStepCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px -6px rgba(15, 23, 42, 0.12);
+  border-color: rgba(81, 112, 255, 0.4);
+}
+
+.setupImageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 13;
+  overflow: hidden;
+  background: #ffffff;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.setupImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center center;
+  display: block;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.setupStepCard:hover .setupImage {
+  transform: scale(1.03);
+}
+
+.setupStepBadge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background: var(--brand-blue);
   color: #ffffff;
-  font-size: 0.65rem;
-  font-weight: 800;
-}
-
-.flowLabel {
-  font-family: var(--font-display);
-  font-size: 0.76rem;
-  font-weight: 800;
-  color: var(--text-primary);
-}
-
-.flowChevron {
-  color: var(--brand-blue);
-  font-weight: 800;
-  font-size: 0.95rem;
-  opacity: 0.8;
-  flex-shrink: 0;
-}
-
-.stepsGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin-left: 52px;
-}
-
-.stepItem {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  transition: all 0.2s ease;
-}
-
-.stepItem:hover {
-  background: #ffffff;
-  border-color: var(--brand-blue);
-  box-shadow: 0 8px 20px -4px rgba(81, 112, 255, 0.1);
-}
-
-.stepItemTop {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-.stepNumTag {
-  font-family: var(--font-sans);
-  font-size: 0.68rem;
-  font-weight: 700;
-  color: var(--brand-blue);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.stepItemName {
-  font-family: var(--font-display);
-  font-size: 1.1rem;
-  font-weight: 800;
-  color: var(--text-primary);
-  margin: 0;
-}
-
-.stepItemAction {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  line-height: 1.5;
-  margin: 0;
-}
-
-/* 3. CARD TYPES */
-.cardTypesGrid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-  margin-left: 52px;
-}
-
-.cardTypeRow {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  padding: 22px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  transition: all 0.2s ease;
-}
-
-.cardTypeRow:hover {
-  background: #ffffff;
-  border-color: var(--brand-blue);
-  box-shadow: 0 6px 18px -4px rgba(81, 112, 255, 0.08);
-}
-
-.cardTypeMeta {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.cardTypeTag {
-  align-self: flex-start;
-  font-family: var(--font-sans);
-  font-size: 0.68rem;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--brand-blue);
-  background: rgba(81, 112, 255, 0.08);
-  border: 1px solid rgba(81, 112, 255, 0.15);
-  padding: 3px 8px;
-  border-radius: 5px;
-}
-
-.cardTypeNames {
-  font-family: var(--font-display);
-  font-size: 1rem;
-  font-weight: 800;
-  color: var(--text-primary);
-  margin: 0;
-  letter-spacing: 0.02em;
-}
-
-.cardTypeInstruction {
-  font-size: 0.92rem;
-  color: var(--text-secondary);
-  line-height: 1.55;
-  margin: 0;
-}
-
-/* 4 & 5. SPLIT ROW */
-.splitRow {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 36px;
-}
-
-.splitCol {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.pointsList {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding-left: 52px;
-}
-
-.pointRow {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 12px 16px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
+  justify-content: center;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+  border: 2px solid #ffffff;
 }
 
-.pointTierName {
+.stepNum {
   font-family: var(--font-display);
-  font-size: 0.95rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  color: var(--text-primary);
+  font-size: 0.82rem;
+  font-weight: 900;
+  line-height: 1;
 }
 
-.pointTierBadge {
-  font-family: var(--font-display);
-  font-size: 0.78rem;
-  font-weight: 800;
-  padding: 3px 12px;
-  border-radius: 9999px;
-  letter-spacing: 0.04em;
-  color: var(--brand-blue);
-  background: rgba(81, 112, 255, 0.08);
-  border: 1px solid rgba(81, 112, 255, 0.15);
-}
-
-.passNoteBadge {
-  display: inline-block;
-  font-family: var(--font-sans);
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--brand-blue);
-  background: rgba(81, 112, 255, 0.08);
-  border: 1px solid rgba(81, 112, 255, 0.15);
-  padding: 3px 8px;
-  border-radius: 5px;
-  margin-top: 4px;
-}
-
-.passFailList {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding-left: 52px;
-}
-
-.passFailItem {
-  padding: 14px 16px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
+.setupStepContent {
+  padding: 12px 10px;
   display: flex;
   flex-direction: column;
   gap: 4px;
+  flex-grow: 1;
+  background: #ffffff;
 }
 
-.passFailLabel {
+.setupStepTitle {
   font-family: var(--font-display);
-  font-size: 0.88rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  color: var(--brand-blue);
-}
-
-.passFailText {
-  font-size: 0.88rem;
-  color: var(--text-secondary);
-  line-height: 1.5;
-  margin: 0;
-}
-
-/* 6. THE PILES */
-.pilesGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
-  margin-left: 52px;
-}
-
-.pileItem {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  padding: 18px 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.pileMeta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 6px;
-}
-
-.pileName {
-  font-family: var(--font-display);
-  font-size: 0.95rem;
-  font-weight: 800;
+  font-size: 0.86rem;
+  font-weight: 850;
   color: var(--text-primary);
+  margin: 0;
+  line-height: 1.25;
 }
 
-.pileRole {
-  font-family: var(--font-sans);
-  font-size: 0.62rem;
-  font-weight: 700;
-  color: var(--brand-blue);
-  background: rgba(81, 112, 255, 0.08);
-  padding: 2px 7px;
-  border-radius: 4px;
-  letter-spacing: 0.04em;
-}
-
-.pileDetails {
-  font-size: 0.85rem;
+.setupStepAction {
+  font-size: 0.76rem;
   color: var(--text-secondary);
   line-height: 1.45;
   margin: 0;
 }
 
-/* 7. END OF GAME */
-.endGameStrip {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-subtle);
+.setupFooterBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+  padding: 8px 14px;
+  background: rgba(81, 112, 255, 0.05);
+  border: 1px solid rgba(81, 112, 255, 0.15);
+  border-radius: var(--radius-sm);
+  margin-top: 4px;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.setupFooterDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--brand-blue);
+  flex-shrink: 0;
+}
+
+/* 2. YOUR TURN — Visual Illustrated Turn Stepper */
+.turnFlowPill {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  border: 1px solid var(--border-medium);
+  padding: 5px 14px;
+  border-radius: 9999px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.turnStepperGrid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: clamp(8px, 1.2vw, 14px);
+  width: 100%;
+}
+
+.turnStepCard {
+  background: #ffffff;
+  border: 1px solid var(--border-medium);
   border-radius: var(--radius-md);
-  padding: 24px;
-  margin-left: 52px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.2s ease;
+}
+
+.turnStepCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px -6px rgba(15, 23, 42, 0.12);
+  border-color: rgba(81, 112, 255, 0.4);
+}
+
+.turnImageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 13;
+  overflow: hidden;
+  background: #ffffff;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.turnImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center center;
+  display: block;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.turnStepCard:hover .turnImage {
+  transform: scale(1.03);
+}
+
+/* Blank placeholder for Step 1 */
+.turnImagePlaceholder {
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
-  text-align: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
+  border: 2px dashed rgba(81, 112, 255, 0.25);
+  box-sizing: border-box;
+  padding: 12px 8px;
 }
 
-.formulaLine {
+.placeholderCardShape {
+  width: 60%;
+  aspect-ratio: 290 / 406;
+  border: 2px dashed rgba(81, 112, 255, 0.4);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  box-shadow: 0 2px 8px rgba(81, 112, 255, 0.08);
+}
+
+.placeholderCardBack {
+  font-family: var(--font-display);
+  font-size: 0.52rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  color: var(--brand-blue);
+  text-align: center;
+  line-height: 1.15;
+  padding: 4px;
+}
+
+.placeholderLabel {
+  font-family: var(--font-display);
+  font-size: 0.76rem;
+  font-weight: 850;
+  letter-spacing: 0.06em;
+  color: var(--brand-blue);
+  text-align: center;
+  margin-bottom: 2px;
+}
+
+.placeholderSubtext {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.3;
+}
+
+.turnStepBadge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--brand-blue);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+  border: 2px solid #ffffff;
+}
+
+.turnStepNum {
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.turnCardBody {
+  padding: 12px 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-grow: 1;
+  background: #ffffff;
+}
+
+.turnTagName {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 850;
+  letter-spacing: 0.06em;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  display: block;
+}
+
+.turnReminderText {
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* 3. CARD TYPES — Formal, Compact & Clickable */
+.cardTypesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(10px, 1.5vw, 16px);
+  align-items: stretch;
+}
+
+.cardTypeCard {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.cardTypeCard:hover {
+  border-color: rgba(81, 112, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.05);
+}
+
+.cardDisplayArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.cardPreviewWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  cursor: pointer;
+}
+
+.compactCardImg {
+  width: 98px;
+  height: 138px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.1), 0 1px 4px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  background: #ffffff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: block;
+}
+
+.compactCardImg:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 10px 22px rgba(81, 112, 255, 0.2);
+}
+
+/* Card Type Pill Buttons — Clean, Same & Clickable */
+/* Card Type Pill Buttons — Clean, Same & Clickable, Always 1 Row */
+.cardTypePillsBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: clamp(3px, 0.6vw, 5px);
+  min-height: 32px;
+  margin: 3px 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+  padding: 2px 0;
+}
+
+.cardTypePillsBar::-webkit-scrollbar {
+  display: none;
+}
+
+.cardTypePill {
+  font-family: var(--font-display);
+  font-size: clamp(0.62rem, 0.72vw, 0.7rem);
+  font-weight: 850;
+  padding: clamp(3px, 0.5vw, 4px) clamp(6px, 0.8vw, 9px);
+  border-radius: 9999px;
+  background: #ffffff;
+  border: 1px solid var(--border-medium);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  letter-spacing: 0.02em;
+  line-height: 1;
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
   justify-content: center;
+  user-select: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.cardTypePill:hover {
+  transform: translateY(-1px);
+  border-color: var(--brand-blue);
+  color: var(--brand-blue);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.cardTypePillActive {
+  border-color: transparent !important;
+  transform: translateY(-1px);
+}
+
+.cardTypeRuleUnder {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  margin: 0;
+  text-align: center;
+  flex-grow: 1;
+  white-space: pre-line;
+}
+
+/* 3. POINTS — Clean Minimalist Rule */
+.pointsText {
+  margin: 8px 0 0 0;
+  font-size: 0.96rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  line-height: 1.55;
+}
+
+/* 5 to 7: COMPACT RULES DASHBOARD (2-Column Grid) */
+.rulesDashboardRow {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(14px, 2vw, 22px);
+}
+
+.dashboardCol {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.miniSectionCard {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.miniHeading {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 850;
+  color: var(--text-primary);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+/* 4. POINTS */
+.pointsTiersBar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pointPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 12px;
+  background: #ffffff;
+  border: 1px solid var(--border-medium);
+  border-radius: 9999px;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 850;
+  color: var(--brand-blue);
+}
+
+.pointNote {
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+  margin: 0;
+  font-style: italic;
+}
+
+/* 5. PASS OR FAIL */
+.passFailList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.passFailRow {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.passFailBadge {
+  font-family: var(--font-display);
+  font-size: 0.76rem;
+  font-weight: 900;
+  color: #ffffff;
+  background: var(--brand-blue);
+  padding: 2px 7px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.passFailText {
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.passAlwaysCallout {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--brand-blue);
+  background: transparent;
+  padding: 2px 0;
+  border: none;
+  align-self: flex-start;
+}
+
+/* 6. THE PILES — Clean, Compact & Direct */
+.pilesHeroWrapper {
+  width: 100%;
+  max-width: 620px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.pilesHeroImage {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+}
+
+.compactPilesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(10px, 1.4vw, 18px);
+  padding: 2px 0 0 0;
+  max-width: 620px;
+}
+
+.compactPileItem {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+}
+
+.compactPileName {
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  font-weight: 850;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.compactPileDesc {
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* 7. END OF GAME */
+.endGameCondition {
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.formulaBarCompact {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 4px 0;
+  background: transparent;
+  border: none;
+  align-self: flex-start;
 }
 
 .formulaItem {
-  background: #ffffff;
-  border: 1px solid var(--border-medium);
-  border-radius: 8px;
-  padding: 6px 16px;
   font-family: var(--font-display);
-  font-size: 0.95rem;
+  font-size: 0.86rem;
   font-weight: 800;
   color: var(--text-primary);
 }
 
-.formulaSymbol {
+.formulaOp {
   font-family: var(--font-display);
-  font-size: 1.15rem;
-  font-weight: 800;
+  font-size: 1rem;
+  font-weight: 900;
   color: var(--brand-blue);
 }
 
 .formulaOutcome {
-  background: var(--brand-blue);
-  color: #ffffff;
-  border-radius: 8px;
-  padding: 6px 18px;
   font-family: var(--font-display);
-  font-size: 0.98rem;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-}
-
-.winnerDeclaration {
-  font-family: var(--font-prompt);
-  font-size: 0.98rem;
-  font-weight: 800;
+  font-size: 0.88rem;
+  font-weight: 900;
   color: var(--brand-blue);
-  margin: 0;
 }
 
-/* 8. GOLDEN RULE */
-.goldenRuleBlock {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-medium);
-  border-left: 4px solid var(--brand-blue);
-  border-radius: var(--radius-md);
-  padding: 32px 36px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 36px;
-}
-
-.goldenContent {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-width: 640px;
-}
-
-.goldenBadgeLine {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.goldenNumber {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 26px;
-  height: 26px;
-  border-radius: 6px;
-  background: var(--brand-blue);
-  color: #ffffff;
+.winnerLine {
   font-family: var(--font-display);
-  font-size: 0.8rem;
+  font-size: 0.88rem;
   font-weight: 800;
-}
-
-.goldenTag {
-  font-family: var(--font-sans);
-  font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  color: var(--brand-blue);
-  text-transform: uppercase;
-}
-
-.goldenTitle {
-  font-family: var(--font-display);
-  font-size: 1.35rem;
-  font-weight: 800;
-  letter-spacing: -0.01em;
   color: var(--text-primary);
   margin: 0;
 }
 
-.goldenText {
+/* 8. GOLDEN RULE — Compact */
+.goldenCard {
+  background: linear-gradient(135deg, rgba(81, 112, 255, 0.05) 0%, rgba(92, 225, 230, 0.05) 100%);
+  border: 1px solid rgba(81, 112, 255, 0.2);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.goldenTitle {
+  font-family: var(--font-display);
   font-size: 0.98rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
+  font-weight: 900;
+  color: var(--brand-blue);
   margin: 0;
 }
 
-.goldenAction {
-  flex-shrink: 0;
+.goldenText {
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--text-primary);
+  margin: 0;
 }
 
-.goldenButton {
-  background-color: var(--brand-blue);
-  color: #ffffff;
-  padding: 14px 24px;
-  border-radius: 9999px;
-  font-family: var(--font-prompt);
-  font-size: 0.88rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  box-shadow: 0 4px 16px var(--brand-blue-glow);
-  cursor: pointer;
-  transition: all 0.25s ease;
-  white-space: nowrap;
-  text-decoration: none;
-}
 
-.goldenButton:hover {
-  background-color: var(--brand-blue-dark);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(81, 112, 255, 0.35);
-}
 
-/* Footer Stamp */
-.rulebookFooterStamp {
-  text-align: center;
-  margin-top: 48px;
-  font-family: var(--font-display);
-  font-size: 0.82rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  color: var(--text-muted);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  text-transform: uppercase;
-}
+/* ── Responsive ─────────────────────────────── */
 
-.stampDot {
-  color: var(--brand-blue);
-}
-
-/* Responsive */
-@media (max-width: 1024px) {
-  .setupList {
-    padding-left: 0;
+/* Laptop / large tablet */
+@media (max-width: 1100px) {
+  .setupGrid {
+    grid-template-columns: repeat(3, 1fr);
   }
-
-  .flowStrip {
-    margin-left: 0;
+  .turnStepperGrid {
+    grid-template-columns: repeat(3, 1fr);
   }
-
-  .stepsGrid {
-    grid-template-columns: repeat(2, 1fr);
-    margin-left: 0;
-  }
-
   .cardTypesGrid {
-    margin-left: 0;
-  }
-
-  .splitRow {
-    grid-template-columns: 1fr;
-    gap: 28px;
-  }
-
-  .pointsList {
-    padding-left: 0;
-  }
-
-  .passFailList {
-    padding-left: 0;
-  }
-
-  .pilesGrid {
     grid-template-columns: repeat(2, 1fr);
-    margin-left: 0;
-  }
-
-  .endGameStrip {
-    margin-left: 0;
-  }
-
-  .goldenRuleBlock {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 28px;
-  }
-
-  .goldenAction {
-    width: 100%;
-  }
-
-  .goldenButton {
-    width: 100%;
-    justify-content: center;
   }
 }
 
+/* Tablet portrait */
+@media (max-width: 800px) {
+  .rulesDashboardRow {
+    grid-template-columns: 1fr;
+  }
+  .turnStepperGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .turnCardBody {
+    padding: 10px 10px 12px;
+  }
+}
+
+/* Large phone — horizontal scroll for both Setup and Your Turn */
 @media (max-width: 640px) {
-  .rulebookSection {
-    padding: 60px 0;
+  /* Setup: horizontal scroll */
+  .setupGrid {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 8px;
+    padding-bottom: 8px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  .setupStepCard {
+    flex: 0 0 62vw;
+    max-width: 200px;
+    scroll-snap-align: start;
+    flex-direction: column;
+  }
+  .setupStepCard:last-child {
+    grid-column: unset;
+  }
+  .setupImageWrapper {
+    width: 100%;
+    aspect-ratio: 9 / 13;
+    height: auto;
+  }
+  .setupStepContent {
+    padding: 10px 8px;
+  }
+  .setupStepTitle {
+    font-size: 0.82rem;
+  }
+  .setupStepAction {
+    font-size: 0.72rem;
   }
 
-  .rulebookCanvas {
-    padding: 24px 16px;
-    border-radius: var(--radius-lg);
+  /* Turn steps: horizontal scroll */
+  .turnStepperGrid {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 8px;
+    padding-bottom: 8px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
   }
-
-  .divider {
-    margin: 28px 0;
+  .turnStepCard {
+    flex: 0 0 62vw;
+    max-width: 200px;
+    scroll-snap-align: start;
+    flex-direction: column;
   }
-
-  .setupList {
+  .turnImageWrapper {
+    width: 100%;
+    aspect-ratio: 9 / 13;
+    height: auto;
+  }
+  .turnStepBadge {
+    width: 24px;
+    height: 24px;
+    top: 6px;
+    left: 6px;
+  }
+  .turnStepNum {
+    font-size: 0.74rem;
+  }
+  .turnCardBody {
+    padding: 8px 8px 10px;
+  }
+  .turnTagName {
+    font-size: 0.72rem;
+  }
+  .turnReminderText {
+    font-size: 0.66rem;
+  }
+  .turnFlowPill {
+    font-size: 0.65rem;
+    padding: 4px 10px;
+    width: 100%;
+    text-align: center;
+  }
+  .compactPilesGrid {
     grid-template-columns: 1fr;
-    gap: 12px;
   }
-
-  .stepsGrid {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-
   .cardTypesGrid {
     grid-template-columns: 1fr;
-    gap: 10px;
-  }
-
-  .pilesGrid {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-
-  .goldenRuleBlock {
-    padding: 20px 16px;
-  }
-
-  .goldenButton {
-    padding: 13px 18px;
-    font-size: 0.8rem;
-    white-space: normal;
-    text-align: center;
+    max-width: 360px;
+    margin: 0 auto;
   }
 }

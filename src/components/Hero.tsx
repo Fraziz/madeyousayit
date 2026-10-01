@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { TOTAL_DECK_POINTS, TOTAL_DECK_CARDS } from '../data/cards';
 import { sound } from '../utils/audio';
 import styles from './Hero.module.css';
 
@@ -19,16 +20,15 @@ interface ShowcaseCard {
 }
 
 const SHOWCASE_CARDS: ShowcaseCard[] = [
-  { id: 'guess', name: 'GUESS', color: '#006826', src: '/cards/2.png', angle: -24, x: -120, y: 22 },
-  { id: 'battle', name: 'BATTLE', color: '#ff3131', src: '/cards/28.png', angle: -16, x: -80, y: 11 },
-  { id: 'create', name: 'CREATE', color: '#5ce1e6', src: '/cards/65.png', angle: -8, x: -40, y: 3 },
-  { id: 'chaos', name: 'CHAOS', color: '#5e17eb', src: '/cards/52.png', angle: 0, x: 0, y: 0 },
-  { id: 'together', name: 'TOGETHER', color: '#ff751f', src: '/cards/17.png', angle: 8, x: 40, y: 3 },
-  { id: 'connect', name: 'CONNECT', color: '#004aad', src: '/cards/21.png', angle: 16, x: 80, y: 11 },
-  { id: 'love', name: 'LOVE', color: '#ff66c4', src: '/cards/59.png', angle: 24, x: 120, y: 22 },
+  { id: 'guess', name: 'GUESS', color: '#5170FF', src: '/cards/guess  1point hero.png', angle: -20, x: -100, y: 18 },
+  { id: 'battle', name: 'BATTLE', color: '#5170FF', src: '/cards/battle 2 points hero.png', angle: -12, x: -60, y: 7 },
+  { id: 'create', name: 'CREATE', color: '#5170FF', src: '/cards/create 1 point hero.png', angle: -4, x: -20, y: 1 },
+  { id: 'chaos', name: 'CHAOS', color: '#5170FF', src: '/cards/chaos 2 point hero.png', angle: 4, x: 20, y: 1 },
+  { id: 'connect', name: 'CONNECT', color: '#5170FF', src: '/cards/connect 3 point hero.png', angle: 12, x: 60, y: 7 },
+  { id: 'love', name: 'LOVE', color: '#5170FF', src: '/cards/love 2  point hero.png', angle: 20, x: 100, y: 18 },
 ];
 
-export const Hero: React.FC<HeroProps> = ({ onOpenGallery, onOpenPackaging }) => {
+export const Hero: React.FC<HeroProps> = () => {
   const [activeCardIndex, setActiveCardIndex] = useState<number>(3);
   // Default: isFlipped is false, meaning all cards display their CARD BACK design!
   const [isFlipped, setIsFlipped] = useState<boolean>(false);
@@ -67,22 +67,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenGallery, onOpenPackaging }) =>
     sound.playFlip();
   };
 
-  const handleOpenGallery = () => {
-    if (onOpenGallery) {
-      onOpenGallery();
-    } else {
-      document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const handleOpenPackaging = () => {
-    if (onOpenPackaging) {
-      onOpenPackaging();
-    } else {
-      document.getElementById('packaging')?.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   const handleScrollToFeedback = () => {
     document.getElementById('feedback')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -103,7 +87,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenGallery, onOpenPackaging }) =>
           <p className={styles.heroTagline}>PLAY A CARD. MAKE A MEMORY.</p>
 
           <p className={styles.heroDescription}>
-            A simple and fun card game for friends and family. Play together, laugh a lot, and make great memories. 75 cards with 7 different types of challenges.
+            A fun and easy card game for friends who want to laugh, connect, and make memories together.
           </p>
 
           {/* Spacious Horizontal Game Specs Capsule */}
@@ -131,36 +115,40 @@ export const Hero: React.FC<HeroProps> = ({ onOpenGallery, onOpenPackaging }) =>
             <div className={styles.specDivider} />
             <div className={styles.specBadge}>
               <div className={styles.specMeta}>
-                <span className={styles.specLabel}>CARDS</span>
-                <span className={styles.specValue}>75 CARDS</span>
+                <span className={styles.specLabel}>DECK</span>
+                <span className={styles.specValue}>{TOTAL_DECK_CARDS} CARDS</span>
+              </div>
+            </div>
+            <div className={styles.specDivider} />
+            <div className={styles.specBadge}>
+              <div className={styles.specMeta}>
+                <span className={styles.specLabel}>POINTS</span>
+                <span className={styles.specValue}>{TOTAL_DECK_POINTS}</span>
               </div>
             </div>
           </div>
 
-          {/* Primary Action Buttons */}
+          {/* Primary Action Button */}
           <div className={styles.actionButtonsRow}>
             <button
-              onClick={handleOpenGallery}
+              onClick={handleScrollToFeedback}
               className={styles.primaryDemoBtn}
             >
-              <span>SEE SAMPLE CARDS</span>
+              <span>GET A DECK</span>
               <span className={styles.btnArrow}>→</span>
             </button>
-
-            <button
-              onClick={handleOpenPackaging}
-              className={styles.secondaryExploreBtn}
-            >
-              <span>WHAT'S IN THE BOX</span>
-            </button>
+            <div className={styles.limitedDeckNote}>
+              <span className={styles.limitedBadge}>LIMITED PROTOTYPE</span>
+              <span>Free while copies last</span>
+            </div>
           </div>
 
-          {/* Free Prototype Playtest Callout */}
+          {/* Playtest Callout */}
           <div className={styles.playtestCallout}>
             <span className={styles.calloutText}>
-              Want to play the real cards with your friends?{' '}
+              Played the game with friends?{' '}
               <button onClick={handleScrollToFeedback} className={styles.calloutLink}>
-                Ask for a free deck →
+                Give me your feedback →
               </button>
             </span>
           </div>
@@ -197,7 +185,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenGallery, onOpenPackaging }) =>
                       {/* DEFAULT RESTING FACE (0deg): Authentic Card Back */}
                       <div className={styles.cardFaceBackDesign}>
                         <img
-                          src="/cards/card-back.png"
+                          src="/cards/back design.png"
                           alt="MADE YOU SAY IT official card back"
                           className={styles.cardImage}
                           loading="eager"
@@ -226,11 +214,11 @@ export const Hero: React.FC<HeroProps> = ({ onOpenGallery, onOpenPackaging }) =>
                 style={{ borderColor: activeCard.color, color: activeCard.color }}
                 onClick={handleToggleFlipBtn}
               >
-                <span>{isFlipped ? `FLIP TO BACK (${activeCard.name})` : `CLICK TO FLIP (${activeCard.name})`}</span>
+                <span>CLICK A CARD TO FLIP</span>
               </button>
 
-              {/* 7 Category Indicator Pills */}
-              <div className={styles.categoryIndicators}>
+              {/* 7 Card Type Indicator Pills */}
+              <div className={styles.cardTypeIndicators}>
                 {SHOWCASE_CARDS.map((c, i) => {
                   const isActive = activeCardIndex === i;
                   return (
@@ -238,7 +226,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenGallery, onOpenPackaging }) =>
                       key={c.id}
                       onClick={() => {
                         setActiveCardIndex(i);
-                        setIsFlipped(true); // reveals that category's card front
+                        setIsFlipped(true); // reveals that card type's card front
                         sound.playDraw();
                       }}
                       className={`${styles.catIndicatorDot} ${isActive ? styles.catIndicatorActive : ''}`}
@@ -247,12 +235,8 @@ export const Hero: React.FC<HeroProps> = ({ onOpenGallery, onOpenPackaging }) =>
                           ? { backgroundColor: c.color, borderColor: c.color, color: '#ffffff' }
                           : { '--cat-color': c.color } as React.CSSProperties
                       }
-                      title={`View ${c.name} category card`}
+                      title={`View ${c.name} card type`}
                     >
-                      <span
-                        className={styles.catDotMarker}
-                        style={{ backgroundColor: isActive ? '#ffffff' : c.color }}
-                      />
                       <span>{c.name}</span>
                     </button>
                   );

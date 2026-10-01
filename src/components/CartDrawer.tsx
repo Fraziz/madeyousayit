@@ -36,7 +36,7 @@ const AVAILABLE_PRODUCTS: CartItem[] = [
     price: 0,
     quantity: 0,
     badge: 'FREE SAMPLE',
-    imageUrl: '/cards/guess-1.png'
+    imageUrl: '/cards/guess  1point hero.png'
   }
 ];
 
@@ -108,7 +108,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose, soundEnabled }
         {/* Drawer Header */}
         <div className={styles.header}>
           <div>
-            <span className={styles.categoryTag}>YOUR CART</span>
+            <span className={styles.headerTag}>YOUR CART</span>
             <h3 className={styles.title}>ORDER DISPATCH</h3>
           </div>
           <button className={styles.closeBtn} onClick={onClose} aria-label="Close cart">

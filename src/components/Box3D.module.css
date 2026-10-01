@@ -75,12 +75,11 @@
 }
 
 .brandTitle {
-  font-family: var(--font-display);
-  font-size: 2.6rem;
-  font-weight: 900;
-  line-height: 0.92;
+  font-family: var(--font-logo);
+  font-size: 2.3rem;
+  line-height: 1.05;
   color: #ffffff;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.01em;
   text-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
   margin-bottom: 20px;
 }
@@ -106,9 +105,8 @@
 }
 
 .backHeader {
-  font-family: var(--font-display);
-  font-size: 1rem;
-  font-weight: 900;
+  font-family: var(--font-logo);
+  font-size: 0.95rem;
   color: #ffffff;
   letter-spacing: 0.04em;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -231,11 +229,10 @@
   background: #637fff;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-display);
-  font-size: 0.75rem;
-  font-weight: 800;
+  font-family: var(--font-logo);
+  font-size: 0.72rem;
   color: #ffffff;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
 }
 
 /* Bottom Face (width 220px, height 64px) */

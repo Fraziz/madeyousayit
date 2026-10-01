@@ -1,7 +1,6 @@
-export type CardCategory =
+export type CardType =
   | 'CONNECT'
   | 'GUESS'
-  | 'TOGETHER'
   | 'BATTLE'
   | 'CHAOS'
   | 'CREATE'
@@ -11,7 +10,7 @@ export type CardDifficulty = 'EASY' | 'FUN' | 'WILD';
 
 export interface GameCard {
   id: string;
-  category: CardCategory;
+  cardType: CardType;
   challenge: string;
   difficulty: CardDifficulty;
   stars: number;

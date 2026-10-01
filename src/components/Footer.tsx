@@ -9,7 +9,7 @@ interface FooterProps {
 const FAQ_ITEMS = [
   {
     q: 'HOW MANY PLAYERS CAN PLAY MADE YOU SAY IT?',
-    a: 'The game works for 2 to 8 players. It is great for game nights, hangouts, road trips, and any time friends get together!'
+    a: 'The game is made for 3 to 8 players. (You deal 3 cards to each player at the start!) It is great for hangouts, road trips, parties, and any time friends get together!'
   },
   {
     q: 'IS IT SUITABLE FOR TEENAGERS AND FAMILIES?',
@@ -17,19 +17,19 @@ const FAQ_ITEMS = [
   },
   {
     q: 'WHERE CAN I FIND THE COMPLETE GAME RULES?',
-    a: 'The full rules are included inside the physical card box! This website gives you the quick 6-step rules so you can see how easy the game is to play.'
+    a: 'The full rules are included inside the prototype card box! This website also features the complete How to Play guide right above so you can see how easy the game is to learn.'
   },
   {
-    q: 'WHAT ARE THE 7 TYPES OF CARDS IN THE GAME?',
-    a: '75 cards across 7 fun types: GUESS (read the room), CREATE (be silly and creative), BATTLE (1-on-1 challenges), CHAOS (wild surprise twists), TOGETHER (everyone plays at once), CONNECT (real honest stories), and LOVE (kind words and warm moments).'
+    q: 'WHAT ARE THE 6 TYPES OF CARDS IN THE GAME?',
+    a: '80 cards across 6 fun card types: GUESS (read the room), CREATE (be silly and creative), BATTLE (1-on-1 challenges), CHAOS (wild surprise twists), CONNECT (real honest stories), and LOVE (kind words and warm moments).'
   },
   {
     q: 'IS THIS WEBSITE A GAME YOU PLAY ONLINE?',
-    a: 'No! This website is a visual showcase and preview for our physical card game. You can explore sample cards, see how the game works, and message the creator to get a free physical deck to play with your friends in real life!'
+    a: 'No! This website is a visual showcase and preview for our physical card game. You can explore sample cards, see how the game works, and message the creator to get a free physical prototype deck to play with your friends in real life!'
   },
   {
-    q: 'HOW DO I GET A FREE CARD DECK?',
-    a: 'Message Aaron Paul directly on Facebook! The cards are free for people who want to test the game. Try it with your friends and share your honest thoughts to help make the game even better.'
+    q: 'HOW DO I GET A FREE PROTOTYPE DECK?',
+    a: 'Message Aaron Paul directly on Facebook! A limited batch of physical prototype decks are free for people who want to test the game with friends. Try it with your group and share your honest thoughts to help make the next version even better.'
   }
 ];
 
@@ -84,10 +84,10 @@ const Footer: React.FC<FooterProps> = ({ soundEnabled = false }) => {
         <div className={styles.container}>
           <div className={styles.bannerBox}>
             <div className={styles.bannerTextCol}>
-              <span className={styles.bannerTag}>FREE CARDS | TRY IT WITH YOUR FRIENDS</span>
-              <h2 className={styles.bannerTitle}>WANT TO TRY THE GAME?</h2>
+              <span className={styles.bannerTag}>LIMITED FREE PROTOTYPE DECKS | WHILE SUPPLIES LAST</span>
+              <h2 className={styles.bannerTitle}>WANT TO PLAYTEST THE GAME?</h2>
               <p className={styles.bannerDesc}>
-                Gather your friends and have fun together. Message Aaron Paul on Facebook to get a free card deck!
+                Gather your friends and have fun together. Physical prototype decks are free for playtesters in limited quantities—message Aaron Paul on Facebook to claim yours!
               </p>
             </div>
             <div className={styles.bannerActionCol}>
@@ -97,7 +97,7 @@ const Footer: React.FC<FooterProps> = ({ soundEnabled = false }) => {
                 rel="noopener noreferrer"
                 className={styles.bannerBtn}
               >
-                MESSAGE ON FACEBOOK TO GET DECK →
+                MESSAGE ON FACEBOOK TO GET PROTOTYPE DECK →
               </a>
             </div>
           </div>
@@ -112,7 +112,7 @@ const Footer: React.FC<FooterProps> = ({ soundEnabled = false }) => {
             <div className={styles.brandCol}>
               <div className={styles.brandTitleRow}>
                 <img
-                  src="/brand/logo.png"
+                  src="/brand/logo.svg"
                   alt="MADE YOU SAY IT official logo"
                   className={styles.footerLogoImg}
                 />
@@ -130,9 +130,9 @@ const Footer: React.FC<FooterProps> = ({ soundEnabled = false }) => {
               <ul className={styles.linkList}>
                 <li><a href="https://www.facebook.com/aaronpaulcabagnan12" target="_blank" rel="noopener noreferrer">Message Aaron on Facebook</a></li>
                 <li><a href="#gallery">Sample Cards by Type</a></li>
-                <li><a href="#rules">6 Easy Rules</a></li>
+                <li><a href="#rules">How to Play</a></li>
                 <li><a href="#story">Why I Created This Game</a></li>
-                <li><a href="#feedback">Get Free Deck &amp; Feedback</a></li>
+                <li><a href="#feedback">Get a Deck &amp; Feedback</a></li>
               </ul>
             </div>
 
@@ -167,20 +167,14 @@ const Footer: React.FC<FooterProps> = ({ soundEnabled = false }) => {
 
           {/* Bottom Bar */}
           <div className={styles.bottomBar}>
-            <div style={{ width: '100%', marginBottom: '12px', padding: '12px 16px', background: '#f8f9fe', borderRadius: '10px', border: '1px solid var(--border-medium)', textAlign: 'center' }}>
-              <span style={{ fontFamily: 'var(--font-sans)', fontSize: '0.75rem', fontWeight: 700, color: 'var(--brand-blue)', display: 'block', marginBottom: '3px', letterSpacing: '0.04em' }}>
-                PROTOTYPE - FOR TESTING ONLY
-              </span>
-              <span style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>
-                Please do not copy or share the card designs without asking first.
-              </span>
-            </div>
             <div className={styles.legalLinks}>
               <span>3–8 PLAYERS</span>
               <span>|</span>
               <span>AGES 13+</span>
               <span>|</span>
               <span>20–30 MIN</span>
+              <span>|</span>
+              <span>80 CARDS</span>
               <span>|</span>
               <span>PROTOTYPE TEST EDITION</span>
             </div>

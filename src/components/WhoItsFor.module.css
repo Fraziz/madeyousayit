@@ -1,0 +1,342 @@
+.section {
+  padding: clamp(64px, 9vh, 108px) 0;
+  background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-primary) 100%);
+  position: relative;
+  overflow-x: clip;
+}
+
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 clamp(16px, 3vw, 36px);
+}
+
+/* Header */
+.header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto clamp(36px, 5vh, 60px);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--brand-blue);
+  background: rgba(81, 112, 255, 0.08);
+  border: 1px solid rgba(81, 112, 255, 0.18);
+  padding: 5px 14px;
+  border-radius: 9999px;
+  margin-bottom: 16px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4.6vw, 3.5rem);
+  font-weight: 900;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
+
+.titleHighlight {
+  color: var(--brand-blue);
+}
+
+.subtitle {
+  font-size: clamp(1rem, 1.25vw, 1.15rem);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Grid Layout */
+.comparisonGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(24px, 3vw, 40px);
+  margin-bottom: clamp(36px, 5vh, 56px);
+}
+
+/* Base Column Card */
+.columnCard {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: clamp(28px, 4vw, 40px);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.06);
+  border: 1px solid var(--border-medium);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.columnCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -12px rgba(15, 23, 42, 0.12);
+}
+
+/* NOT FOR Column Styling */
+.notForCard {
+  border-top: 1px solid var(--border-medium);
+}
+
+.notForCard:hover {
+  border-color: rgba(15, 23, 42, 0.2);
+  box-shadow: 0 20px 40px -12px rgba(15, 23, 42, 0.08);
+}
+
+/* FOR Column Styling */
+.forCard {
+  border-top: 1px solid var(--border-medium);
+}
+
+.forCard:hover {
+  border-color: rgba(81, 112, 255, 0.35);
+  box-shadow: 0 20px 40px -12px rgba(15, 23, 42, 0.12);
+}
+
+/* Card Header - Icon Free */
+.cardHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.columnTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.12rem, 1.35vw, 1.32rem);
+  font-weight: 850;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.3;
+}
+
+/* Item List */
+.itemList {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.itemRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.itemNumber {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 3px 8px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  user-select: none;
+}
+
+.notForNumber {
+  background: #f1f5f9;
+  color: #64748b;
+  border: 1px solid var(--border-medium);
+}
+
+.forNumber {
+  background: rgba(81, 112, 255, 0.08);
+  color: var(--brand-blue);
+  border: 1px solid rgba(81, 112, 255, 0.22);
+}
+
+.itemContent {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.itemTitle {
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.itemDesc {
+  font-size: 0.94rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* Bottom CTA Banner */
+.bottomCallout {
+  background: #ffffff;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  padding: clamp(20px, 3vh, 28px) clamp(24px, 4vw, 36px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  box-shadow: 0 4px 20px -4px rgba(15, 23, 42, 0.05);
+}
+
+.calloutTextGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.calloutHeading {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 850;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.calloutSub {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.ctaBtn {
+  background: var(--brand-blue);
+  color: #ffffff;
+  padding: 13px 26px;
+  border-radius: 9999px;
+  font-family: var(--font-prompt);
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 6px 20px var(--brand-blue-glow);
+  transition: all 0.25s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+  border: none;
+  cursor: pointer;
+}
+
+.ctaBtn:hover {
+  background: var(--brand-blue-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.16);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .comparisonGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .bottomCallout {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ctaBtn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: clamp(40px, 6vh, 64px) 0;
+  }
+
+  .header {
+    margin-bottom: 28px;
+  }
+
+  .title {
+    font-size: clamp(1.85rem, 8vw, 2.5rem);
+    margin-bottom: 10px;
+  }
+
+  .subtitle {
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  .comparisonGrid {
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+
+  .columnCard {
+    padding: 20px 16px;
+    border-radius: 16px;
+  }
+
+  .cardHeader {
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+  }
+
+  .columnTitle {
+    font-size: 1.05rem;
+    line-height: 1.35;
+  }
+
+  .itemList {
+    gap: 16px;
+  }
+
+  .itemRow {
+    gap: 10px;
+  }
+
+  .itemNumber {
+    font-size: 0.68rem;
+    padding: 2px 7px;
+  }
+
+  .itemTitle {
+    font-size: 0.95rem;
+  }
+
+  .itemDesc {
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  .bottomCallout {
+    padding: 20px 16px;
+    border-radius: 16px;
+    gap: 16px;
+  }
+
+  .calloutHeading {
+    font-size: 1.08rem;
+  }
+
+  .calloutSub {
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  .ctaBtn {
+    padding: 13px 20px;
+    font-size: 0.9rem;
+    border-radius: 12px;
+  }
+}

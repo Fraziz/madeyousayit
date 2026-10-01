@@ -38,8 +38,76 @@
   line-height: 1.6;
 }
 
-/* Category Filters Bar */
-.categoryFilters {
+/* Creator Improvement Callout */
+.improvingCallout {
+  background: #ffffff;
+  border: 1px solid rgba(81, 112, 255, 0.25);
+  border-radius: var(--radius-md);
+  padding: 14px 20px;
+  max-width: 800px;
+  margin: 0 auto 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: 0 4px 16px -4px rgba(81, 112, 255, 0.08);
+}
+
+.improvingLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.improvingBadge {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  background: var(--brand-blue);
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.improvingText {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.improvingText strong {
+  color: var(--text-primary);
+}
+
+.improvingBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  background: var(--brand-blue);
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.improvingBtn:hover {
+  background: #3b57e6;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(81, 112, 255, 0.25);
+}
+
+/* Card Type Filters Bar */
+.cardTypeFilters {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -186,9 +254,12 @@
 }
 
 .cardInteractiveStage {
-  margin-bottom: 12px;
+  margin: 0 auto 12px;
   display: flex;
   justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 280px;
 }
 
 .flipInstruction {
@@ -270,6 +341,36 @@
   box-shadow: 0 8px 24px rgba(81, 112, 255, 0.45);
 }
 
+/* Quick Challenge Feedback Prompt Under Controls */
+.challengeFeedbackPrompt {
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.promptHint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.promptLink {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--brand-blue);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.promptLink:hover {
+  text-decoration: underline;
+  color: #3b57e6;
+}
+
 /* Right Column: Insight Card */
 .insightCard {
   background: var(--bg-secondary);
@@ -282,7 +383,7 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
 }
 
-.categoryBadge {
+.cardTypeBadge {
   align-self: flex-start;
   padding: 4px 12px;
   border-radius: 6px;
@@ -293,7 +394,7 @@
   letter-spacing: 0.12em;
 }
 
-.categoryTitle {
+.cardTypeTitle {
   font-family: var(--font-prompt);
   font-size: 1.4rem;
   font-weight: 800;
@@ -301,7 +402,7 @@
   margin: 0;
 }
 
-.categoryTagline {
+.cardTypeTagline {
   font-size: 0.85rem;
   color: var(--text-secondary);
   line-height: 1.4;
@@ -362,18 +463,35 @@
     padding: 60px 0;
   }
 
-  .categoryFilters {
+  .cardTypeFilters {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
     gap: 8px;
-    padding: 4px 0;
-    margin: 0 0 28px 0;
+    padding: 6px 20px 14px 20px;
+    margin-left: -20px;
+    margin-right: -20px;
+    width: calc(100% + 40px);
+    margin-bottom: 24px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    mask-image: linear-gradient(to right, transparent 0, black 16px, black calc(100% - 16px), transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0, black 16px, black calc(100% - 16px), transparent 100%);
+  }
+
+  .cardTypeFilters::-webkit-scrollbar {
+    display: none;
   }
 
   .filterPill {
     padding: 8px 14px;
-    font-size: 0.72rem;
+    font-size: 0.74rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+    scroll-snap-align: start;
   }
 
   .workspaceGrid {
@@ -424,7 +542,10 @@
   }
 
   .cardInteractiveStage {
-    min-height: 360px;
+    min-height: auto;
+    width: 100%;
+    max-width: clamp(200px, 60vw, 260px);
+    margin: 0 auto 12px;
     display: flex;
     align-items: center;
     justify-content: center;

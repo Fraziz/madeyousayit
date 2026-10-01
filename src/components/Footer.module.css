@@ -192,8 +192,8 @@
 .brandLogo {
   font-family: var(--font-logo);
   font-size: 1.35rem;
-  font-weight: 400;
-  letter-spacing: 0.04em;
+  font-weight: 850;
+  letter-spacing: -0.02em;
   color: var(--text-primary);
   margin-bottom: 0;
 }
