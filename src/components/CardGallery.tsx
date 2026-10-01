@@ -195,6 +195,31 @@ export const CardGallery: React.FC<CardGalleryProps> = ({ soundEnabled = true })
                       handleCardFlip(card.id);
                     }}
                   />
+                  <div className={styles.cardQuickActions}>
+                    <button
+                      type="button"
+                      className={styles.cardQuickBtn}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedCardId(card.id);
+                        handleCardFlip(card.id);
+                      }}
+                      title="Flip card"
+                    >
+                      Flip
+                    </button>
+                    <button
+                      type="button"
+                      className={styles.cardQuickBtn}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setZoomModalCard(card);
+                      }}
+                      title="Enlarge card"
+                    >
+                      Zoom
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>

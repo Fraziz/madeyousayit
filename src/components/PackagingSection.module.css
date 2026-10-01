@@ -481,18 +481,44 @@
   }
 
   .specsGrid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding-top: 14px;
   }
 
-  .specItem:nth-child(2)::after {
-    display: none;
+  .specItem::after {
+    display: none !important;
+  }
+
+  .specItem {
+    background: var(--bg-secondary);
+    padding: 8px 6px;
+    border-radius: 8px;
+    border: 1px solid var(--border-subtle);
+  }
+
+  .specItem:last-child {
+    grid-column: 1 / -1;
   }
 }
 
 @media (max-width: 640px) {
   .section {
-    padding: 60px 0;
+    padding: 50px 0;
+  }
+
+  .header {
+    margin-bottom: 36px;
+  }
+
+  .title {
+    font-size: clamp(1.85rem, 8vw, 2.5rem);
+    margin-bottom: 12px;
+  }
+
+  .subtext {
+    font-size: 0.95rem;
+    line-height: 1.55;
   }
 
   .boxCardContainer {
@@ -504,18 +530,28 @@
   }
 
   .prototypeCtaBar {
-    padding: 22px 18px;
+    padding: 20px 16px;
     flex-direction: column;
     align-items: flex-start;
-    gap: 18px;
+    gap: 16px;
   }
 
   .claimDeckBtn {
     width: 100%;
     text-align: center;
     padding: 14px 18px;
-    font-size: 0.82rem;
+    font-size: 0.84rem;
     white-space: normal;
+  }
+}
+
+@media (max-width: 480px) {
+  .specsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .specItem:last-child {
+    grid-column: 1 / -1;
   }
 }
 

@@ -4,8 +4,12 @@
 }
 
 .container {
+  width: 100%;
   max-width: var(--max-width);
   margin: 0 auto;
+  padding-left: clamp(16px, 3.5vw, 32px);
+  padding-right: clamp(16px, 3.5vw, 32px);
+  box-sizing: border-box;
 }
 
 /* FAQ Section */
@@ -342,7 +346,7 @@
   }
 
   .bannerSection {
-    padding: 32px 0;
+    padding: 36px 0;
   }
 
   .bannerBox {
@@ -364,9 +368,16 @@
 
   .newsletterForm {
     flex-direction: column;
+    width: 100%;
+  }
+
+  .newsletterInput {
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .newsletterSubmit {
+    width: 100%;
     padding: 12px;
   }
 

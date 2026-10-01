@@ -497,26 +497,18 @@
 }
 
 /* Card Type Pill Buttons — Clean, Same & Clickable */
-/* Card Type Pill Buttons — Clean, Same & Clickable, Always 1 Row */
+/* Card Type Pill Buttons — Clean, Same & Clickable */
 .cardTypePillsBar {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: nowrap;
-  gap: clamp(3px, 0.6vw, 5px);
-  min-height: 32px;
-  margin: 3px 0;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+  min-height: 28px;
+  margin: 4px 0;
   width: 100%;
   max-width: 100%;
-  overflow-x: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  -webkit-overflow-scrolling: touch;
   padding: 2px 0;
-}
-
-.cardTypePillsBar::-webkit-scrollbar {
-  display: none;
 }
 
 .cardTypePill {
@@ -833,20 +825,29 @@
 }
 
 /* Large phone — horizontal scroll for both Setup and Your Turn */
+/* Mobile and small tablet refinement */
 @media (max-width: 640px) {
-  /* Setup: horizontal scroll */
+  /* Setup: horizontal scroll with smooth snapping */
   .setupGrid {
     display: flex;
     flex-direction: row;
     overflow-x: auto;
-    gap: 8px;
-    padding-bottom: 8px;
+    gap: 10px;
+    padding-bottom: 12px;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+  .setupGrid::-webkit-scrollbar {
+    height: 4px;
+  }
+  .setupGrid::-webkit-scrollbar-thumb {
+    background: rgba(81, 112, 255, 0.25);
+    border-radius: 9999px;
   }
   .setupStepCard {
-    flex: 0 0 62vw;
-    max-width: 200px;
+    flex: 0 0 65vw;
+    max-width: 210px;
     scroll-snap-align: start;
     flex-direction: column;
   }
@@ -862,25 +863,33 @@
     padding: 10px 8px;
   }
   .setupStepTitle {
-    font-size: 0.82rem;
+    font-size: 0.84rem;
   }
   .setupStepAction {
-    font-size: 0.72rem;
+    font-size: 0.74rem;
   }
 
-  /* Turn steps: horizontal scroll */
+  /* Turn steps: horizontal scroll with smooth snapping */
   .turnStepperGrid {
     display: flex;
     flex-direction: row;
     overflow-x: auto;
-    gap: 8px;
-    padding-bottom: 8px;
+    gap: 10px;
+    padding-bottom: 12px;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+  .turnStepperGrid::-webkit-scrollbar {
+    height: 4px;
+  }
+  .turnStepperGrid::-webkit-scrollbar-thumb {
+    background: rgba(81, 112, 255, 0.25);
+    border-radius: 9999px;
   }
   .turnStepCard {
-    flex: 0 0 62vw;
-    max-width: 200px;
+    flex: 0 0 65vw;
+    max-width: 210px;
     scroll-snap-align: start;
     flex-direction: column;
   }
@@ -890,35 +899,48 @@
     height: auto;
   }
   .turnStepBadge {
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
     top: 6px;
     left: 6px;
   }
   .turnStepNum {
-    font-size: 0.74rem;
+    font-size: 0.76rem;
   }
   .turnCardBody {
-    padding: 8px 8px 10px;
+    padding: 10px 8px 12px;
   }
   .turnTagName {
-    font-size: 0.72rem;
+    font-size: 0.74rem;
   }
   .turnReminderText {
-    font-size: 0.66rem;
+    font-size: 0.68rem;
   }
   .turnFlowPill {
-    font-size: 0.65rem;
+    font-size: 0.68rem;
     padding: 4px 10px;
     width: 100%;
     text-align: center;
   }
+
+  .pilesHeroImage {
+    max-width: 100%;
+  }
+
   .compactPilesGrid {
     grid-template-columns: 1fr;
+    gap: 10px;
   }
+
   .cardTypesGrid {
     grid-template-columns: 1fr;
-    max-width: 360px;
+    max-width: 440px;
+    width: 100%;
     margin: 0 auto;
+    gap: 14px;
+  }
+
+  .formulaBarCompact {
+    width: 100%;
   }
 }

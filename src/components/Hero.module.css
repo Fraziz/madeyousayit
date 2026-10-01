@@ -705,10 +705,10 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    gap: 8px 14px;
+    gap: 8px 10px;
     width: 100%;
     max-width: 440px;
-    padding: 10px 14px;
+    padding: 10px 12px;
     margin: 0 auto 20px;
     background: rgba(255, 255, 255, 0.98);
     border: 1px solid var(--border-medium);
@@ -720,6 +720,7 @@
     display: flex;
     align-items: center;
     gap: 6px;
+    padding: 3px 6px;
   }
 
   .specMeta {
@@ -730,11 +731,7 @@
   }
 
   .specDivider {
-    display: block;
-    width: 1px;
-    height: 18px;
-    background: var(--border-medium);
-    opacity: 0.6;
+    display: none;
   }
 
   .specValue {
@@ -800,20 +797,17 @@
 
   .cardTypeIndicators {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 3px;
+    gap: 5px 6px;
     max-width: 100%;
     width: 100%;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
     padding: 3px 4px;
   }
 
   .catIndicatorDot {
-    padding: 3px 6px;
-    font-size: 0.6rem;
+    padding: 4px 8px;
+    font-size: 0.64rem;
     border-radius: 9999px;
     flex-shrink: 0;
     white-space: nowrap;
@@ -822,29 +816,29 @@
 
 @media (max-width: 380px) {
   .heroTitle {
-    font-size: 1.95rem;
+    font-size: 1.85rem;
   }
 
   .specsRow {
-    gap: 6px 10px;
-    padding: 8px 10px;
+    gap: 6px 8px;
+    padding: 8px 8px;
   }
 
   .specValue {
-    font-size: 0.85rem;
+    font-size: 0.82rem;
   }
 
   .specLabel {
-    font-size: 0.58rem;
+    font-size: 0.56rem;
   }
 
   .cardFanContainer {
-    --card-w: 130px;
-    --fan-mult: 0.38;
+    --card-w: 125px;
+    --fan-mult: 0.36;
   }
 
   .catIndicatorDot {
-    padding: 3px 7px;
-    font-size: 0.62rem;
+    padding: 3px 6px;
+    font-size: 0.6rem;
   }
 }
