@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { RULEBOOK_DATA } from '../data/rules';
+import { RULEBOOK_TRANSLATIONS, RULE_LANGUAGES } from '../data/rules';
+import type { RuleLanguage } from '../data/rules';
 import { sound } from '../utils/audio';
 import styles from './Rulebook.module.css';
 
@@ -8,6 +9,7 @@ interface RulebookProps {
 }
 
 export const Rulebook: React.FC<RulebookProps> = ({ soundEnabled = true }) => {
+  const [currentLang, setCurrentLang] = useState<RuleLanguage>('en');
   const [activeSoloCardIndex, setActiveSoloCardIndex] = useState<number>(0);
   const [sampleIndices, setSampleIndices] = useState<Record<string, number>>({
     guess: 0,
@@ -22,7 +24,8 @@ export const Rulebook: React.FC<RulebookProps> = ({ soundEnabled = true }) => {
     }));
   };
 
-  const { setup, yourTurn, points, cardTypes, passOrFail, thePiles, endOfGame, goldenRule, specs } = RULEBOOK_DATA;
+  const currentRules = RULEBOOK_TRANSLATIONS[currentLang];
+  const { setup, yourTurn, points, cardTypes, passOrFail, thePiles, endOfGame, goldenRule, specs, subtitle, quickNote, quickNoteLabel } = currentRules;
 
   return (
     <section className={styles.rulebookSection} id="rules">
@@ -44,15 +47,39 @@ export const Rulebook: React.FC<RulebookProps> = ({ soundEnabled = true }) => {
             HOW TO <span className={styles.titleHighlight}>PLAY</span>
           </h2>
           <p className={styles.sectionSubtitle}>
-            Everything you need to know to start playing in 2 minutes.
+            {subtitle}
           </p>
+
+          {/* Minimalist Language Switcher */}
+          <div className={styles.langSelectorRow}>
+            <div className={styles.langSwitcher} role="tablist" aria-label="Translate Rulebook">
+              {RULE_LANGUAGES.map((lang) => {
+                const isActive = currentLang === lang.code;
+                return (
+                  <button
+                    key={lang.code}
+                    type="button"
+                    role="tab"
+                    aria-selected={isActive}
+                    className={`${styles.langBtn} ${isActive ? styles.langBtnActive : ''}`}
+                    onClick={() => {
+                      if (soundEnabled) sound.playClick();
+                      setCurrentLang(lang.code);
+                    }}
+                  >
+                    {lang.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
         </div>
 
         {/* Minimalist Wide Document Canvas */}
         <div className={styles.rulebookCanvas}>
           {/* Quick Note Banner */}
           <p className={styles.quickNote}>
-            <strong>Quick note:</strong> For now, I use AI anime images to help explain the rules. This is a test version, so some prints and cuts may be uneven.
+            <strong>{quickNoteLabel}</strong> {quickNote}
           </p>
 
           {/* 1. SETUP — Visual Step-by-Step Illustrated Guide */}

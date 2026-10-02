@@ -87,6 +87,54 @@
   opacity: 0.6;
 }
 
+/* Minimalist Language Switcher Segmented Control */
+.langSelectorRow {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(14px, 2vw, 20px);
+  width: 100%;
+}
+
+.langSwitcher {
+  display: inline-flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid var(--border-medium);
+  border-radius: 9999px;
+  padding: 4px;
+  gap: 4px;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.langBtn {
+  font-family: var(--font-display);
+  font-size: clamp(0.72rem, 1.8vw, 0.82rem);
+  font-weight: 800;
+  padding: clamp(5px, 1vw, 7px) clamp(10px, 2vw, 18px);
+  border-radius: 9999px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.langBtn:hover {
+  color: var(--brand-blue);
+  background: rgba(81, 112, 255, 0.06);
+}
+
+.langBtnActive {
+  background: var(--brand-blue) !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(81, 112, 255, 0.35);
+}
+
 /* Unified Document Canvas — Compact, Clean & Modern */
 .rulebookCanvas {
   background: #ffffff;
