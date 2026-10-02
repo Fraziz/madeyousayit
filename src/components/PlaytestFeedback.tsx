@@ -148,6 +148,10 @@ export const PlaytestFeedback: React.FC<PlaytestFeedbackProps> = ({ soundEnabled
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (!contactInfo.trim()) {
+      return;
+    }
+
     if (rating === null) {
       setRatingError(true);
       return;
@@ -155,7 +159,7 @@ export const PlaytestFeedback: React.FC<PlaytestFeedbackProps> = ({ soundEnabled
 
     setIsSubmitting(true);
 
-    const playerName = contactInfo.trim() || 'Anonymous Player';
+    const playerName = contactInfo.trim();
     const playerReviewText = notes.trim();
 
     const prefix =
@@ -449,7 +453,7 @@ export const PlaytestFeedback: React.FC<PlaytestFeedbackProps> = ({ soundEnabled
                       ? 'WHICH CHALLENGE WAS BAD & HOW CAN IT BE BETTER?'
                       : feedbackType === 'SUGGEST_NEW'
                       ? 'YOUR CHALLENGE IDEA'
-                      : 'ANY SPECIFIC CARD YOU WOULD CHANGE? (OPTIONAL)'}
+                      : 'YOUR THOUGHTS & SUGGESTIONS'}
                   </label>
                   <textarea
                     rows={4}
@@ -470,12 +474,13 @@ export const PlaytestFeedback: React.FC<PlaytestFeedbackProps> = ({ soundEnabled
                 {/* Name / Contact */}
                 <div className={styles.fieldGroup}>
                   <label htmlFor="contact-name" className={styles.fieldLabel}>
-                    YOUR NAME OR NICKNAME (OPTIONAL)
+                    YOUR NAME OR NICKNAME
                   </label>
                   <input
                     id="contact-name"
                     name="name"
                     type="text"
+                    required
                     autoComplete="name"
                     value={contactInfo}
                     onChange={(e) => setContactInfo(e.target.value)}
