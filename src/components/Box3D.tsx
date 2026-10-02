@@ -8,45 +8,41 @@ interface Box3DProps {
 
 export const Box3D: React.FC<Box3DProps> = ({
   initialAngle = 0,
-  autoRotateSpeed = 22, // formal, stately rotation: ~16 seconds per 360 deg
+  autoRotateSpeed = 22, // formal, stately rotation: ~16.3 seconds per 360 deg
 }) => {
-  const [rotY, setRotY] = useState<number>(initialAngle);
-  const [rotX, setRotX] = useState<number>(10); // subtle formal downward pitch to view top & depth
   const [isAutoSpinning, setIsAutoSpinning] = useState<boolean>(true);
-  const [isHovered, setIsHovered] = useState<boolean>(false);
+
+  const boxRef = useRef<HTMLDivElement | null>(null);
+  const rotYRef = useRef<number>(initialAngle);
+  const rotXRef = useRef<number>(10); // subtle formal downward pitch to view top & depth
 
   // Drag interaction state
   const isDraggingRef = useRef<boolean>(false);
   const dragStartPos = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const dragStartAngle = useRef<{ rotX: number; rotY: number }>({ rotX: 10, rotY: 0 });
-  const rotYRef = useRef<number>(initialAngle);
-  const rotXRef = useRef<number>(10);
   const animFrameRef = useRef<number | null>(null);
   const lastTimeRef = useRef<number>(performance.now());
 
-  // Keep refs synchronized
+  // Continuous Seamless 360 Turntable Animation Loop
   useEffect(() => {
-    rotYRef.current = rotY;
-  }, [rotY]);
+    lastTimeRef.current = performance.now();
 
-  useEffect(() => {
-    rotXRef.current = rotX;
-  }, [rotX]);
-
-  // Smooth 360 Turntable Animation Loop
-  useEffect(() => {
     const animate = (currentTime: number) => {
-      const delta = (currentTime - lastTimeRef.current) / 1000;
+      // Clamp delta to prevent erratic jumps if the browser tab was hidden
+      const delta = Math.min((currentTime - lastTimeRef.current) / 1000, 0.1);
       lastTimeRef.current = currentTime;
 
-      if (isAutoSpinning && !isDraggingRef.current && !isHovered) {
-        setRotY((prev) => (prev + autoRotateSpeed * delta) % 360);
+      if (isAutoSpinning && !isDraggingRef.current) {
+        // Monotonically advance rotY so it seamlessly loops forever without snapping or reversing
+        rotYRef.current += autoRotateSpeed * delta;
+        if (boxRef.current) {
+          boxRef.current.style.transform = `rotateX(${rotXRef.current}deg) rotateY(${rotYRef.current}deg)`;
+        }
       }
 
       animFrameRef.current = requestAnimationFrame(animate);
     };
 
-    lastTimeRef.current = performance.now();
     animFrameRef.current = requestAnimationFrame(animate);
 
     return () => {
@@ -54,7 +50,7 @@ export const Box3D: React.FC<Box3DProps> = ({
         cancelAnimationFrame(animFrameRef.current);
       }
     };
-  }, [isAutoSpinning, isHovered, autoRotateSpeed]);
+  }, [isAutoSpinning, autoRotateSpeed]);
 
   // Pointer Drag Handlers (touch & mouse unified)
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -70,22 +66,37 @@ export const Box3D: React.FC<Box3DProps> = ({
     const dy = e.clientY - dragStartPos.current.y;
 
     // Fluid drag sensitivity
-    const newRotY = (dragStartAngle.current.rotY + dx * 0.6) % 360;
+    const newRotY = dragStartAngle.current.rotY + dx * 0.6;
     const newRotX = Math.max(-28, Math.min(28, dragStartAngle.current.rotX - dy * 0.4));
 
-    setRotY(newRotY);
-    setRotX(newRotX);
+    rotYRef.current = newRotY;
+    rotXRef.current = newRotX;
+
+    if (boxRef.current) {
+      boxRef.current.style.transform = `rotateX(${newRotX}deg) rotateY(${newRotY}deg)`;
+    }
   };
 
   const handlePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
     if (isDraggingRef.current) {
       isDraggingRef.current = false;
+      lastTimeRef.current = performance.now();
       try {
         e.currentTarget.releasePointerCapture(e.pointerId);
       } catch {
         // Safe fallback
       }
     }
+  };
+
+  const handleToggleSpin = () => {
+    setIsAutoSpinning((prev) => {
+      const next = !prev;
+      if (next) {
+        lastTimeRef.current = performance.now();
+      }
+      return next;
+    });
   };
 
   return (
@@ -97,18 +108,14 @@ export const Box3D: React.FC<Box3DProps> = ({
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
         onPointerCancel={handlePointerUp}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
         role="region"
         aria-label="Interactive 3D Card Box, drag to rotate or inspect all sides"
       >
         <div
+          ref={boxRef}
           className={styles.box}
           style={{
-            transform: `rotateX(${rotX}deg) rotateY(${rotY}deg)`,
-            transition: isDraggingRef.current
-              ? 'none'
-              : 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+            transform: `rotateX(${rotXRef.current}deg) rotateY(${rotYRef.current}deg)`,
           }}
         >
           {/* 1. FRONT FACE (3.5" x 2.5") */}
@@ -184,7 +191,7 @@ export const Box3D: React.FC<Box3DProps> = ({
       <button
         type="button"
         className={styles.minimalPill}
-        onClick={() => setIsAutoSpinning((prev) => !prev)}
+        onClick={handleToggleSpin}
         title={isAutoSpinning ? "Click to pause rotation" : "Click to auto rotate"}
       >
         <span>360° {isAutoSpinning ? 'SPIN' : 'PAUSED'}</span>
