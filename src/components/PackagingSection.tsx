@@ -1,5 +1,6 @@
 import React from 'react';
 import { TOTAL_DECK_CARDS, TOTAL_DECK_POINTS } from '../data/cards';
+import Box3D from './Box3D';
 import styles from './PackagingSection.module.css';
 
 interface CardTypeBadge {
@@ -76,15 +77,7 @@ const PackagingSection: React.FC = () => {
               </div>
 
               <div className={styles.boxImageStage}>
-                <img
-                  src="/brand/box-mockup.png"
-                  alt="MADE YOU SAY IT simple prototype card box"
-                  className={styles.boxMockupImg}
-                />
-              </div>
-
-              <div className={styles.boxCaptionPill}>
-                <span>80-CARD PROTOTYPE DECK</span>
+                <Box3D />
               </div>
 
               {/* Integrated Clean Box Specs Strip */}
