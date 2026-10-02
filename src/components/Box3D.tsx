@@ -14,7 +14,6 @@ export const Box3D: React.FC<Box3DProps> = ({
   const [rotX, setRotX] = useState<number>(10); // subtle formal downward pitch to view top & depth
   const [isAutoSpinning, setIsAutoSpinning] = useState<boolean>(true);
   const [isHovered, setIsHovered] = useState<boolean>(false);
-  const [activePreset, setActivePreset] = useState<'360' | 'front' | 'right' | 'back' | 'custom'>('360');
 
   // Drag interaction state
   const isDraggingRef = useRef<boolean>(false);
@@ -76,7 +75,6 @@ export const Box3D: React.FC<Box3DProps> = ({
 
     setRotY(newRotY);
     setRotX(newRotX);
-    setActivePreset('custom');
   };
 
   const handlePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -87,21 +85,6 @@ export const Box3D: React.FC<Box3DProps> = ({
       } catch {
         // Safe fallback
       }
-    }
-  };
-
-  // Preset Angle Selectors
-  const selectPreset = (preset: '360' | 'front' | 'right' | 'back') => {
-    setActivePreset(preset);
-    if (preset === '360') {
-      setIsAutoSpinning(true);
-      setRotX(10);
-    } else {
-      setIsAutoSpinning(false);
-      setRotX(8);
-      if (preset === 'front') setRotY(0);
-      if (preset === 'right') setRotY(-90);
-      if (preset === 'back') setRotY(180);
     }
   };
 
@@ -197,59 +180,16 @@ export const Box3D: React.FC<Box3DProps> = ({
         <div className={styles.groundShadow} />
       </div>
 
-      {/* Formal Interactive Toolbar */}
-      <div className={styles.controlsToolbar}>
-        <div className={styles.hintRow}>
-          {isAutoSpinning && !isHovered && <span className={styles.spinPulseDot} />}
-          <span>
-            {isHovered
-              ? 'PAUSED (DRAG TO ROTATE 360°)'
-              : isAutoSpinning
-              ? '360° TURNTABLE SPIN'
-              : 'DRAG TO ROTATE 360°'}
-          </span>
-        </div>
-
-        {/* View Angle Preset Pills */}
-        <div className={styles.presetButtonsRow}>
-          <button
-            type="button"
-            className={`${styles.presetBtn} ${activePreset === '360' && isAutoSpinning ? styles.presetBtnActive : ''}`}
-            onClick={() => selectPreset('360')}
-            title="Continuous 360 rotation"
-          >
-            <span>🔄 360° Spin</span>
-          </button>
-          <button
-            type="button"
-            className={`${styles.presetBtn} ${activePreset === 'front' ? styles.presetBtnActive : ''}`}
-            onClick={() => selectPreset('front')}
-            title="View Front Face"
-          >
-            <span>Front</span>
-          </button>
-          <button
-            type="button"
-            className={`${styles.presetBtn} ${activePreset === 'right' ? styles.presetBtnActive : ''}`}
-            onClick={() => selectPreset('right')}
-            title="View Spine & Specs"
-          >
-            <span>Spine &amp; Specs</span>
-          </button>
-          <button
-            type="button"
-            className={`${styles.presetBtn} ${activePreset === 'back' ? styles.presetBtnActive : ''}`}
-            onClick={() => selectPreset('back')}
-            title="View Back Face"
-          >
-            <span>Back</span>
-          </button>
-        </div>
-
-        <div className={styles.dimensionBadge}>
-          3.5&quot; × 2.5&quot; POCKET TUCK BOX • 80 CARDS
-        </div>
-      </div>
+      {/* Clean Minimalist 360 Indicator & Toggle */}
+      <button
+        type="button"
+        className={styles.minimalPill}
+        onClick={() => setIsAutoSpinning((prev) => !prev)}
+        title={isAutoSpinning ? "Click to pause rotation" : "Click to auto rotate"}
+      >
+        <span className={`${styles.pulseDot} ${!isAutoSpinning ? styles.pulseDotPaused : ''}`} />
+        <span>360° {isAutoSpinning ? 'SPIN' : 'PAUSED'}</span>
+      </button>
     </div>
   );
 };

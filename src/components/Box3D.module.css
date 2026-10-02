@@ -142,90 +142,51 @@
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-/* Interactive Controls Toolbar */
-.controlsToolbar {
-  display: flex;
-  flex-direction: column;
+/* Clean Minimalist 360 Pill */
+.minimalPill {
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
-  width: 100%;
-  margin-top: 6px;
-}
-
-.hintRow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   gap: 8px;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  background: rgba(81, 112, 255, 0.07);
+  border: 1px solid rgba(81, 112, 255, 0.22);
+  color: var(--brand-blue);
+  font-family: var(--font-display);
+  font-size: 0.74rem;
+  font-weight: 800;
   letter-spacing: 0.08em;
-  color: var(--text-muted);
   text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  margin-top: 2px;
+  touch-action: manipulation;
 }
 
-.spinPulseDot {
+.minimalPill:hover {
+  background: rgba(81, 112, 255, 0.14);
+  border-color: var(--brand-blue);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(81, 112, 255, 0.18);
+}
+
+.minimalPill:active {
+  transform: translateY(0);
+}
+
+.pulseDot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
   background-color: var(--brand-blue);
-  animation: pulseDot 1.8s ease-in-out infinite;
+  animation: pulseDot 1.6s ease-in-out infinite;
+  flex-shrink: 0;
 }
 
-.presetButtonsRow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  flex-wrap: wrap;
-  width: 100%;
-}
-
-.presetBtn {
-  font-family: var(--font-prompt);
-  font-size: 0.74rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  padding: 6px 14px;
-  border-radius: 9999px;
-  background: #ffffff;
-  border: 1px solid var(--border-medium);
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.04);
-  touch-action: manipulation;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.presetBtn:hover {
-  background: var(--brand-blue-surface);
-  border-color: var(--brand-blue);
-  color: var(--brand-blue);
-  transform: translateY(-1px);
-}
-
-.presetBtnActive {
-  background: var(--brand-blue) !important;
-  color: #ffffff !important;
-  border-color: var(--brand-blue) !important;
-  box-shadow: 0 4px 14px rgba(81, 112, 255, 0.35);
-}
-
-.dimensionBadge {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  color: var(--brand-blue);
-  background: rgba(81, 112, 255, 0.08);
-  border: 1px solid rgba(81, 112, 255, 0.2);
-  padding: 3px 10px;
-  border-radius: 9999px;
-  margin-top: 4px;
+.pulseDotPaused {
+  animation: none;
+  opacity: 0.45;
+  background-color: var(--text-muted);
 }
 
 @keyframes pulseDot {
@@ -246,8 +207,8 @@
     padding: 6px 0 16px;
   }
 
-  .presetBtn {
-    padding: 5px 10px;
+  .minimalPill {
+    padding: 5px 14px;
     font-size: 0.7rem;
   }
 }
