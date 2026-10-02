@@ -54,8 +54,8 @@
 .showcaseGrid {
   display: grid;
   grid-template-columns: minmax(280px, 400px) minmax(0, 1fr);
-  gap: clamp(24px, 3.5vw, 40px);
-  align-items: stretch;
+  gap: clamp(20px, 3.5vw, 40px);
+  align-items: start;
   margin-bottom: clamp(36px, 5vh, 64px);
   width: 100%;
 }
@@ -63,22 +63,27 @@
 /* Box Column (Left) */
 .boxColumn {
   display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .boxCardContainer {
   position: relative;
   z-index: 1;
   width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
   background: #ffffff;
   border: 1px solid var(--border-medium);
   border-radius: var(--radius-lg);
-  padding: 28px 24px 24px;
+  padding: clamp(20px, 3vw, 28px) clamp(14px, 2.5vw, 24px) clamp(16px, 2.5vw, 22px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   box-shadow: 0 16px 36px -10px rgba(15, 23, 42, 0.06), 0 0 0 1px rgba(81, 112, 255, 0.05);
   transition: all 0.35s ease;
+  box-sizing: border-box;
 }
 
 .boxCardContainer:hover {
@@ -90,9 +95,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 8px;
   width: 100%;
-  padding-bottom: 16px;
+  padding-bottom: 14px;
   border-bottom: 1px solid var(--border-subtle);
+  flex-wrap: wrap;
 }
 
 .editionPill {
@@ -100,22 +107,23 @@
   align-items: center;
   justify-content: center;
   font-family: var(--font-mono);
-  font-size: 0.82rem;
+  font-size: clamp(0.72rem, 1.8vw, 0.8rem);
   font-weight: 800;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   color: var(--brand-blue);
   background: rgba(81, 112, 255, 0.08);
-  padding: 4px 14px;
+  padding: 4px 12px;
   border-radius: 9999px;
   white-space: nowrap;
 }
 
 .boxTypeTag {
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: clamp(0.68rem, 1.6vw, 0.76rem);
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   color: var(--text-muted);
+  white-space: nowrap;
 }
 
 .boxImageStage {
@@ -124,7 +132,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 8px 0 12px;
+  padding: 6px 0 10px;
 }
 
 .boxCaptionPill {
@@ -141,21 +149,27 @@
   margin-bottom: 20px;
 }
 
-/* Integrated Specs Grid */
+/* Integrated Specs Grid — Responsive 5-column dashboard strip */
 .specsGrid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   width: 100%;
-  padding-top: 18px;
+  padding-top: 14px;
   border-top: 1px solid var(--border-subtle);
   text-align: center;
+  gap: 0;
+  box-sizing: border-box;
 }
 
 .specItem {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
   position: relative;
+  padding: 2px 2px;
+  min-width: 0;
 }
 
 .specItem:not(:last-child)::after {
@@ -170,25 +184,31 @@
 
 .specValue {
   font-family: var(--font-sans);
-  font-size: 1.15rem;
-  font-weight: 800;
+  font-size: clamp(0.88rem, 2.4vw, 1.15rem);
+  font-weight: 850;
   color: var(--text-primary);
   letter-spacing: -0.02em;
+  line-height: 1.1;
+  white-space: nowrap;
 }
 
 .specLabel {
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: clamp(0.58rem, 1.5vw, 0.74rem);
   font-weight: 800;
   color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  white-space: nowrap;
 }
 
 /* Inventory Column (Right) */
 .inventoryColumn {
   display: flex;
   flex-direction: column;
+  min-width: 0;
+  width: 100%;
 }
 
 .inventoryHeader {
@@ -198,6 +218,9 @@
   margin-bottom: 20px;
   padding-bottom: 14px;
   border-bottom: 2px solid var(--border-medium);
+  gap: 12px;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .inventorySub {
@@ -212,22 +235,24 @@
 
 .inventoryTitle {
   font-family: var(--font-sans);
-  font-size: 1.25rem;
+  font-size: clamp(1.15rem, 2.5vw, 1.35rem);
   font-weight: 800;
   letter-spacing: -0.02em;
   color: var(--text-primary);
   margin: 0;
+  line-height: 1.2;
 }
 
 .inventoryBadge {
   font-family: var(--font-mono);
   font-size: 0.68rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   color: var(--brand-blue);
   background: rgba(81, 112, 255, 0.08);
-  padding: 5px 12px;
+  padding: 4px 10px;
   border-radius: 6px;
+  white-space: nowrap;
 }
 
 /* 2x2 Bento Grid */
@@ -236,18 +261,23 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
   flex: 1;
+  min-width: 0;
+  width: 100%;
 }
 
 .inventoryCard {
   background: #ffffff;
   border: 1px solid var(--border-medium);
   border-radius: var(--radius-md);
-  padding: 22px;
+  padding: clamp(16px, 3vw, 22px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.03);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .inventoryCard:hover {
@@ -260,7 +290,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 8px;
   margin-bottom: 12px;
+  width: 100%;
 }
 
 .cardIndex {
@@ -272,51 +304,48 @@
   background: rgba(81, 112, 255, 0.08);
   padding: 3px 8px;
   border-radius: 6px;
+  flex-shrink: 0;
 }
 
 .cardTag {
   font-family: var(--font-mono);
-  font-size: 0.76rem;
+  font-size: clamp(0.62rem, 1.8vw, 0.74rem);
   font-weight: 800;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
   color: var(--text-muted);
   background: var(--bg-secondary);
   border: 1px solid var(--border-subtle);
-  padding: 4px 10px;
+  padding: 3px 8px;
   border-radius: 6px;
+  white-space: nowrap;
 }
 
 .itemName {
   font-family: var(--font-sans);
-  font-size: 1.15rem;
+  font-size: clamp(1.02rem, 2vw, 1.18rem);
   font-weight: 800;
   letter-spacing: -0.01em;
   color: var(--text-primary);
   margin-bottom: 8px;
+  line-height: 1.25;
 }
 
 .itemDesc {
-  font-size: 0.94rem;
+  font-size: clamp(0.86rem, 1.8vw, 0.94rem);
   color: var(--text-secondary);
-  line-height: 1.6;
+  line-height: 1.55;
   margin: 0;
 }
 
-/* Card Type Pills for Card 01 — Single Responsive Row */
+/* Card Type Pills for Card 01 — Responsive Wrapped Row */
 .cardTypePills {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   gap: 6px;
   margin-top: 14px;
   padding-top: 12px;
   border-top: 1px dashed var(--border-subtle);
-  overflow-x: auto;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-}
-
-.cardTypePills::-webkit-scrollbar {
-  display: none;
+  width: 100%;
 }
 
 .cardTypePill {
@@ -384,7 +413,8 @@
 
 .prototypeCtaText {
   flex: 1;
-  min-width: 280px;
+  min-width: 0;
+  width: 100%;
 }
 
 .ctaBadge {
@@ -444,14 +474,20 @@
 }
 
 /* Responsive */
-@media (max-width: 1080px) {
+@media (max-width: 1024px) {
   .showcaseGrid {
     grid-template-columns: 1fr;
     gap: 36px;
   }
 
-  .boxMockupImg {
-    max-width: 220px;
+  .boxCardContainer {
+    max-width: 440px;
+  }
+
+  .inventoryHeader {
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
   }
 }
 
@@ -460,54 +496,36 @@
     grid-template-columns: 1fr;
     gap: 14px;
   }
-
-  .specsGrid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    padding-top: 14px;
-  }
-
-  .specItem::after {
-    display: none !important;
-  }
-
-  .specItem {
-    background: var(--bg-secondary);
-    padding: 8px 6px;
-    border-radius: 8px;
-    border: 1px solid var(--border-subtle);
-  }
-
-  .specItem:last-child {
-    grid-column: 1 / -1;
-  }
 }
 
 @media (max-width: 640px) {
   .section {
-    padding: 50px 0;
+    padding: 48px 0;
   }
 
   .header {
-    margin-bottom: 36px;
+    margin-bottom: 32px;
   }
 
   .title {
-    font-size: clamp(1.85rem, 8vw, 2.5rem);
-    margin-bottom: 12px;
+    font-size: clamp(1.85rem, 7.5vw, 2.4rem);
+    margin-bottom: 10px;
   }
 
   .subtext {
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     line-height: 1.55;
   }
 
-  .boxCardContainer {
-    padding: 20px 16px 18px;
+  .inventoryHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
   }
 
-  .boxMockupImg {
-    max-width: 190px;
+  .boxCardContainer {
+    padding: 18px 14px 16px;
+    max-width: 100%;
   }
 
   .prototypeCtaBar {
@@ -527,16 +545,6 @@
 }
 
 @media (max-width: 480px) {
-  .specsGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .specItem:last-child {
-    grid-column: 1 / -1;
-  }
-}
-
-@media (max-width: 480px) {
   .inventoryCard {
     padding: 16px;
   }
@@ -552,5 +560,19 @@
   .cardTypePill {
     font-size: 0.64rem;
     padding: 2px 7px;
+  }
+}
+
+@media (max-width: 360px) {
+  .specValue {
+    font-size: 0.82rem;
+  }
+
+  .specLabel {
+    font-size: 0.54rem;
+  }
+
+  .boxTopBar {
+    justify-content: center;
   }
 }

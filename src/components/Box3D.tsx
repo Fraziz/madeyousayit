@@ -187,7 +187,6 @@ export const Box3D: React.FC<Box3DProps> = ({
         onClick={() => setIsAutoSpinning((prev) => !prev)}
         title={isAutoSpinning ? "Click to pause rotation" : "Click to auto rotate"}
       >
-        <span className={`${styles.pulseDot} ${!isAutoSpinning ? styles.pulseDotPaused : ''}`} />
         <span>360° {isAutoSpinning ? 'SPIN' : 'PAUSED'}</span>
       </button>
     </div>
