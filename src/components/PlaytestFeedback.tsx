@@ -87,6 +87,24 @@ export const PlaytestFeedback: React.FC<PlaytestFeedbackProps> = ({ soundEnabled
     };
   }, []);
 
+  // Auto-detect player name from URL (?name=... or ?fb=...) or localStorage
+  useEffect(() => {
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlName = urlParams.get('name') || urlParams.get('fb') || urlParams.get('user');
+      if (urlName && urlName.trim()) {
+        setContactInfo(urlName.trim());
+        return;
+      }
+      const savedName = localStorage.getItem('mysi_player_name');
+      if (savedName && savedName.trim()) {
+        setContactInfo(savedName.trim());
+      }
+    } catch {
+      // Safe fallback
+    }
+  }, []);
+
   // Check 5 submissions per device per month
   useEffect(() => {
     const recent = getRecentSubmissions();
@@ -163,6 +181,9 @@ export const PlaytestFeedback: React.FC<PlaytestFeedbackProps> = ({ soundEnabled
       // Record submission timestamp on device (keep array for 5-per-month tracking)
       const existing = getRecentSubmissions();
       localStorage.setItem(FEEDBACK_STORAGE_KEY, JSON.stringify([...existing, Date.now()]));
+      if (playerName && playerName.trim()) {
+        localStorage.setItem('mysi_player_name', playerName.trim());
+      }
 
       // Save directly to Aaron's Google Sheet
       await fetch(GOOGLE_SHEETS_API_URL, {
@@ -448,14 +469,17 @@ export const PlaytestFeedback: React.FC<PlaytestFeedbackProps> = ({ soundEnabled
 
                 {/* Name / Contact */}
                 <div className={styles.fieldGroup}>
-                  <label className={styles.fieldLabel}>
+                  <label htmlFor="contact-name" className={styles.fieldLabel}>
                     YOUR NAME OR NICKNAME (OPTIONAL)
                   </label>
                   <input
+                    id="contact-name"
+                    name="name"
                     type="text"
+                    autoComplete="name"
                     value={contactInfo}
                     onChange={(e) => setContactInfo(e.target.value)}
-                    placeholder="Your name or Instagram"
+                    placeholder="Your name or Facebook / Instagram"
                     className={styles.input}
                   />
                 </div>
