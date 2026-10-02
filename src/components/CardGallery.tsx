@@ -153,9 +153,6 @@ export const CardGallery: React.FC<CardGalleryProps> = ({ soundEnabled = true })
           </div>
 
           <div className={styles.bannerRight}>
-            <span className={styles.countBadge}>
-              {filteredCards.length} SAMPLES · {currentCardTypeInfo.count} CARDS ({currentCardTypeInfo.totalPoints} PTS) IN FULL DECK
-            </span>
             {/* Points Filter Chips: ALL, 1 POINT, 2 POINTS, 3 POINTS */}
             <div className={styles.filterPills}>
               {(['ALL', 1, 2, 3] as const).map((p) => {
