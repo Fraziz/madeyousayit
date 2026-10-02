@@ -254,7 +254,7 @@ export const CardGallery: React.FC<CardGalleryProps> = ({ soundEnabled = true })
                 PROTOTYPE EDITION
               </span>
               <span className={styles.playtestNoticeLegal}>
-                {TOTAL_DECK_CARDS} Cards · {TOTAL_DECK_POINTS} Points · 6 Card Types · 3–8 Players · 20–30 Min
+                {TOTAL_DECK_CARDS} Cards · {TOTAL_DECK_POINTS} Points · 6 Card Types · 3–8 Players · 15–45 Min
               </span>
             </div>
           </div>

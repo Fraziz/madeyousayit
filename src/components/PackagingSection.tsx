@@ -95,7 +95,7 @@ const PackagingSection: React.FC = () => {
                   <span className={styles.specLabel}>Players</span>
                 </div>
                 <div className={styles.specItem}>
-                  <span className={styles.specValue}>20–30</span>
+                  <span className={styles.specValue}>15–45</span>
                   <span className={styles.specLabel}>Minutes</span>
                 </div>
                 <div className={styles.specItem}>

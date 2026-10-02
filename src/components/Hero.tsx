@@ -102,7 +102,7 @@ export const Hero: React.FC<HeroProps> = () => {
             <div className={styles.specBadge}>
               <div className={styles.specMeta}>
                 <span className={styles.specLabel}>TIME</span>
-                <span className={styles.specValue}>20–30 MIN</span>
+                <span className={styles.specValue}>15–45 MIN</span>
               </div>
             </div>
             <div className={styles.specDivider} />

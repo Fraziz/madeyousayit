@@ -172,7 +172,7 @@ const Footer: React.FC<FooterProps> = ({ soundEnabled = false }) => {
               <span>|</span>
               <span>AGES 13+</span>
               <span>|</span>
-              <span>20–30 MIN</span>
+              <span>15–45 MIN</span>
               <span>|</span>
               <span>80 CARDS</span>
               <span>|</span>

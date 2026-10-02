@@ -54,7 +54,7 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
             <div key={i} className={styles.tickerItem} aria-hidden={i > 1 ? 'true' : undefined}>
               <span>LIMITED FREE PROTOTYPE DECKS AVAILABLE</span>
               <span className={styles.tickerDot} />
-              <span>80 CARDS · 6 CARD TYPES · 3–8 PLAYERS · 20–30 MIN · AGES 13+</span>
+              <span>80 CARDS · 6 CARD TYPES · 3–8 PLAYERS · 15–45 MIN · AGES 13+</span>
               <span className={styles.tickerDot} />
             </div>
           ))}

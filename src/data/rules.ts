@@ -4,7 +4,7 @@ export const GAME_SPECS = {
   edition: 'RULEBOOK',
   players: '3–8 PLAYERS',
   ages: 'AGES 13+',
-  duration: '20–30 MIN',
+  duration: '15–45 MIN',
   cardsCount: '80 CARDS',
   points: '160 POINTS',
 };
@@ -19,10 +19,10 @@ export const RULEBOOK_DATA = {
   specs: {
     title: 'MADE YOU SAY IT',
     tagline: 'PLAY A CARD. MAKE A MEMORY.',
-    badgeLine: 'RULEBOOK • 3–8 PLAYERS • AGES 13+ • 20–30 MIN',
+    badgeLine: 'RULEBOOK • 3–8 PLAYERS • AGES 13+ • 15–45 MIN',
     players: '3–8 PLAYERS',
     ages: 'AGES 13+',
-    duration: '20–30 MIN',
+    duration: '15–45 MIN',
   },
   setup: {
     number: '1',
