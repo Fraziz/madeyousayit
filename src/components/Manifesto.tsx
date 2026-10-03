@@ -21,7 +21,7 @@ const Manifesto: React.FC = () => {
             I created <strong>MADE YOU SAY IT</strong> after seeing my friend enjoy creating and playing card games filled with challenges and funny moments. It inspired me to create my own game.
           </p>
           <p className={styles.bodyText}>
-            I’m also a shy person, and sometimes I don’t know how to start conversations or interact with others. I wanted to create something that could make it easier for friends to <strong>talk, laugh, play, and enjoy the moment together.</strong>
+            I’m also an introvert, and sometimes I don’t know how to start conversations or interact with others. I wanted to create something that could make it easier for friends to <strong>talk, laugh, play, and enjoy the moment together.</strong>
           </p>
           <p className={styles.bodyText}>
             <strong>MADE YOU SAY IT</strong> is still a prototype, and I’m continuously testing and improving it. That’s why I’m sharing it with people who are willing to play, have fun, and give honest feedback.

@@ -36,8 +36,8 @@ const FOR_POINTS = [
   },
   {
     num: '02',
-    title: 'You Like Romantic & Sweet Questions',
-    desc: 'If you enjoy romantic questions, talking about crushes, sharing sweet compliments, and getting closer to people, you will love this game.',
+    title: 'You Like Deep Talks & Meaningful Questions',
+    desc: 'If you enjoy deep talks, thoughtful questions, sharing genuine stories, and getting closer to people without pressure, you will love this game.',
   },
   {
     num: '03',
