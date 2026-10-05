@@ -323,6 +323,7 @@ export const Rulebook: React.FC<RulebookProps> = ({ soundEnabled = true }) => {
               <span className={styles.formulaOutcome}>Final Score</span>
             </div>
             <p className={styles.winnerLine}>{endOfGame.winner}</p>
+            <p className={styles.endGameCondition}>{endOfGame.dare}</p>
           </div>
 
           <div className={styles.divider} />

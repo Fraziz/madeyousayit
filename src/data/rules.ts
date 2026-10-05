@@ -129,6 +129,7 @@ export interface RulebookContent {
     condition: string;
     formula: string;
     winner: string;
+    dare: string;
   };
   goldenRule: {
     number: string;
@@ -342,6 +343,7 @@ export const RULEBOOK_TRANSLATIONS: Record<RuleLanguage, RulebookContent> = {
       condition: 'When the Draw Pile is empty, keep playing without drawing. On your turn, play or pass 1 card from your hand. When everyone has no cards left, the game ends. Count the points in your Score Pile.',
       formula: 'Score Pile = Final Score',
       winner: 'The player with the most points wins.',
+      dare: 'The player with the lowest score goes on the Hot Seat. Each player gets to ask them one question, and they have to answer it. Keep it fun and follow the Golden Rule!',
     },
     goldenRule: {
       number: '8',
@@ -554,6 +556,7 @@ export const RULEBOOK_TRANSLATIONS: Record<RuleLanguage, RulebookContent> = {
       condition: 'Kapag naubos na ang Draw Pile, magpatuloy sa paglalaro nang hindi na bumubunot. Sa iyong turn, maglaro o mag-pass ng 1 card mula sa iyong hawak. Kapag wala nang card ang lahat, magtatapos ang laro. Bilangin ang points sa iyong Score Pile.',
       formula: 'Score Pile = Final Score',
       winner: 'Ang player na may pinakamaraming points ang panalo.',
+      dare: 'Ang player na may pinakamababang score ay mapupunta sa Hot Seat. Bawat player ay may isang tanong para sa kanya, at kailangan niyang sagutin ito. Panatilihing masaya at sundin ang Golden Rule!',
     },
     goldenRule: {
       number: '8',
@@ -766,6 +769,7 @@ export const RULEBOOK_TRANSLATIONS: Record<RuleLanguage, RulebookContent> = {
       condition: 'Kun waray na sulod an Draw Pile, padayon la an uyag bisan diri na nagbubutong. Ha imo turn, pag-uyag o pag-pass hin 1 ka card tikang ha imo kapot. Kun waray na cards an ngatanan, matatapos an uyag. Ihapa an points ha imo Score Pile.',
       formula: 'Score Pile = Final Score',
       winner: 'An player nga may gidadamoi nga points an daug.',
+      dare: 'An player nga may pinakagamay nga score mapakadto ha Hot Seat. Kada player may usa nga pakiana para ha iya, ngan kinahanglan niya sabton ini. Palingawa la ngan sunda an Golden Rule!',
     },
     goldenRule: {
       number: '8',
