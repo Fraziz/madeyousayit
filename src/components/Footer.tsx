@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { playSound } from '../utils/audio';
+import { scrollToSection } from '../utils/smoothScroll';
 import styles from './Footer.module.css';
 
 interface FooterProps {
@@ -51,10 +52,15 @@ const Footer: React.FC<FooterProps> = ({ soundEnabled = false }) => {
     }
   };
 
+  const handleNavClick = (e: React.MouseEvent, id: string) => {
+    e.preventDefault();
+    scrollToSection(id, -60);
+  };
+
   return (
     <footer id="faq" className={styles.footer}>
       {/* FAQ Section */}
-      <div className={styles.faqSection}>
+      <div className={`${styles.faqSection} reveal-item`}>
         <div className={styles.container}>
           <div className={styles.faqHeader}>
             <span className={styles.faqLabel}>QUESTIONS &amp; ANSWERS</span>
@@ -79,8 +85,8 @@ const Footer: React.FC<FooterProps> = ({ soundEnabled = false }) => {
         </div>
       </div>
 
-      {/* Action Banner (No Price / No Buying) */}
-      <div className={styles.bannerSection}>
+      {/* Action Banner (Final Banner) */}
+      <div className={`${styles.bannerSection} reveal-banner`}>
         <div className={styles.container}>
           <div className={styles.bannerBox}>
             <div className={styles.bannerTextCol}>
@@ -105,7 +111,7 @@ const Footer: React.FC<FooterProps> = ({ soundEnabled = false }) => {
       </div>
 
       {/* Main Footer Links & Newsletter */}
-      <div className={styles.mainFooter}>
+      <div className={`${styles.mainFooter} reveal-item`}>
         <div className={styles.container}>
           <div className={styles.footerGrid}>
             {/* Brand column */}
@@ -129,10 +135,10 @@ const Footer: React.FC<FooterProps> = ({ soundEnabled = false }) => {
               <span className={styles.colTitle}>QUICK LINKS</span>
               <ul className={styles.linkList}>
                 <li><a href="https://www.facebook.com/aaronpaulcabagnan12" target="_blank" rel="noopener noreferrer">Message Aaron on Facebook</a></li>
-                <li><a href="#gallery">Sample Cards by Type</a></li>
-                <li><a href="#rules">How to Play</a></li>
-                <li><a href="#story">Why I Created This Game</a></li>
-                <li><a href="#feedback">Get a Deck &amp; Feedback</a></li>
+                <li><a href="#gallery" onClick={(e) => handleNavClick(e, 'gallery')}>Sample Cards by Type</a></li>
+                <li><a href="#rules" onClick={(e) => handleNavClick(e, 'rules')}>How to Play</a></li>
+                <li><a href="#story" onClick={(e) => handleNavClick(e, 'story')}>Why I Created This Game</a></li>
+                <li><a href="#feedback" onClick={(e) => handleNavClick(e, 'feedback')}>Get a Deck &amp; Feedback</a></li>
               </ul>
             </div>
 

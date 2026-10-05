@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import CardGallery from './components/CardGallery';
@@ -8,9 +8,23 @@ import WhoItsFor from './components/WhoItsFor';
 import Manifesto from './components/Manifesto';
 import PlaytestFeedback from './components/PlaytestFeedback';
 import Footer from './components/Footer';
+import { initSmoothScroll } from './utils/smoothScroll';
+import { initScrollAnimations, initParallax } from './utils/scrollAnimations';
 import './App.css';
 
 const App: React.FC = () => {
+  useEffect(() => {
+    const cleanupScroll = initSmoothScroll();
+    const cleanupAnimations = initScrollAnimations();
+    const cleanupParallax = initParallax();
+
+    return () => {
+      cleanupScroll();
+      cleanupAnimations();
+      cleanupParallax();
+    };
+  }, []);
+
   return (
     <div className="app-layout">
       {/* Sticky Navigation Header */}

@@ -246,7 +246,7 @@ export const PlaytestFeedback: React.FC<PlaytestFeedbackProps> = ({ soundEnabled
     <section className={styles.feedbackSection} id="feedback">
       <div className={`container ${styles.container}`}>
         {/* Clean Minimalist Header */}
-        <div className={styles.header}>
+        <div className={`${styles.header} reveal-item`}>
           <span className={styles.tag}>SHARE YOUR THOUGHTS</span>
           <h2 className={styles.title}>
             GIVE YOUR <span className={styles.highlight}>FEEDBACK</span>
@@ -257,7 +257,7 @@ export const PlaytestFeedback: React.FC<PlaytestFeedbackProps> = ({ soundEnabled
         </div>
 
         {/* Creator Note Banner */}
-        <div className={styles.creatorBanner}>
+        <div className={`${styles.creatorBanner} reveal-item`}>
           <div className={styles.creatorBannerLeft}>
             <span className={styles.creatorBadge}>HELP US IMPROVE THE CARDS</span>
             <p className={styles.creatorText}>
@@ -268,7 +268,7 @@ export const PlaytestFeedback: React.FC<PlaytestFeedbackProps> = ({ soundEnabled
 
         <div className={styles.grid}>
           {/* Minimalist Feedback Form */}
-          <div className={styles.formCard}>
+          <div className={`${styles.formCard} reveal-item`}>
             {alreadySubmitted || submitted ? (
               <div className={styles.successState}>
                 <div className={styles.successCheck}>FEEDBACK RECORDED</div>
@@ -553,7 +553,7 @@ export const PlaytestFeedback: React.FC<PlaytestFeedbackProps> = ({ soundEnabled
             LIVE COMMUNITY PLAYTEST REVIEWS WALL (Synced with Google Sheets)
             ============================================================ */}
         <div className={styles.reviewsSection}>
-          <div className={styles.reviewsHeader}>
+          <div className={`${styles.reviewsHeader} reveal-item`}>
             <div className={styles.reviewsTitleGroup}>
               <span className={styles.reviewsTag}>COMMUNITY VOICES</span>
               <h3 className={styles.reviewsTitle}>WHAT PLAYTESTERS ARE SAYING</h3>
@@ -580,9 +580,13 @@ export const PlaytestFeedback: React.FC<PlaytestFeedbackProps> = ({ soundEnabled
               No reviews published yet. Be the first to play and share your review above!
             </div>
           ) : (
-            <div className={styles.reviewsGrid}>
-              {reviews.map((rev) => (
-                <div key={rev.id} className={styles.reviewCard}>
+            <div className={`${styles.reviewsGrid} reveal-group`}>
+              {reviews.map((rev, idx) => (
+                <div
+                  key={rev.id}
+                  className={`${styles.reviewCard} reveal-card card-hover-lift`}
+                  style={{ '--reveal-delay': idx % 6 } as React.CSSProperties}
+                >
                   <div className={styles.reviewCardTop}>
                     <div className={styles.reviewerMeta}>
                       <span className={styles.reviewerName}>{rev.name}</span>

@@ -120,8 +120,8 @@ html {
   -webkit-text-size-adjust: 100%;
   width: 100%;
   max-width: 100vw;
+  /* Use hidden (not clip) so Lenis smooth scroll isn't stopped by overflow detection */
   overflow-x: hidden;
-  overflow-x: clip;
 }
 
 body {
@@ -238,4 +238,100 @@ a {
   50% { opacity: 0.4; transform: scale(0.8); }
 }
 
+/* ============================================================
+   SMOOTH SCROLLING & MOTION REVEAL SYSTEM
+   ============================================================ */
 
+/* 1. Subtle Parallax for Large Product Images */
+[data-parallax="true"] {
+  translate: 0 var(--parallax-y, 0px);
+  will-change: translate;
+}
+
+/* 2. Progressive Enhancement: Visible by default */
+.reveal-item,
+.reveal-card,
+.reveal-banner {
+  opacity: 1;
+  transform: none;
+}
+
+/* 3. Initial state ONLY when motion engine is confirmed ready */
+html.motion-ready:not(.no-motion) .reveal-item:not([data-revealed]),
+html.motion-ready:not(.no-motion) .reveal-banner:not([data-revealed]) {
+  opacity: 0;
+  transform: translateY(24px);
+  will-change: opacity, transform;
+}
+
+/* Staggered cards initial state */
+html.motion-ready:not(.no-motion) .reveal-card:not([data-revealed]) {
+  opacity: 0;
+  transform: translateY(24px);
+  will-change: opacity, transform;
+}
+
+/* 4. Active revealed states: 0.7s gentle easing */
+html.motion-ready .reveal-item[data-revealed],
+html.motion-ready .reveal-banner[data-revealed] {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--reveal-delay, 0) * 0.08s);
+}
+
+/* Sequential cards: 0.1s delay between items */
+html.motion-ready .reveal-card[data-revealed] {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--reveal-delay, 0) * 0.1s);
+}
+
+/* 5. Desktop Card Hover: Lift by 4 pixels & gently enlarge image */
+@media (hover: hover) and (pointer: fine) {
+  .card-hover-lift {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .card-hover-lift:hover {
+    transform: translateY(-4px) !important;
+  }
+
+  .card-hover-lift img {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .card-hover-lift:hover img {
+    transform: scale(1.03);
+  }
+}
+
+/* 6. Mobile & Small Screen Optimizations: Reduced movement */
+@media (max-width: 768px) {
+  html.motion-ready:not(.no-motion) .reveal-item:not([data-revealed]),
+  html.motion-ready:not(.no-motion) .reveal-card:not([data-revealed]),
+  html.motion-ready:not(.no-motion) .reveal-banner:not([data-revealed]) {
+    transform: translateY(12px);
+  }
+
+  [data-parallax="true"] {
+    transition: none;
+  }
+}
+
+/* 7. Reduced Motion Settings */
+@media (prefers-reduced-motion: reduce) {
+  html.motion-ready .reveal-item,
+  html.motion-ready .reveal-card,
+  html.motion-ready .reveal-banner,
+  [data-parallax="true"] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}

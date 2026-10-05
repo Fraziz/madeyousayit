@@ -23,7 +23,12 @@
 }
 
 .cardContainer.interactive:hover {
-  transform: translateY(-8px) scale(1.02);
+  transform: translateY(-4px);
+}
+
+.cardContainer.interactive:hover .cardFrontImage,
+.cardContainer.interactive:hover .cardBackImage {
+  transform: scale(1.03);
 }
 
 .cardInner {
@@ -67,6 +72,7 @@
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   transform: translateZ(0);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
   user-select: none;
 }
@@ -202,6 +208,7 @@
   object-fit: fill;
   display: block;
   border-radius: 20px;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
   user-select: none;
 }

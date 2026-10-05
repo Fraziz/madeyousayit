@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { scrollToSection } from '../utils/smoothScroll';
 import styles from './Header.module.css';
 
 interface HeaderProps {
@@ -11,9 +12,10 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 15);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -37,10 +39,7 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
     if (onNavigate) {
       onNavigate(id);
     } else {
-      const el = document.getElementById(id);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-      }
+      scrollToSection(id, -60);
     }
     setMobileMenuOpen(false);
   };

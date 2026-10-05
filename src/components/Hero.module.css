@@ -52,6 +52,7 @@
   text-transform: uppercase;
   color: var(--text-primary);
   margin-bottom: clamp(8px, 1.3vh, 14px);
+  animation: heroRevealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
 }
 
 .breakTitle {
@@ -69,6 +70,7 @@
   letter-spacing: 0.06em;
   color: var(--brand-blue);
   margin-bottom: clamp(8px, 1.3vh, 14px);
+  animation: heroRevealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both;
 }
 
 .heroDescription {
@@ -77,6 +79,7 @@
   color: var(--text-secondary);
   max-width: 520px;
   margin-bottom: clamp(14px, 2vh, 24px);
+  animation: heroRevealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.28s both;
 }
 
 /* Specs Row Capsule */
@@ -93,6 +96,7 @@
   margin-bottom: clamp(14px, 2vh, 24px);
   box-shadow: 0 6px 20px -4px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(15, 23, 42, 0.04);
   max-width: 100%;
+  animation: heroRevealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.38s both;
 }
 
 .specBadge {
@@ -141,6 +145,7 @@
   margin-bottom: clamp(10px, 1.5vh, 16px);
   width: 100%;
   flex-wrap: wrap;
+  animation: heroRevealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.48s both;
 }
 
 .primaryDemoBtn {
@@ -230,6 +235,7 @@
   gap: 6px;
   font-size: clamp(0.78rem, 0.85vw, 0.86rem);
   color: var(--text-secondary);
+  animation: heroRevealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.58s both;
 }
 
 .calloutDot {
@@ -265,6 +271,7 @@
   position: relative;
   width: 100%;
   min-width: 0;
+  animation: heroSlideRight 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
 }
 
 .cardStageWrapper {
@@ -842,3 +849,67 @@
     font-size: 0.6rem;
   }
 }
+
+/* ============================================================
+   OPENING ANIMATION KEYFRAMES & ACCESSIBILITY
+   ============================================================ */
+@keyframes heroRevealUp {
+  0% {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroSlideRight {
+  0% {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 768px) {
+  @keyframes heroRevealUp {
+    0% {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes heroSlideRight {
+    0% {
+      opacity: 0;
+      transform: translateX(18px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroTitle,
+  .heroTagline,
+  .heroDescription,
+  .specsRow,
+  .actionButtonsRow,
+  .playtestCallout,
+  .heroVisualArea {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+

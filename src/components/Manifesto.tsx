@@ -5,12 +5,12 @@ const Manifesto: React.FC = () => {
   return (
     <section className={styles.section} id="story">
       <div className={`container ${styles.container}`}>
-        <div className={styles.labelWrapper}>
+        <div className={`${styles.labelWrapper} reveal-item`}>
           <span className={styles.label}>CREATOR'S MISSION</span>
           <span className={styles.year}>1ST EDITION PROTOTYPE</span>
         </div>
 
-        <div className={styles.statement}>
+        <div className={`${styles.statement} reveal-item`}>
           <h2 className={styles.largeText}>
             WHY I CREATED THIS GAME
           </h2>
@@ -29,8 +29,11 @@ const Manifesto: React.FC = () => {
         </div>
 
         {/* 3 Core Pillars */}
-        <div className={styles.pillarsGrid}>
-          <div className={styles.pillarCard}>
+        <div className={`${styles.pillarsGrid} reveal-group`}>
+          <div
+            className={`${styles.pillarCard} reveal-card card-hover-lift`}
+            style={{ '--reveal-delay': 0 } as React.CSSProperties}
+          >
             <div className={styles.pillarHeader}>
               <span className={styles.pillarIndex}>01</span>
               <h3 className={styles.pillarTitle}>REAL LAUGHS</h3>
@@ -40,7 +43,10 @@ const Manifesto: React.FC = () => {
             </p>
           </div>
 
-          <div className={styles.pillarCard}>
+          <div
+            className={`${styles.pillarCard} reveal-card card-hover-lift`}
+            style={{ '--reveal-delay': 1 } as React.CSSProperties}
+          >
             <div className={styles.pillarHeader}>
               <span className={styles.pillarIndex}>02</span>
               <h3 className={styles.pillarTitle}>NO PRESSURE</h3>
@@ -50,7 +56,10 @@ const Manifesto: React.FC = () => {
             </p>
           </div>
 
-          <div className={styles.pillarCard}>
+          <div
+            className={`${styles.pillarCard} reveal-card card-hover-lift`}
+            style={{ '--reveal-delay': 2 } as React.CSSProperties}
+          >
             <div className={styles.pillarHeader}>
               <span className={styles.pillarIndex}>03</span>
               <h3 className={styles.pillarTitle}>MAKE A MEMORY</h3>
@@ -61,7 +70,7 @@ const Manifesto: React.FC = () => {
           </div>
         </div>
 
-        <div className={styles.footerQuote}>
+        <div className={`${styles.footerQuote} reveal-item`}>
           <p className={styles.bigTagline}>PLAY A CARD. MAKE A MEMORY.</p>
           <div className={styles.manifestoAction}>
             <a

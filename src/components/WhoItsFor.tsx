@@ -1,4 +1,5 @@
 import React from 'react';
+import { scrollToSection } from '../utils/smoothScroll';
 import styles from './WhoItsFor.module.css';
 
 interface WhoItsForProps {
@@ -56,7 +57,7 @@ export const WhoItsFor: React.FC<WhoItsForProps> = ({ onNavigateToFeedback }) =>
     if (onNavigateToFeedback) {
       onNavigateToFeedback();
     } else {
-      document.getElementById('feedback')?.scrollIntoView({ behavior: 'smooth' });
+      scrollToSection('feedback', -60);
     }
   };
 
@@ -64,7 +65,7 @@ export const WhoItsFor: React.FC<WhoItsForProps> = ({ onNavigateToFeedback }) =>
     <section className={styles.section} id="who-its-for">
       <div className={`container ${styles.container}`}>
         {/* Section Header */}
-        <div className={styles.header}>
+        <div className={`${styles.header} reveal-item`}>
           <span className={styles.tag}>HONEST FIT CHECK</span>
           <h2 className={styles.title}>
             IS THIS GAME <span className={styles.titleHighlight}>FOR YOU?</span>
@@ -75,9 +76,9 @@ export const WhoItsFor: React.FC<WhoItsForProps> = ({ onNavigateToFeedback }) =>
         </div>
 
         {/* 2-Column Comparison Cards - Clean & Icon-Free */}
-        <div className={styles.comparisonGrid}>
+        <div className={`${styles.comparisonGrid} reveal-group`}>
           {/* Column 1: THIS GAME MIGHT NOT BE FOR YOU IF... */}
-          <div className={`${styles.columnCard} ${styles.notForCard}`}>
+          <div className={`${styles.columnCard} ${styles.notForCard} reveal-item`}>
             <div className={styles.cardHeader}>
               <h3 className={styles.columnTitle}>
                 THIS GAME MIGHT NOT BE FOR YOU IF...
@@ -85,8 +86,12 @@ export const WhoItsFor: React.FC<WhoItsForProps> = ({ onNavigateToFeedback }) =>
             </div>
 
             <div className={styles.itemList}>
-              {NOT_FOR_POINTS.map((item) => (
-                <div key={item.num} className={styles.itemRow}>
+              {NOT_FOR_POINTS.map((item, idx) => (
+                <div
+                  key={item.num}
+                  className={`${styles.itemRow} reveal-card card-hover-lift`}
+                  style={{ '--reveal-delay': idx } as React.CSSProperties}
+                >
                   <span className={`${styles.itemNumber} ${styles.notForNumber}`}>
                     {item.num}
                   </span>
@@ -100,7 +105,7 @@ export const WhoItsFor: React.FC<WhoItsForProps> = ({ onNavigateToFeedback }) =>
           </div>
 
           {/* Column 2: THIS GAME IS FOR YOU IF... */}
-          <div className={`${styles.columnCard} ${styles.forCard}`}>
+          <div className={`${styles.columnCard} ${styles.forCard} reveal-item`}>
             <div className={styles.cardHeader}>
               <h3 className={styles.columnTitle}>
                 THIS GAME IS FOR YOU IF...
@@ -108,8 +113,12 @@ export const WhoItsFor: React.FC<WhoItsForProps> = ({ onNavigateToFeedback }) =>
             </div>
 
             <div className={styles.itemList}>
-              {FOR_POINTS.map((item) => (
-                <div key={item.num} className={styles.itemRow}>
+              {FOR_POINTS.map((item, idx) => (
+                <div
+                  key={item.num}
+                  className={`${styles.itemRow} reveal-card card-hover-lift`}
+                  style={{ '--reveal-delay': idx } as React.CSSProperties}
+                >
                   <span className={`${styles.itemNumber} ${styles.forNumber}`}>
                     {item.num}
                   </span>
@@ -124,7 +133,7 @@ export const WhoItsFor: React.FC<WhoItsForProps> = ({ onNavigateToFeedback }) =>
         </div>
 
         {/* Bottom Callout Banner */}
-        <div className={styles.bottomCallout}>
+        <div className={`${styles.bottomCallout} reveal-item`}>
           <div className={styles.calloutTextGroup}>
             <h4 className={styles.calloutHeading}>Sounds like your kind of game?</h4>
             <p className={styles.calloutSub}>

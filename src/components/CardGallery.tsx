@@ -7,6 +7,7 @@ import {
 } from '../data/cards';
 import { CardView } from './CardView';
 import { playSound } from '../utils/audio';
+import { scrollToSection } from '../utils/smoothScroll';
 import type { CardType, GameCard } from '../types';
 import styles from './CardGallery.module.css';
 
@@ -68,7 +69,7 @@ export const CardGallery: React.FC<CardGalleryProps> = ({ soundEnabled = true })
     <section className={styles.gallerySection} id="gallery">
       <div className={`container ${styles.galleryContainer}`}>
         {/* Section Header */}
-        <div className={styles.sectionHeader}>
+        <div className={`${styles.sectionHeader} reveal-item`}>
           <div className={styles.sectionTag}>3 SAMPLE CARDS PER CARD TYPE</div>
           <h2 className={styles.sectionTitle}>
             SAMPLE <span className={styles.titleHighlight}>CARDS</span>
@@ -79,7 +80,7 @@ export const CardGallery: React.FC<CardGalleryProps> = ({ soundEnabled = true })
         </div>
 
         {/* Creator Improvement Notice Banner */}
-        <div className={styles.improvingCallout}>
+        <div className={`${styles.improvingCallout} reveal-item`}>
           <div className={styles.improvingLeft}>
             <span className={styles.improvingBadge}>HELP US IMPROVE THE CARDS</span>
             <p className={styles.improvingText}>
@@ -91,7 +92,7 @@ export const CardGallery: React.FC<CardGalleryProps> = ({ soundEnabled = true })
             className={styles.improvingBtn}
             onClick={(e) => {
               e.preventDefault();
-              document.getElementById('feedback')?.scrollIntoView({ behavior: 'smooth' });
+              scrollToSection('feedback', -60);
             }}
           >
             <span>GIVE A SUGGESTION</span>
@@ -100,7 +101,7 @@ export const CardGallery: React.FC<CardGalleryProps> = ({ soundEnabled = true })
         </div>
 
         {/* Card Type Tabs: Exactly 3 cards per card type */}
-        <div className={styles.tabNav}>
+        <div className={`${styles.tabNav} reveal-item`}>
           {(Object.keys(CARD_TYPES_INFO) as CardType[]).map((catKey) => {
             const info = CARD_TYPES_INFO[catKey];
             const isActive = activeCardType === catKey;
@@ -129,7 +130,7 @@ export const CardGallery: React.FC<CardGalleryProps> = ({ soundEnabled = true })
 
         {/* Active Card Type Banner */}
         <div
-          className={styles.manifestoBanner}
+          className={`${styles.manifestoBanner} reveal-item`}
           style={{
             borderColor: currentCardTypeInfo.color,
             background: `linear-gradient(135deg, ${currentCardTypeInfo.color}10 0%, #ffffff 100%)`,
@@ -174,11 +175,12 @@ export const CardGallery: React.FC<CardGalleryProps> = ({ soundEnabled = true })
         {/* Cards Grid: Clean Pure Card Images (Click image to flip, no badges or colored glow) */}
         {filteredCards.length > 0 ? (
           <>
-            <div className={styles.cardsGrid}>
-              {filteredCards.map((card) => (
+            <div className={`${styles.cardsGrid} reveal-group`}>
+              {filteredCards.map((card, idx) => (
                 <div
                   key={card.id}
-                  className={`${styles.cardWrapper} ${activeCard?.id === card.id ? styles.cardWrapperActive : ''}`}
+                  className={`${styles.cardWrapper} reveal-card card-hover-lift ${activeCard?.id === card.id ? styles.cardWrapperActive : ''}`}
+                  style={{ '--reveal-delay': idx } as React.CSSProperties}
                   onClick={() => {
                     setSelectedCardId(card.id);
                   }}
@@ -222,7 +224,7 @@ export const CardGallery: React.FC<CardGalleryProps> = ({ soundEnabled = true })
             </div>
           </>
         ) : (
-          <div className={styles.emptyFilterState}>
+          <div className={`${styles.emptyFilterState} reveal-item`}>
             <h4 className={styles.emptyFilterTitle}>
               NO {pointFilter === 1 ? '1 POINT' : `${pointFilter} POINTS`} CARDS IN {activeCardType}
             </h4>
@@ -239,7 +241,7 @@ export const CardGallery: React.FC<CardGalleryProps> = ({ soundEnabled = true })
         )}
 
         {/* Physical 80-Card Playtest Banner */}
-        <div className={styles.playtestBanner}>
+        <div className={`${styles.playtestBanner} reveal-item`}>
           <div className={styles.playtestText}>
             <span className={styles.playtestTag}>UNLOCK ALL {TOTAL_DECK_CARDS} CARDS & {TOTAL_DECK_POINTS} POINTS</span>
             <h4 className={styles.playtestTitle}>WANT TO PLAY THE FULL PHYSICAL GAME?</h4>
@@ -259,7 +261,7 @@ export const CardGallery: React.FC<CardGalleryProps> = ({ soundEnabled = true })
             <button
               onClick={() => {
                 if (soundEnabled) playSound('click');
-                document.getElementById('feedback')?.scrollIntoView({ behavior: 'smooth' });
+                scrollToSection('feedback', -60);
               }}
               className={styles.playtestPrimaryBtn}
             >
@@ -267,7 +269,7 @@ export const CardGallery: React.FC<CardGalleryProps> = ({ soundEnabled = true })
             </button>
             <button
               onClick={() => {
-                document.getElementById('rules')?.scrollIntoView({ behavior: 'smooth' });
+                scrollToSection('rules', -60);
               }}
               className={styles.playtestSecondaryBtn}
             >

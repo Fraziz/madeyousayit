@@ -31,7 +31,7 @@ export const Rulebook: React.FC<RulebookProps> = ({ soundEnabled = true }) => {
     <section className={styles.rulebookSection} id="rules">
       <div className={styles.rulebookContainer}>
         {/* Section Header */}
-        <div className={styles.sectionHeader}>
+        <div className={`${styles.sectionHeader} reveal-item`}>
           {/* Exact Specs Capsule */}
           <div className={styles.specsCapsule}>
             <span>RULEBOOK</span>
@@ -78,19 +78,23 @@ export const Rulebook: React.FC<RulebookProps> = ({ soundEnabled = true }) => {
         {/* Minimalist Wide Document Canvas */}
         <div className={styles.rulebookCanvas}>
           {/* Quick Note Banner */}
-          <p className={styles.quickNote}>
+          <p className={`${styles.quickNote} reveal-item`}>
             <strong>{quickNoteLabel}</strong> {quickNote}
           </p>
 
           {/* 1. SETUP — Visual Step-by-Step Illustrated Guide */}
           <div className={styles.sectionBlock}>
-            <div className={styles.sectionHeadingRow}>
+            <div className={`${styles.sectionHeadingRow} reveal-item`}>
               <h3 className={styles.sectionHeading}>{setup.title}</h3>
             </div>
 
-            <div className={styles.setupGrid}>
-              {setup.steps?.map((st) => (
-                <div key={st.number} className={styles.setupStepCard}>
+            <div className={`${styles.setupGrid} reveal-group`}>
+              {setup.steps?.map((st, idx) => (
+                <div
+                  key={st.number}
+                  className={`${styles.setupStepCard} reveal-card card-hover-lift`}
+                  style={{ '--reveal-delay': idx } as React.CSSProperties}
+                >
                   <div className={styles.setupImageWrapper}>
                     <img
                       src={st.image}
@@ -117,13 +121,17 @@ export const Rulebook: React.FC<RulebookProps> = ({ soundEnabled = true }) => {
 
           {/* 2. YOUR TURN — Visual Illustrated Turn Stepper */}
           <div className={styles.sectionBlock}>
-            <div className={styles.sectionHeadingRow}>
+            <div className={`${styles.sectionHeadingRow} reveal-item`}>
               <h3 className={styles.sectionHeading}>{yourTurn.title}</h3>
             </div>
 
-            <div className={styles.turnStepperGrid}>
+            <div className={`${styles.turnStepperGrid} reveal-group`}>
               {yourTurn.steps.map((st, idx) => (
-                <div key={st.name} className={styles.turnStepCard}>
+                <div
+                  key={st.name}
+                  className={`${styles.turnStepCard} reveal-card card-hover-lift`}
+                  style={{ '--reveal-delay': idx } as React.CSSProperties}
+                >
                   <div className={styles.turnImageWrapper}>
                     {st.image ? (
                       <img
@@ -158,7 +166,7 @@ export const Rulebook: React.FC<RulebookProps> = ({ soundEnabled = true }) => {
           <div className={styles.divider} />
 
           {/* 3. POINTS — Clean Minimalist Section */}
-          <div className={styles.sectionBlock}>
+          <div className={`${styles.sectionBlock} reveal-item`}>
             <div className={styles.sectionHeadingRow}>
               <h3 className={styles.sectionHeading}>{points.title}</h3>
             </div>
@@ -169,9 +177,9 @@ export const Rulebook: React.FC<RulebookProps> = ({ soundEnabled = true }) => {
 
           {/* 4. CARD TYPES — Formal, Compact & Clickable */}
           <div className={styles.sectionBlock}>
-            <h3 className={styles.sectionHeading}>{cardTypes.title}</h3>
+            <h3 className={`${styles.sectionHeading} reveal-item`}>{cardTypes.title}</h3>
 
-            <div className={styles.cardTypesGrid}>
+            <div className={`${styles.cardTypesGrid} reveal-group`}>
               {cardTypes.types.map((type, idx) => {
                 const isSolo = type.id === 'solo';
                 const currentCardImg = isSolo
@@ -183,7 +191,11 @@ export const Rulebook: React.FC<RulebookProps> = ({ soundEnabled = true }) => {
                   : `${type.name || 'Card'} sample card`;
 
                 return (
-                  <div key={idx} className={styles.cardTypeCard}>
+                  <div
+                    key={idx}
+                    className={`${styles.cardTypeCard} reveal-card card-hover-lift`}
+                    style={{ '--reveal-delay': idx } as React.CSSProperties}
+                  >
                     {/* Compact Formal Card Image on Top — Clickable to flip/cycle */}
                     <div className={styles.cardDisplayArea}>
                       <div
@@ -271,7 +283,7 @@ export const Rulebook: React.FC<RulebookProps> = ({ soundEnabled = true }) => {
           <div className={styles.divider} />
 
           {/* 5. PASS OR FAIL */}
-          <div className={styles.sectionBlock}>
+          <div className={`${styles.sectionBlock} reveal-item`}>
             <h3 className={styles.sectionHeading}>{passOrFail.title}</h3>
             <div className={styles.passFailList}>
               {passOrFail.items.map((it) => (
@@ -287,12 +299,12 @@ export const Rulebook: React.FC<RulebookProps> = ({ soundEnabled = true }) => {
           <div className={styles.divider} />
 
           {/* 6. THE PILES */}
-          <div className={styles.sectionBlock}>
+          <div className={`${styles.sectionBlock} reveal-item`}>
             <h3 className={styles.sectionHeading}>{thePiles.title}</h3>
 
             {/* Table layout image & piles explanation */}
             {thePiles.image && (
-              <div className={styles.pilesHeroWrapper}>
+              <div className={`${styles.pilesHeroWrapper} reveal-item`} data-parallax="true">
                 <img
                   src={thePiles.image}
                   alt={thePiles.alt}
@@ -314,7 +326,7 @@ export const Rulebook: React.FC<RulebookProps> = ({ soundEnabled = true }) => {
           <div className={styles.divider} />
 
           {/* 7. END OF GAME */}
-          <div className={styles.sectionBlock}>
+          <div className={`${styles.sectionBlock} reveal-item`}>
             <h3 className={styles.sectionHeading}>{endOfGame.title}</h3>
             <p className={styles.endGameCondition}>{endOfGame.condition}</p>
             <div className={styles.formulaBarCompact}>
@@ -329,7 +341,7 @@ export const Rulebook: React.FC<RulebookProps> = ({ soundEnabled = true }) => {
           <div className={styles.divider} />
 
           {/* 8. GOLDEN RULE — Compact Note */}
-          <div className={styles.goldenCard}>
+          <div className={`${styles.goldenCard} reveal-item`}>
             <h4 className={styles.goldenTitle}>{goldenRule.title}</h4>
             <p className={styles.goldenText}>{goldenRule.text}</p>
           </div>

@@ -54,7 +54,7 @@ const PackagingSection: React.FC = () => {
     <section id="packaging" className={styles.section}>
       <div className={`container ${styles.container}`}>
         {/* Section Header */}
-        <div className={styles.header}>
+        <div className={`${styles.header} reveal-item`}>
           <span className={styles.label}>WHAT'S IN THE BOX</span>
           <h2 className={styles.title}>
             WHAT YOU GET <span className={styles.highlight}>INSIDE</span>
@@ -68,7 +68,7 @@ const PackagingSection: React.FC = () => {
         <div className={styles.showcaseGrid}>
           {/* Left Column: 3D Tuck Box Display */}
           <div className={styles.boxColumn}>
-            <div className={styles.boxCardContainer}>
+            <div className={`${styles.boxCardContainer} reveal-item`} data-parallax="true">
               <div className={styles.boxTopBar}>
                 <div className={styles.editionPill}>
                   <span>PROTOTYPE EDITION</span>
@@ -108,7 +108,7 @@ const PackagingSection: React.FC = () => {
 
           {/* Right Column: "What's Included in the Package" - 2x2 Bento Grid */}
           <div className={styles.inventoryColumn}>
-            <div className={styles.inventoryHeader}>
+            <div className={`${styles.inventoryHeader} reveal-item`}>
               <div>
                 <span className={styles.inventorySub}>INSIDE THE BOX</span>
                 <h3 className={styles.inventoryTitle}>WHAT YOU GET IN THE BOX</h3>
@@ -117,9 +117,13 @@ const PackagingSection: React.FC = () => {
             </div>
 
             {/* 2x2 Bento Grid */}
-            <div className={styles.inventoryGrid}>
-              {PACKAGE_ITEMS.map((item) => (
-                <div key={item.index} className={styles.inventoryCard}>
+            <div className={`${styles.inventoryGrid} reveal-group`}>
+              {PACKAGE_ITEMS.map((item, idx) => (
+                <div
+                  key={item.index}
+                  className={`${styles.inventoryCard} reveal-card card-hover-lift`}
+                  style={{ '--reveal-delay': idx } as React.CSSProperties}
+                >
                   <div>
                     <div className={styles.cardHeader}>
                       <span className={styles.cardIndex}>{item.index}</span>
@@ -151,7 +155,7 @@ const PackagingSection: React.FC = () => {
         </div>
 
         {/* Prototype CTA Bar linking directly to Facebook */}
-        <div className={styles.prototypeCtaBar}>
+        <div className={`${styles.prototypeCtaBar} reveal-item`}>
           <div className={styles.prototypeCtaText}>
             <div className={styles.ctaBadge}>LIMITED FREE PROTOTYPE DECKS</div>
             <h4>Want to play the 80-card prototype with your friends?</h4>

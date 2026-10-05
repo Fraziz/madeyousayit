@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { TOTAL_DECK_POINTS, TOTAL_DECK_CARDS } from '../data/cards';
 import { sound } from '../utils/audio';
+import { scrollToSection } from '../utils/smoothScroll';
 import styles from './Hero.module.css';
 
 interface HeroProps {
@@ -68,7 +69,7 @@ export const Hero: React.FC<HeroProps> = () => {
   };
 
   const handleScrollToFeedback = () => {
-    document.getElementById('feedback')?.scrollIntoView({ behavior: 'smooth' });
+    scrollToSection('feedback', -60);
   };
 
   return (
@@ -155,7 +156,7 @@ export const Hero: React.FC<HeroProps> = () => {
         </div>
 
         {/* Right Column: 3D Interactive Card Fan (Starts all at card back, click to flip) */}
-        <div className={styles.heroVisualArea}>
+        <div className={styles.heroVisualArea} data-parallax="true">
           <div
             className={styles.cardStageWrapper}
             onMouseMove={handleMouseMove}
