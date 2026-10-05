@@ -593,7 +593,7 @@ async function generate() {
           color: COLORS.textDark,
         }),
         new TextRun({
-          text: 'When the Draw Pile is empty, keep playing without drawing. On your turn, play or pass 1 card from your hand. When everyone has no cards left, the game ends.\n',
+          text: 'When the Draw Pile is empty, play or pass 1 card each turn until everyone has no cards left.\n',
           size: 13,
           font: FONT_FAMILY,
           color: COLORS.textMuted,
@@ -612,11 +612,24 @@ async function generate() {
           color: COLORS.textMuted,
         }),
         new TextRun({
-          text: 'The player with the most points wins!',
+          text: 'The player with the most points wins!\n',
           bold: true,
           size: 13,
           font: FONT_FAMILY,
           color: COLORS.primaryDark,
+        }),
+        new TextRun({
+          text: '• Lowest Score: ',
+          bold: true,
+          size: 13,
+          font: FONT_FAMILY,
+          color: COLORS.textDark,
+        }),
+        new TextRun({
+          text: 'The player with the lowest score gets 1 question from each other player. They can answer or pass. Follow the Golden Rule!',
+          size: 13,
+          font: FONT_FAMILY,
+          color: COLORS.textMuted,
         }),
       ],
     })

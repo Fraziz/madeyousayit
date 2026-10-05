@@ -137,14 +137,29 @@ export const CardGallery: React.FC<CardGalleryProps> = ({ soundEnabled = true })
           }}
         >
           <div className={styles.bannerLeft}>
-            <span
-              className={styles.bannerCardTypeTag}
-              style={{
-                backgroundColor: currentCardTypeInfo.color,
-              }}
-            >
-              {activeCardType} · 3 SAMPLES ({currentCardTypeInfo.count} IN FULL DECK)
-            </span>
+            <div className={styles.bannerTagRow}>
+              <span
+                className={styles.bannerCardTypeTag}
+                style={{
+                  backgroundColor: currentCardTypeInfo.color,
+                }}
+              >
+                {activeCardType}
+              </span>
+              <span
+                className={styles.bannerSampleTag}
+                style={{
+                  color: currentCardTypeInfo.color,
+                  backgroundColor: `${currentCardTypeInfo.color}15`,
+                  borderColor: `${currentCardTypeInfo.color}35`,
+                }}
+              >
+                3 SAMPLES
+              </span>
+              <span className={styles.bannerDeckTag}>
+                {currentCardTypeInfo.count} IN FULL DECK
+              </span>
+            </div>
             <h3 className={styles.bannerTagline}>
               {currentCardTypeInfo.tagline}
             </h3>

@@ -19,11 +19,6 @@ const NOT_FOR_POINTS = [
   },
   {
     num: '03',
-    title: 'You Want a Deep Strategy Game',
-    desc: "There are no complicated rules or long setup steps. Learn it in one minute and start playing. If you want a heavy 3-hour strategy game, this isn't it.",
-  },
-  {
-    num: '04',
     title: "You Don't Want Deep Connection or Questions About You",
     desc: "Many cards ask about your thoughts, feelings, and real stories. If you don't want deep connection or you don't like answering questions about yourself, this game isn't for you.",
   },
@@ -42,11 +37,6 @@ const FOR_POINTS = [
   },
   {
     num: '03',
-    title: 'You Want Zero Pressure & Easy Fun',
-    desc: 'Anyone can jump in immediately. Pass anytime with no penalties, no forced answers, and no awkward stress. Play at your own comfort level.',
-  },
-  {
-    num: '04',
     title: 'You Want to Make Great Memories',
     desc: 'Put the phones down, laugh until your stomach hurts, and create funny inside jokes and memories you will still talk about later.',
   },

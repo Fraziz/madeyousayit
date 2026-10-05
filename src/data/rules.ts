@@ -340,10 +340,10 @@ export const RULEBOOK_TRANSLATIONS: Record<RuleLanguage, RulebookContent> = {
     endOfGame: {
       number: '7',
       title: '7. END OF GAME',
-      condition: 'When the Draw Pile is empty, keep playing without drawing. On your turn, play or pass 1 card from your hand. When everyone has no cards left, the game ends. Count the points in your Score Pile.',
+      condition: 'When the Draw Pile is empty, play or pass 1 card each turn until everyone has no cards left.',
       formula: 'Score Pile = Final Score',
-      winner: 'The player with the most points wins.',
-      dare: 'The player with the lowest score goes on the Hot Seat. Each player gets to ask them one question, and they have to answer it. Keep it fun and follow the Golden Rule!',
+      winner: 'Count the points in your Score Pile. The player with the most points wins.',
+      dare: 'The player with the lowest score gets 1 question from each other player. They can answer or pass. Follow the Golden Rule!',
     },
     goldenRule: {
       number: '8',
@@ -553,10 +553,10 @@ export const RULEBOOK_TRANSLATIONS: Record<RuleLanguage, RulebookContent> = {
     endOfGame: {
       number: '7',
       title: '7. END OF GAME (PAGTATAPOS NG LARO)',
-      condition: 'Kapag naubos na ang Draw Pile, magpatuloy sa paglalaro nang hindi na bumubunot. Sa iyong turn, maglaro o mag-pass ng 1 card mula sa iyong hawak. Kapag wala nang card ang lahat, magtatapos ang laro. Bilangin ang points sa iyong Score Pile.',
+      condition: 'Kapag naubos na ang Draw Pile, maglaro o mag-pass ng 1 card bawat turn hanggang maubusan ng baraha ang lahat.',
       formula: 'Score Pile = Final Score',
-      winner: 'Ang player na may pinakamaraming points ang panalo.',
-      dare: 'Ang player na may pinakamababang score ay mapupunta sa Hot Seat. Bawat player ay may isang tanong para sa kanya, at kailangan niyang sagutin ito. Panatilihing masaya at sundin ang Golden Rule!',
+      winner: 'Bilangin ang points sa iyong Score Pile. Ang player na may pinakamaraming points ang panalo.',
+      dare: 'Ang player na may pinakamababang score ay makakakuha ng 1 tanong mula sa bawat ibang player. Pwede nilang sagutin o mag-pass. Sundin ang Golden Rule!',
     },
     goldenRule: {
       number: '8',
@@ -766,10 +766,10 @@ export const RULEBOOK_TRANSLATIONS: Record<RuleLanguage, RulebookContent> = {
     endOfGame: {
       number: '7',
       title: '7. END OF GAME (PAGTATAPOS HAN UYAG)',
-      condition: 'Kun waray na sulod an Draw Pile, padayon la an uyag bisan diri na nagbubutong. Ha imo turn, pag-uyag o pag-pass hin 1 ka card tikang ha imo kapot. Kun waray na cards an ngatanan, matatapos an uyag. Ihapa an points ha imo Score Pile.',
+      condition: 'Kun waray na sulod an Draw Pile, pag-uyag o pag-pass hin 1 ka card kada turn tubtob waray na kapot nga baraha an ngatanan.',
       formula: 'Score Pile = Final Score',
-      winner: 'An player nga may gidadamoi nga points an daug.',
-      dare: 'An player nga may pinakagamay nga score mapakadto ha Hot Seat. Kada player may usa nga pakiana para ha iya, ngan kinahanglan niya sabton ini. Palingawa la ngan sunda an Golden Rule!',
+      winner: 'Ihapa an points ha imo Score Pile. An player nga may gidadamoi nga points an daug.',
+      dare: 'An player nga may pinakagamay nga score makakakarawat hin 1 nga pakiana tikang ha kada usa nga player. Puyde nira sabton o mag-pass. Sunda an Golden Rule!',
     },
     goldenRule: {
       number: '8',
