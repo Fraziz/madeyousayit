@@ -339,14 +339,14 @@ export const RULEBOOK_TRANSLATIONS: Record<RuleLanguage, RulebookContent> = {
     endOfGame: {
       number: '7',
       title: '7. END OF GAME',
-      condition: 'When the last card is drawn, finish the current round. Players who cannot draw simply play 1 card from their hand. Count the points in your Score Pile.',
+      condition: 'When the Draw Pile is empty, keep playing without drawing. On your turn, play or pass 1 card from your hand. When everyone has no cards left, the game ends. Count the points in your Score Pile.',
       formula: 'Score Pile = Final Score',
       winner: 'The player with the most points wins.',
     },
     goldenRule: {
       number: '8',
       title: '8. GOLDEN RULE',
-      text: 'Everyone should have fun. You can always pass. Never pressure anyone to reveal a real crush, private information, touch another person, or do anything dangerous, sexual, humiliating, or genuinely uncomfortable.',
+      text: 'The goal is not to win, it’s to have fun and make good memories. You can always pass. Never pressure anyone to reveal a real crush, private information, touch another person, or do anything dangerous, sexual, humiliating, or genuinely uncomfortable.',
     },
     footer: {
       brand: 'MADE YOU SAY IT',
@@ -551,14 +551,14 @@ export const RULEBOOK_TRANSLATIONS: Record<RuleLanguage, RulebookContent> = {
     endOfGame: {
       number: '7',
       title: '7. END OF GAME (PAGTATAPOS NG LARO)',
-      condition: 'Kapag nabunot na ang huling card, tapusin ang kasalukuyang round. Ang mga player na hindi na makakabunot ay maglalaro na lang ng 1 card mula sa kanilang hawak. Bilangin ang points sa iyong Score Pile.',
+      condition: 'Kapag naubos na ang Draw Pile, magpatuloy sa paglalaro nang hindi na bumubunot. Sa iyong turn, maglaro o mag-pass ng 1 card mula sa iyong hawak. Kapag wala nang card ang lahat, magtatapos ang laro. Bilangin ang points sa iyong Score Pile.',
       formula: 'Score Pile = Final Score',
       winner: 'Ang player na may pinakamaraming points ang panalo.',
     },
     goldenRule: {
       number: '8',
       title: '8. GOLDEN RULE (GINTONG PATAKARAN)',
-      text: 'Ang pinakamahalaga ay mag-enjoy ang lahat. Pwede kang mag-pass kahit kailan. Huwag kailanman pilitin ang sinuman na umamin ng totoong crush, magbunyag ng pribadong impormasyon, humawak sa ibang tao, o gumawa ng anumang mapanganib, sexual, nakakahiya, o labag sa kanilang kalooban.',
+      text: 'Ang layunin ay hindi ang manalo, kundi ang mag-enjoy at gumawa ng magagandang alaala. Pwede kang mag-pass kahit kailan. Huwag kailanman pilitin ang sinuman na umamin ng totoong crush, magbunyag ng pribadong impormasyon, humawak sa ibang tao, o gumawa ng anumang mapanganib, sexual, nakakahiya, o labag sa kanilang kalooban.',
     },
     footer: {
       brand: 'MADE YOU SAY IT',
@@ -763,14 +763,14 @@ export const RULEBOOK_TRANSLATIONS: Record<RuleLanguage, RulebookContent> = {
     endOfGame: {
       number: '7',
       title: '7. END OF GAME (PAGTATAPOS HAN UYAG)',
-      condition: 'Kon mabuot na an katapusan nga card, tapusa an round. An mga player nga diri na makakaburot matira nala hin 1 nga card tikang ha ira kapot. Ihapa an points ha imo Score Pile.',
+      condition: 'Kun waray na sulod an Draw Pile, padayon la an uyag bisan diri na nagbubutong. Ha imo turn, pag-uyag o pag-pass hin 1 ka card tikang ha imo kapot. Kun waray na cards an ngatanan, matatapos an uyag. Ihapa an points ha imo Score Pile.',
       formula: 'Score Pile = Final Score',
       winner: 'An player nga may gidadamoi nga points an daug.',
     },
     goldenRule: {
       number: '8',
       title: '8. GOLDEN RULE (BULAWANON NGA SURUNDON)',
-      text: 'An pinaka-importante maglipay an ngatanan. Puyde ka gud pirme mag-pass. Ayaw piriton an bisan hin-o nga magsumat han tinuod nga crush, magpagawas hin pribado nga impormasyon, kumapot ha iba, o maghimo hin peligroso, sexual, nakakaarawod, o diri gud komportable ha iya.',
+      text: 'An tumong diri an pagdaog, kundi an maglipay ngan maghimo hin mag-opay nga handumanan. Puyde ka gud pirme mag-pass. Ayaw piriton an bisan hin-o nga magsumat han tinuod nga crush, magpagawas hin pribado nga impormasyon, kumapot ha iba, o maghimo hin peligroso, sexual, nakakaarawod, o diri gud komportable ha iya.',
     },
     footer: {
       brand: 'MADE YOU SAY IT',

@@ -18,13 +18,13 @@ const App: React.FC = () => {
 
       {/* Main Visual Showcase Flow */}
       <main>
-        {/* Visual Hero with 7-Card Fan Showcase & Floating Specs Capsule */}
+        {/* Visual Hero with 6-Card Fan Showcase & Floating Specs Capsule */}
         <Hero />
 
         {/* How to Play Rulebook & Golden Rule Notice */}
         <Rulebook />
 
-        {/* Visual Card Gallery by 7 Card Types & Flip Cards */}
+        {/* Visual Card Gallery by 6 Card Types & Flip Cards */}
         <CardGallery />
 
         {/* Complete Package & Unboxing Showcase: What's In The Box */}

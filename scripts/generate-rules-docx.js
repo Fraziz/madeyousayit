@@ -593,7 +593,7 @@ async function generate() {
           color: COLORS.textDark,
         }),
         new TextRun({
-          text: 'When the last card is drawn, complete the current round. Players who cannot draw play 1 card from hand.\n',
+          text: 'When the Draw Pile is empty, keep playing without drawing. On your turn, play or pass 1 card from your hand. When everyone has no cards left, the game ends.\n',
           size: 13,
           font: FONT_FAMILY,
           color: COLORS.textMuted,
@@ -606,13 +606,13 @@ async function generate() {
           color: COLORS.textDark,
         }),
         new TextRun({
-          text: 'Sum all printed points on cards in your Score Pile. ',
+          text: 'Count the points in your Score Pile. ',
           size: 13,
           font: FONT_FAMILY,
           color: COLORS.textMuted,
         }),
         new TextRun({
-          text: 'Highest score wins!',
+          text: 'The player with the most points wins!',
           bold: true,
           size: 13,
           font: FONT_FAMILY,
@@ -654,7 +654,7 @@ async function generate() {
                 spacing: { before: 0, after: 0, line: 175 },
                 children: [
                   new TextRun({
-                    text: 'Everyone should have fun! You can always pass without penalty. Never pressure anyone to reveal a real crush, private secrets, touch another player, or do anything dangerous, sexual, humiliating, or uncomfortable.',
+                    text: 'The goal is not to win, it’s to have fun and make good memories. You can always pass. Never pressure anyone to reveal a real crush, private information, touch another person, or do anything dangerous, sexual, humiliating, or genuinely uncomfortable.',
                     size: 12,
                     font: FONT_FAMILY,
                     color: COLORS.textDark,

@@ -255,14 +255,17 @@
   border-color: var(--brand-blue);
 }
 
-/* Cards Grid */
+/* Cards Grid — ALWAYS 3 cards in a row across all devices (Desktop, Tablet, Mobile) */
 .cardsGrid {
-  display: flex;
-  gap: clamp(16px, 2.5vw, 32px);
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: clamp(32px, 5vh, 56px);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(12px, 2.5vw, 32px);
+  justify-items: center;
+  align-items: start;
   width: 100%;
+  max-width: 1080px;
+  margin: 0 auto clamp(28px, 4.5vh, 56px);
+  box-sizing: border-box;
 }
 
 .cardWrapper {
@@ -271,13 +274,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: clamp(230px, 22vw, 280px);
-  max-width: 100%;
-  flex: 0 0 clamp(230px, 22vw, 280px);
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
   outline: none;
   -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
 }
 
 .cardWrapper:focus,
@@ -290,17 +294,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  margin-top: 10px;
+  gap: clamp(4px, 1vw, 6px);
+  margin-top: clamp(6px, 1.2vw, 10px);
   width: 100%;
 }
 
 .cardQuickBtn {
   font-family: var(--font-prompt);
-  font-size: 0.76rem;
+  font-size: clamp(0.64rem, 1.8vw, 0.76rem);
   font-weight: 800;
   letter-spacing: 0.04em;
-  padding: 5px 12px;
+  padding: 4px clamp(6px, 1.5vw, 12px);
   border-radius: 9999px;
   background: #ffffff;
   border: 1px solid var(--border-medium);
@@ -309,6 +313,7 @@
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: 0 1px 4px rgba(15, 23, 42, 0.04);
   touch-action: manipulation;
+  white-space: nowrap;
 }
 
 .cardQuickBtn:hover {
@@ -712,12 +717,14 @@
   }
 
   .cardsGrid {
-    gap: 20px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(10px, 1.8vw, 20px);
   }
 
   .cardWrapper {
-    width: clamp(210px, 27vw, 250px);
-    flex: 0 0 clamp(210px, 27vw, 250px);
+    width: 100%;
+    max-width: 280px;
+    flex: none;
   }
 }
 
@@ -734,12 +741,14 @@
   }
 
   .cardsGrid {
-    gap: 14px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(8px, 1.6vw, 16px);
   }
 
   .cardWrapper {
-    width: clamp(180px, 29vw, 225px);
-    flex: 0 0 clamp(180px, 29vw, 225px);
+    width: 100%;
+    max-width: 240px;
+    flex: none;
   }
 }
 

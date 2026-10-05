@@ -134,7 +134,7 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
         <div className={`${styles.mobileDrawer} ${mobileMenuOpen ? styles.mobileDrawerOpen : ''}`}>
           <div className={styles.mobileDrawerInner}>
             <button onClick={() => handleLinkClick('gallery')} className={styles.mobileNavLink}>
-              SAMPLE CARDS (7 CARD TYPES)
+              SAMPLE CARDS (6 CARD TYPES)
             </button>
             <button onClick={() => handleLinkClick('packaging')} className={styles.mobileNavLink}>
               WHAT'S IN THE BOX

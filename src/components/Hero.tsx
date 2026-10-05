@@ -161,7 +161,7 @@ export const Hero: React.FC<HeroProps> = () => {
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
-            {/* Dynamic Card Fan - 7 Cards */}
+            {/* Dynamic Card Fan - 6 Cards */}
             <div className={styles.cardFanContainer}>
               {SHOWCASE_CARDS.map((card, idx) => {
                 const isSelected = activeCardIndex === idx;
@@ -217,7 +217,7 @@ export const Hero: React.FC<HeroProps> = () => {
                 <span>CLICK A CARD TO FLIP</span>
               </button>
 
-              {/* 7 Card Type Indicator Pills */}
+              {/* 6 Card Type Indicator Pills */}
               <div className={styles.cardTypeIndicators}>
                 {SHOWCASE_CARDS.map((c, i) => {
                   const isActive = activeCardIndex === i;

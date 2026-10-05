@@ -14,7 +14,7 @@ const AVAILABLE_PRODUCTS: CartItem[] = [
   {
     id: 'standard-deck',
     name: 'MADE YOU SAY IT — Standard Edition',
-    edition: '1st Edition · 75 Cards · Rigid Tuck Box',
+    edition: '1st Edition · 80 Cards · Rigid Tuck Box',
     price: 350,
     quantity: 1,
     badge: 'LAUNCH PRICE',
@@ -23,7 +23,7 @@ const AVAILABLE_PRODUCTS: CartItem[] = [
   {
     id: 'duo-pack',
     name: 'The Dual Host Bundle (2x Decks)',
-    edition: '2x 75 Cards (150 Total) · Save ₱50',
+    edition: '2x 80 Cards (160 Total) · Save ₱50',
     price: 650,
     quantity: 0,
     badge: 'SAVE ₱50',
@@ -32,7 +32,7 @@ const AVAILABLE_PRODUCTS: CartItem[] = [
   {
     id: 'digital-pnp',
     name: 'Print & Play Sampler PDF',
-    edition: '7 Flagship Cards · Immediate Print Ready',
+    edition: '6 Flagship Cards · Immediate Print Ready',
     price: 0,
     quantity: 0,
     badge: 'FREE SAMPLE',
