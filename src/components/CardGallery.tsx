@@ -16,7 +16,7 @@ interface CardGalleryProps {
 }
 
 export const CardGallery: React.FC<CardGalleryProps> = ({ soundEnabled = true }) => {
-  const [activeCardType, setActiveCardType] = useState<CardType>('GUESS');
+  const [activeCardType, setActiveCardType] = useState<CardType>('EXPOSE');
   const [pointFilter, setPointFilter] = useState<'ALL' | 1 | 2 | 3>('ALL');
   const [flippedCards, setFlippedCards] = useState<Record<string, boolean>>({});
   const [selectedCardId, setSelectedCardId] = useState<string | null>(null);

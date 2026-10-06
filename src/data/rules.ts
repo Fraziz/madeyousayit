@@ -264,7 +264,7 @@ export const RULEBOOK_TRANSLATIONS: Record<RuleLanguage, RulebookContent> = {
       types: [
         {
           id: 'solo',
-          title: 'CHAOS, CREATE, LOVE, CONNECT',
+          title: 'CHAOS, CREATE, LOVE, CONNECT, EXPOSE',
           rule: "Follow the card's instructions. Complete it → earn the printed points → place it in your Score Pile.",
           tag: 'ACTION',
           subTypes: [
@@ -272,17 +272,8 @@ export const RULEBOOK_TRANSLATIONS: Record<RuleLanguage, RulebookContent> = {
             { name: 'CREATE', image: '/cards/create 1 point hero.png', color: '#5170FF', textColor: '#ffffff' },
             { name: 'LOVE', image: '/cards/love 2  point hero.png', color: '#5170FF', textColor: '#ffffff' },
             { name: 'CONNECT', image: '/cards/connect 3 point hero.png', color: '#5170FF', textColor: '#ffffff' },
+            { name: 'EXPOSE', image: '/cards/EXPOSE 1point.png', color: '#5170FF', textColor: '#ffffff' },
           ],
-        },
-        {
-          id: 'guess',
-          title: 'GUESS',
-          name: 'GUESS',
-          rule: "Everyone guesses. The player who played the card scores the printed points. The fun comes from hearing everyone's guesses.",
-          tag: 'GROUP',
-          color: '#5170FF',
-          textColor: '#ffffff',
-          samples: ['/cards/guess  1point hero.png', '/cards/guess  1point.png', '/cards/guess  1point (2).png'],
         },
         {
           id: 'battle',
@@ -477,7 +468,7 @@ export const RULEBOOK_TRANSLATIONS: Record<RuleLanguage, RulebookContent> = {
       types: [
         {
           id: 'solo',
-          title: 'CHAOS, CREATE, LOVE, CONNECT',
+          title: 'CHAOS, CREATE, LOVE, CONNECT, EXPOSE',
           rule: 'Sundin ang utos ng card. Magawa ito → makuha ang nakasulat na points → ilagay sa iyong Score Pile.',
           tag: 'ACTION',
           subTypes: [
@@ -485,17 +476,8 @@ export const RULEBOOK_TRANSLATIONS: Record<RuleLanguage, RulebookContent> = {
             { name: 'CREATE', image: '/cards/create 1 point hero.png', color: '#5170FF', textColor: '#ffffff' },
             { name: 'LOVE', image: '/cards/love 2  point hero.png', color: '#5170FF', textColor: '#ffffff' },
             { name: 'CONNECT', image: '/cards/connect 3 point hero.png', color: '#5170FF', textColor: '#ffffff' },
+            { name: 'EXPOSE', image: '/cards/EXPOSE 1point.png', color: '#5170FF', textColor: '#ffffff' },
           ],
-        },
-        {
-          id: 'guess',
-          title: 'GUESS',
-          name: 'GUESS',
-          rule: "Lahat ay huhula. Ang naglaro ng card ang makakakuha ng nakasulat na points. Ang saya ay nanggagaling sa mga hula ng bawat isa.",
-          tag: 'GROUP',
-          color: '#5170FF',
-          textColor: '#ffffff',
-          samples: ['/cards/guess  1point hero.png', '/cards/guess  1point.png', '/cards/guess  1point (2).png'],
         },
         {
           id: 'battle',
@@ -690,7 +672,7 @@ export const RULEBOOK_TRANSLATIONS: Record<RuleLanguage, RulebookContent> = {
       types: [
         {
           id: 'solo',
-          title: 'CHAOS, CREATE, LOVE, CONNECT',
+          title: 'CHAOS, CREATE, LOVE, CONNECT, EXPOSE',
           rule: 'Sunda an tugon han card. Matuman ini → kuhaa an nakasurat nga points → ibutang ha imo Score Pile.',
           tag: 'ACTION',
           subTypes: [
@@ -698,17 +680,8 @@ export const RULEBOOK_TRANSLATIONS: Record<RuleLanguage, RulebookContent> = {
             { name: 'CREATE', image: '/cards/create 1 point hero.png', color: '#5170FF', textColor: '#ffffff' },
             { name: 'LOVE', image: '/cards/love 2  point hero.png', color: '#5170FF', textColor: '#ffffff' },
             { name: 'CONNECT', image: '/cards/connect 3 point hero.png', color: '#5170FF', textColor: '#ffffff' },
+            { name: 'EXPOSE', image: '/cards/EXPOSE 1point.png', color: '#5170FF', textColor: '#ffffff' },
           ],
-        },
-        {
-          id: 'guess',
-          title: 'GUESS',
-          name: 'GUESS',
-          rule: "Matag-an an ngatanan. An player nga nagtira han card an makakakuha han points. An kalipay aadi ha mga tirag-an han kada tagsa.",
-          tag: 'GROUP',
-          color: '#5170FF',
-          textColor: '#ffffff',
-          samples: ['/cards/guess  1point hero.png', '/cards/guess  1point.png', '/cards/guess  1point (2).png'],
         },
         {
           id: 'battle',

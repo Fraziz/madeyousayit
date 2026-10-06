@@ -18,7 +18,7 @@ export const CardView: React.FC<CardViewProps> = ({
   scale = 1,
   interactive = true,
 }) => {
-  const cardTypeFallback = CARD_TYPES_INFO[card.cardType]?.officialCardImage || '/cards/guess  1point hero.png';
+  const cardTypeFallback = CARD_TYPES_INFO[card.cardType]?.officialCardImage || '/cards/EXPOSE 1point.png';
   const initialImage = card.imageUrl || cardTypeFallback;
   const [currentImg, setCurrentImg] = useState<string>(initialImage);
 

@@ -25,16 +25,16 @@ export const SAMPLE_CARDS_PER_TYPE = 3;
 export const TOTAL_SAMPLE_CARDS = 18; // 6 card types * 3 sample cards
 
 export const CARD_TYPES_INFO: Record<CardType, CardTypeInfo> = {
-  GUESS: {
-    name: 'GUESS',
+  EXPOSE: {
+    name: 'EXPOSE',
     count: 10,
     sampleCount: 3,
     totalPoints: 10,
     color: '#5170FF',
     accent: '#5170FF',
-    tagline: 'READ THE ROOM AND GUESS OUT LOUD.',
-    rule: "Everyone guesses. The player who played the card scores the printed points. The fun comes from hearing everyone's guesses.",
-    officialCardImage: '/cards/guess  1point hero.png',
+    tagline: 'REVEAL SOMETHING ABOUT YOURSELF.',
+    rule: "Follow the card's instructions. Complete it → earn the printed points → place it in your Score Pile.",
+    officialCardImage: '/cards/EXPOSE 1point.png',
   },
   CREATE: {
     name: 'CREATE',
@@ -100,114 +100,114 @@ export const CARD_TYPES_INFO: Record<CardType, CardTypeInfo> = {
  */
 export const OFFICIAL_DECK: GameCard[] = [
   {
-    "id": "guess-1",
-    "cardType": "GUESS",
-    "challenge": "WHO IS MOST LIKELY TO LAUGH BEFORE THEY UNDERSTAND THE JOKE?",
+    "id": "expose-1",
+    "cardType": "EXPOSE",
+    "challenge": "WHAT IS ONE THING YOU DO WHEN NO ONE IS WATCHING?",
     "difficulty": "EASY",
     "stars": 1,
     "points": 1,
     "themeColor": "#5170FF",
     "accentColor": "#5170FF",
-    "imageUrl": "/cards/guess  1point (2).png"
+    "imageUrl": "/cards/EXPOSE 1point (2).png"
   },
   {
-    "id": "guess-2",
-    "cardType": "GUESS",
-    "challenge": "WHO DO YOU THINK HAS FALLEN ASLEEP IN CLASS AND PRETENDED TO BE LISTENING?",
+    "id": "expose-2",
+    "cardType": "EXPOSE",
+    "challenge": "WHAT IS THE MOST EMBARRASSING THING SAVED ON YOUR PHONE?",
     "difficulty": "EASY",
     "stars": 1,
     "points": 1,
     "themeColor": "#5170FF",
     "accentColor": "#5170FF",
-    "imageUrl": "/cards/guess  1point (3).png"
+    "imageUrl": "/cards/EXPOSE 1point (3).png"
   },
   {
-    "id": "guess-3",
-    "cardType": "GUESS",
-    "challenge": "WHO IS MOST LIKELY TO BUY SOMETHING SILLY AND SAY, \"I NEEDED THIS\"?",
+    "id": "expose-3",
+    "cardType": "EXPOSE",
+    "challenge": "WHAT IS A HABIT YOU HAVE THAT YOU WOULD NEVER ADMIT TO YOUR CRUSH?",
     "difficulty": "EASY",
     "stars": 1,
     "points": 1,
     "themeColor": "#5170FF",
     "accentColor": "#5170FF",
-    "imageUrl": "/cards/guess  1point (4).png"
+    "imageUrl": "/cards/EXPOSE 1point (4).png"
   },
   {
-    "id": "guess-4",
-    "cardType": "GUESS",
-    "challenge": "WHO IS MOST LIKELY TO WALK INTO THE WRONG ROOM AND ACT LIKE THEY BELONG THERE?",
+    "id": "expose-4",
+    "cardType": "EXPOSE",
+    "challenge": "WHAT IS THE WEIRDEST THING YOU HAVE EVER GOOGLED?",
     "difficulty": "EASY",
     "stars": 1,
     "points": 1,
     "themeColor": "#5170FF",
     "accentColor": "#5170FF",
-    "imageUrl": "/cards/guess  1point (5).png"
+    "imageUrl": "/cards/EXPOSE 1point (5).png"
   },
   {
-    "id": "guess-5",
-    "cardType": "GUESS",
-    "challenge": "WHO HERE WOULD WAVE BACK AT SOMEONE WHO WAS WAVING AT THE PERSON BEHIND THEM?",
+    "id": "expose-5",
+    "cardType": "EXPOSE",
+    "challenge": "WHAT IS SOMETHING YOU PRETEND TO BE GOOD AT BUT ARE ACTUALLY TERRIBLE?",
     "difficulty": "EASY",
     "stars": 1,
     "points": 1,
     "themeColor": "#5170FF",
     "accentColor": "#5170FF",
-    "imageUrl": "/cards/guess  1point (6).png"
+    "imageUrl": "/cards/EXPOSE 1point (6).png"
   },
   {
-    "id": "guess-6",
-    "cardType": "GUESS",
-    "challenge": "WHO HERE WOULD TURN A SIMPLE GAME INTO A SERIOUS COMPETITION?",
+    "id": "expose-6",
+    "cardType": "EXPOSE",
+    "challenge": "WHAT IS THE LAST LIE YOU TOLD AND WHO DID YOU TELL IT TO?",
     "difficulty": "EASY",
     "stars": 1,
     "points": 1,
     "themeColor": "#5170FF",
     "accentColor": "#5170FF",
-    "imageUrl": "/cards/guess  1point (7).png"
+    "imageUrl": "/cards/EXPOSE 1point (7).png"
   },
   {
-    "id": "guess-7",
-    "cardType": "GUESS",
-    "challenge": "WHO HERE WOULD SING THE WRONG LYRICS WITH COMPLETE CONFIDENCE?",
+    "id": "expose-7",
+    "cardType": "EXPOSE",
+    "challenge": "WHAT IS THE MOST CHILDISH THING YOU STILL DO?",
     "difficulty": "EASY",
     "stars": 1,
     "points": 1,
     "themeColor": "#5170FF",
     "accentColor": "#5170FF",
-    "imageUrl": "/cards/guess  1point (8).png"
+    "imageUrl": "/cards/EXPOSE 1point (8).png"
   },
   {
-    "id": "guess-8",
-    "cardType": "GUESS",
-    "challenge": "WHO IS MOST LIKELY TO BECOME FAMOUS ON REALITY TV FOR STARTING UNNECESSARY DRAMA?",
+    "id": "expose-8",
+    "cardType": "EXPOSE",
+    "challenge": "WHAT IS SOMETHING YOU HAVE DONE THAT WOULD SURPRISE EVERYONE HERE?",
     "difficulty": "EASY",
     "stars": 1,
     "points": 1,
     "themeColor": "#5170FF",
     "accentColor": "#5170FF",
-    "imageUrl": "/cards/guess  1point (9).png"
+    "imageUrl": "/cards/EXPOSE 1point (9).png"
   },
   {
-    "id": "guess-hero",
-    "cardType": "GUESS",
-    "challenge": "WHO DO YOU THINK HAS POOPED IN HIGH SCHOOL AND PRAYED NOBODY NOTICED?",
+    "id": "expose-hero",
+    "cardType": "EXPOSE",
+    "challenge": "WHAT IS YOUR GUILTY PLEASURE THAT YOU HAVE NEVER TOLD ANYONE?",
     "difficulty": "EASY",
     "stars": 1,
     "points": 1,
     "themeColor": "#5170FF",
     "accentColor": "#5170FF",
-    "imageUrl": "/cards/guess  1point hero.png"
+    "imageUrl": "/cards/EXPOSE 1point (10).png"
   },
   {
-    "id": "guess-9",
-    "cardType": "GUESS",
-    "challenge": "WHO IS MOST LIKELY TO LOOK FOR THEIR PHONE WHILE HOLDING IT?",
+    "id": "expose-9",
+    "cardType": "EXPOSE",
+    "challenge": "WHAT IS ONE THING ABOUT YOU THAT PEOPLE ALWAYS GET WRONG?",
     "difficulty": "EASY",
     "stars": 1,
     "points": 1,
     "themeColor": "#5170FF",
     "accentColor": "#5170FF",
-    "imageUrl": "/cards/guess  1point.png"
+    "imageUrl": "/cards/EXPOSE 1point.png"
   },
   {
     "id": "create-1",
@@ -986,8 +986,8 @@ export const OFFICIAL_DECK: GameCard[] = [
  * Hand-picked flagship cards showcasing Easy, Fun, and Wild difficulties.
  */
 export const SAMPLE_CARD_IDS = new Set([
-  // GUESS (10 cards: all 1pt EASY)
-  'guess-hero', 'guess-1', 'guess-2',
+  // EXPOSE (10 cards: all 1pt EASY)
+  'expose-hero', 'expose-1', 'expose-2',
   // CREATE (1pt, 2pt, 3pt)
   'create-hero', 'create-4', 'create-10',
   // BATTLE (1pt, 2pt, 3pt)

@@ -10,7 +10,7 @@ interface CardTypeBadge {
 }
 
 const CARD_TYPES: CardTypeBadge[] = [
-  { name: 'Guess', count: 10, color: 'var(--card-guess)' },
+  { name: 'Expose', count: 10, color: 'var(--card-expose)' },
   { name: 'Create', count: 15, color: 'var(--card-create)' },
   { name: 'Battle', count: 15, color: 'var(--card-battle)' },
   { name: 'Chaos', count: 15, color: 'var(--card-chaos)' },

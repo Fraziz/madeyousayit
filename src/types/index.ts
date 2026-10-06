@@ -1,6 +1,6 @@
 export type CardType =
   | 'CONNECT'
-  | 'GUESS'
+  | 'EXPOSE'
   | 'BATTLE'
   | 'CHAOS'
   | 'CREATE'

@@ -22,7 +22,7 @@ const FAQ_ITEMS = [
   },
   {
     q: 'WHAT ARE THE 6 TYPES OF CARDS IN THE GAME?',
-    a: '80 cards across 6 fun card types: GUESS (read the room), CREATE (be silly and creative), BATTLE (1-on-1 challenges), CHAOS (wild surprise twists), CONNECT (real honest stories), and LOVE (kind words and warm moments).'
+    a: '80 cards across 6 fun card types: EXPOSE (reveal something about yourself), CREATE (be silly and creative), BATTLE (1-on-1 challenges), CHAOS (wild surprise twists), CONNECT (real honest stories), and LOVE (kind words and warm moments).'
   },
   {
     q: 'IS THIS WEBSITE A GAME YOU PLAY ONLINE?',

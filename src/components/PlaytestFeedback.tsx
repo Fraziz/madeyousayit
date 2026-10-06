@@ -23,7 +23,7 @@ const GOOGLE_SHEETS_API_URL =
   'https://script.google.com/macros/s/AKfycbyo5cRws4wo7wZCg3CabmprCk-MB567wPl-spjnZqW8qHnP6ylLCMq9tYkrdl-t4Sjo/exec';
 
 const CARD_TYPES = [
-  'GUESS',
+  'EXPOSE',
   'CREATE',
   'BATTLE',
   'CHAOS',
@@ -36,7 +36,7 @@ const CARD_TYPE_OPTIONS: Record<string, string[]> = {
   LOVE:     ['Good as it is', 'More questions about love & romance', 'More playful, flirty questions', 'Less personal questions', "Haven't tried it"],
   CHAOS:    ['Good as it is', 'Funnier challenges', 'Easier challenges', 'More interaction with other players', "Haven't tried it"],
   CREATE:   ['Good as it is', 'Funnier prompts', 'Easier things to come up with', 'More chances to be creative', "Haven't tried it"],
-  GUESS:    ['Good as it is', 'Funnier questions', 'More surprising questions', 'Less personal questions', "Haven't tried it"],
+  EXPOSE:   ['Good as it is', 'More revealing questions', 'Less personal questions', 'More surprising questions', "Haven't tried it"],
   BATTLE:   ['Good as it is', 'More exciting challenges', 'Clearer instructions', 'Fairer challenges', "Haven't tried it"],
 };
 

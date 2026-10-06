@@ -21,7 +21,7 @@ interface ShowcaseCard {
 }
 
 const SHOWCASE_CARDS: ShowcaseCard[] = [
-  { id: 'guess', name: 'GUESS', color: '#5170FF', src: '/cards/guess  1point hero.png', angle: -20, x: -100, y: 18 },
+  { id: 'expose', name: 'EXPOSE', color: '#5170FF', src: '/cards/EXPOSE 1point.png', angle: -20, x: -100, y: 18 },
   { id: 'battle', name: 'BATTLE', color: '#5170FF', src: '/cards/battle 2 points hero.png', angle: -12, x: -60, y: 7 },
   { id: 'create', name: 'CREATE', color: '#5170FF', src: '/cards/create 1 point hero.png', angle: -4, x: -20, y: 1 },
   { id: 'chaos', name: 'CHAOS', color: '#5170FF', src: '/cards/chaos 2 point hero.png', angle: 4, x: 20, y: 1 },

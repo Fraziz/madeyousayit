@@ -12,7 +12,6 @@ export const Rulebook: React.FC<RulebookProps> = ({ soundEnabled = true }) => {
   const [currentLang, setCurrentLang] = useState<RuleLanguage>('en');
   const [activeSoloCardIndex, setActiveSoloCardIndex] = useState<number>(0);
   const [sampleIndices, setSampleIndices] = useState<Record<string, number>>({
-    guess: 0,
     battle: 0,
   });
 
@@ -184,7 +183,7 @@ export const Rulebook: React.FC<RulebookProps> = ({ soundEnabled = true }) => {
                 const isSolo = type.id === 'solo';
                 const currentCardImg = isSolo
                   ? type.subTypes?.[activeSoloCardIndex]?.image || '/cards/chaos 2 point hero.png'
-                  : type.samples?.[sampleIndices[type.id] || 0] || '/cards/guess  1point hero.png';
+                  : type.samples?.[sampleIndices[type.id] || 0] || '/cards/EXPOSE 1point.png';
 
                 const cardAlt = isSolo
                   ? `${type.subTypes?.[activeSoloCardIndex]?.name || 'Card'} official card`

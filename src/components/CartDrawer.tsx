@@ -36,7 +36,7 @@ const AVAILABLE_PRODUCTS: CartItem[] = [
     price: 0,
     quantity: 0,
     badge: 'FREE SAMPLE',
-    imageUrl: '/cards/guess  1point hero.png'
+    imageUrl: '/cards/EXPOSE 1point.png'
   }
 ];
 
